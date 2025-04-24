@@ -5,45 +5,76 @@
         public UID AccountID = new();
         public List<Account>? Accounts;
 
-        public void SignUpAccount(AccountVerificationType type, string input, string password)
+        private Account? GetAccount(AccountVerificationType type, string input)
         {
-            Account? account;
+            return type == AccountVerificationType.Email
+                ? Accounts?.Find(i => i.Email == input)
+                : Accounts?.Find(i => i.PhoneNumber == input);
+        }
 
-            if (type == AccountVerificationType.Email)
+        public void SignAccount(AccountSignType signType, AccountVerificationType verificationType, string input, string password, string? confirmedPassword = null)
+        {
+            Account? account = GetAccount(verificationType, input);
+
+            if (verificationType == AccountVerificationType.Email)
             {
                 if (!Handler.Validator.ValidateEmail(input))
                 {
-                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpEmailNotValid);
-                    return;
-                }
-                if ((account = Accounts?.Find(i => i.Email == input)) == null)
-                {
-                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpEmailHasExisted);
-                    return;
-                }
+                    Event.OnAccountVerificated?.Invoke(signType == AccountSignType.SignUp
+                        ? AccountVerificationResult.SignUpEmailNotValid
+                        : AccountVerificationResult.SignInEmailNotValid);
 
-                Console.WriteLine($"Account ID: {AccountID = account.ID}");
+                    return;
+                }
             }
-            else if (type == AccountVerificationType.PhoneNumber)
+            else if (verificationType == AccountVerificationType.PhoneNumber)
             {
                 if (!Handler.Validator.ValidatePhoneNumber(input))
                 {
-                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpPhoneNumberNotValid);
-                    return;
-                }
-                if ((account = Accounts?.Find(i => i.PhoneNumber == input)) == null)
-                {
-                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpPhoneNumberHasExisted);
-                    return;
-                }
+                    Event.OnAccountVerificated?.Invoke(signType == AccountSignType.SignUp
+                        ? AccountVerificationResult.SignUpPhoneNumberNotValid
+                        : AccountVerificationResult.SignInPhoneNumberNotValid);
 
-                Console.WriteLine($"Account ID: {AccountID = account.ID}");
+                    return;
+                }
             }
-        }
 
-        public void AssignAccount(UID id)
-        {
+            if (signType == AccountSignType.SignUp)
+            {
+                if (account != null)
+                {
+                    Event.OnAccountVerificated?.Invoke(verificationType == AccountVerificationType.Email
+                        ? AccountVerificationResult.SignUpEmailHasExisted
+                        : AccountVerificationResult.SignUpPhoneNumberHasExisted);
+                    
+                    return;
+                }
+                else if (password != confirmedPassword)
+                {
+                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpPasswordNotMatch);
+                    
+                    return;
+                }
 
+                Console.WriteLine("Signing up may pass!");
+            }
+            else if (signType == AccountSignType.SignIn)
+            {
+                if (account == null)
+                {
+                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignInAccountNotFound);
+                    
+                    return;
+                }
+                else if (account.Password != password)
+                {
+                    Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignInPasswordNotCorrect);
+                    
+                    return;
+                }
+
+                Console.WriteLine($"Account ID: {account.ID}");
+            }
         }
     }
 }
