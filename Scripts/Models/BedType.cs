@@ -1,4 +1,4 @@
-﻿namespace HotelReservation.Models
+﻿namespace HotelReservation
 {
     public class BedType
     {

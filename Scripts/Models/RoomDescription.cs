@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelReservation.Models
+﻿namespace HotelReservation
 {
     public class RoomDescription
     {
@@ -16,32 +10,32 @@ namespace HotelReservation.Models
 
     public class RoomProperty
     {
-        public ushort MaxOccupancy { get; set; }
-        public ushort NumberOfBeds { get; set; }
-        public BedDesign BedType { get; set; }
-        public ViewType ViewType { get; set; }
+        public ushort MaxOccupancy { get; set; } = 5;
+        public ushort NumberOfBeds { get; set; } = 2;
+        public BedType BedType { get; set; } = new();
+        public ViewType ViewType { get; set; } = ViewType.Ocean;
     }
 
     public class RoomAmenity
     {
-        public bool HasWifi { get; set; }
-        public bool HasTV { get; set; }
-        public bool HasBalcony { get; set; }
-        public bool HasKitchen { get; set; }
-        public bool HasBathTub { get; set; }
-        public bool IsSmokingAllowed { get; set; }
+        public bool HasWifi { get; set; } = true;
+        public bool HasTV { get; set; } = true;
+        public bool HasBalcony { get; set; } = true;
+        public bool HasKitchen { get; set; } = false;
+        public bool HasBathTub { get; set; } = true;
+        public bool IsSmokingAllowed { get; set; } = true;
     }
 
     public class RoomRestriction
     {
-        public bool Refundable { get; set; }
-        public ushort MinStay { get; set; }
-        public ushort MaxStay { get; set; }
+        public bool Refundable { get; set; } = false;
+        public ushort MinStay { get; set; } = 1;
+        public ushort MaxStay { get; set; } = 10;
     }
 
     public class RoomAccessibility
     {
-        public bool IsWheelchairFriendly { get; set; }
-        public bool HasBrailleSignage { get; set; }
+        public bool IsWheelchairFriendly { get; set; } = false;
+        public bool HasBrailleSignage { get; set; } = false;
     }
 }
