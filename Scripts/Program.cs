@@ -6,15 +6,12 @@ namespace HotelReservation
     {
         public static void Main(string[] args)
         {
-            System.Console.WriteLine("Hello, World!");
-            // Account
-            List<Account> testAccounts = DataGenerator.GenerateAccountsInRange(1, 20, true);
-            foreach (var acc in testAccounts){
-                Console.WriteLine($"ID={(uint)acc.ID}, Name={acc.Name}, Email={acc.Email}, Phone={acc.Phone}, Password={acc.Password}");
-            }
-            
-            // RoomDescription
-            DataGenerator.PrintRoomDescription(DataGenerator.GenerateRandomRoomDescription());
+            //DataGenerator.PrintRoomDescription(DataGenerator.GenerateRandomRoomDescription());
+
+            var accountManager = new AccountManager();
+
+            accountManager.Accounts = CsvSerializer.LoadFromCsv(@"C:\Users\Yunasawa\Documents\Projects\G3 Hotel Reservation\Datas\AccountData.csv");
+            accountManager.SignUpAccount(AccountVerificationType.PhoneNumber, "6754483676", "mwU6cwgS9zeN");
         }
     }
 }

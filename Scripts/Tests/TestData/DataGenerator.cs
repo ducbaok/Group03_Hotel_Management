@@ -100,7 +100,7 @@ namespace HotelReservation.Utils
                 ID = id,
                 Name = $"{first} {middle} {last}",
                 Email = email,
-                Phone = phone,
+                PhoneNumber = phone,
                 Password = password
             };
         }
