@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelReservation.Models
+namespace HotelReservation
 {
     [System.Serializable]
     public class Owner : Account

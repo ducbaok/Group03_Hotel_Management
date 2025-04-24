@@ -1,4 +1,4 @@
-﻿namespace HotelReservation.Models
+﻿namespace HotelReservation
 {
     [System.Serializable]
     public class Customer : Account

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelReservation.Models
+﻿namespace HotelReservation
 {
-    public class Room
+    public class RoomGroup
     {
-
+        public string Name { get; set; } = string.Empty;
+        public RoomDescription Description { get; set; } = new();
+        public List<ushort> Numbers { get; set; } = new();
     }
 }

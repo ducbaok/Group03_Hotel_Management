@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelReservation.Models
+﻿namespace HotelReservation
 {
     public class Hotel
     {
-        public uint ID { get; set; }
-        public required string Name { get; set; }
-        public required string Address { get; set; }
-        public required string Phone { get; set; }
-        public required string Email { get; set; }
-        public required string Description { get; set; }
+        public UID ID { get; set; }
+        public HotelDescription Description { get; set; } = new();
+        public List<RoomGroup> RoomGroups { get; set; } = new();
+    }
+
+    public class HotelDescription
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }
