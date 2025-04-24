@@ -11,6 +11,7 @@
         SignUpSuccess,              // Sign up success
 
         SignInAccountDisabled,      // Account is disabled or banned
+        SignInAccountNotFound,      // Account is disabled or banned
         SignInPhoneNumberNotValid,  // Phone number not valid or not found
         SignInEmailNotValid,        // Email not valid or not found
         SignInPasswordNotCorrect,   // Password not correct
