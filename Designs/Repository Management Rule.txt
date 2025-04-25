@@ -10,3 +10,12 @@
 2: Commit Message Format
 [WIP]/[FEA]/[RLS]/[FIX]/[DOC]/[REF]/[TES] <Short Description>
 <Long Description> (if needed)
+
+3: Branch Naming Rule
+<main branch name>/<details or functions>
+Example: feature/login-function, feature/payment-method, feature/map-api-adding, test/data-generation
+Note:
+- All words in the branch name should be lowercase.
+- Use hyphen (-) to separate words.
+- Use slash (/) to separate main branch name and details or functions.
+- Details or functions should be two or more words. (feature/data is wrong, should be feature/data-generation)
