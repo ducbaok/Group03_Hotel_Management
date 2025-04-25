@@ -1,0 +1,8 @@
+1: Commit Message Tag
+[WIP] Work in Progress: Used with commits of a function that are not yet complete.
+[FEA] Feature: Used with commits of a feature that are completed and ready for review.
+[RLS] Release: Used with commits of a version that can be released.
+[FIX] Bug Fix: Used with commits that fix bugs.
+[DOC] Documentation: Used with commits that create or update documentation.
+[REF] Refactor: Used with commits that refactor code without changing functionality.
+[TES] Test: Used with commits that add or update tests.
