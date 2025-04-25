@@ -4,16 +4,24 @@
     {
         public Dictionary<UID, Hotel> Hotels = new();
 
-        public async Task<List<UID>> SearchHotelAsync(List<UID> hotels, string query)
+        public bool AddHotel()
         {
-            Func<List<UID>> task = () =>
-                Hotels.Values.ToList().Where(h =>
-                       h.Description.Name.Contains(query, StringComparison.OrdinalIgnoreCase)
-                    || h.Description.Address.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .Select(h => h.ID)
-                .ToList();
+            return true;
+        }
 
-            return await Task.Run(task);
+        public bool DeleteHotel()
+        {
+            return true;
+        }
+
+        public List<UID> SearchHotel(HotelSearchingType type, string query)
+        {
+            return null;
+        }
+
+        public List<UID> FilterHotel(HotelFilteringType type, string query)
+        {
+            return null;
         }
     }
 }
