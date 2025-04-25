@@ -12,7 +12,7 @@
     {
         public ushort MaxOccupancy { get; set; } = 5;
         public ushort NumberOfBeds { get; set; } = 2;
-        public BedType BedType { get; set; } = new();
+        public RoomBedType BedType { get; set; } = new();
         public ViewType ViewType { get; set; } = ViewType.Ocean;
     }
 

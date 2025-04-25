@@ -1,6 +1,6 @@
 ﻿namespace HotelReservation
 {
-    public class BedType
+    public class RoomBedType
     {
         public BedSize Size { get; set; } = BedSize.Single;
         public BedDesign Design { get; set; } = BedDesign.Futon;
