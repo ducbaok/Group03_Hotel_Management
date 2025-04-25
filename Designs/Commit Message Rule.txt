@@ -6,3 +6,7 @@
 [DOC] Documentation: Used with commits that create or update documentation.
 [REF] Refactor: Used with commits that refactor code without changing functionality.
 [TES] Test: Used with commits that add or update tests.
+
+2: Commit Message Format
+[WIP]/[FEA]/[RLS]/[FIX]/[DOC]/[REF]/[TES] <Short Description>
+<Long Description> (if needed)
