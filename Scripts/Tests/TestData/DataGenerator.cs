@@ -160,7 +160,7 @@ namespace HotelReservation.Utils
                         KidType = (BedKid)_rnd.Next(Enum.GetValues<BedKid>().Length),
                         Frame = (BedFrame)_rnd.Next(Enum.GetValues<BedFrame>().Length)
                     },
-                    ViewType = (ViewType)_rnd.Next(Enum.GetValues<ViewType>().Length)
+                    ViewType = (RoomViewType)_rnd.Next(Enum.GetValues<RoomViewType>().Length)
                 },
                 Amenity = new RoomAmenity
                 {
