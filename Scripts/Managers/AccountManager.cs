@@ -11,6 +11,10 @@
                 ? Accounts?.Find(i => i.Email == input)
                 : Accounts?.Find(i => i.PhoneNumber == input);
         }
+        private Account? GetAccount(UID id)
+        {
+            return Accounts?.Find(i => i.ID == id);
+        }
 
         public void SignAccount(AccountSignType signType, AccountVerificationType verificationType, string input, string password, string? confirmedPassword = null)
         {
@@ -75,6 +79,23 @@
 
                 Console.WriteLine($"Account ID: {account.ID}");
             }
+        }
+    
+        public void DeleteAccount(UID id)
+        {
+            Account? account = GetAccount(id);
+
+            if (account == null)
+            {
+                Event.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountNotFound);
+
+                return;
+            }
+
+            Accounts?.Remove(account);
+            Event.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountDeletionSuccess);
+
+            Console.WriteLine($"Account with ID {id} has been deleted.");
         }
     }
 }
