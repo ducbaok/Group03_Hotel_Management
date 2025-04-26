@@ -4,7 +4,6 @@
     {
         public UID ID { get; set; }
         public HotelDescription Description { get; set; } = new();
-        public List<RoomGroup> RoomGroups { get; set; } = new();
     }
 
     public class HotelDescription
