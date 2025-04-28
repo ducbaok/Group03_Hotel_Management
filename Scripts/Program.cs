@@ -8,10 +8,10 @@ namespace HotelReservation
         {
             //DataGenerator.PrintRoomDescription(DataGenerator.GenerateRandomRoomDescription());
 
-            var accountManager = new AccountManager();
+            var DataContainer = new DataContainer();
 
-            accountManager.Accounts = CsvSerializer.LoadFromCsv(@"C:\Users\Yunasawa\Documents\Projects\G3 Hotel Reservation\Datas\AccountData.csv");
-            accountManager.SignAccount(AccountSignType.SignUp, AccountVerificationType.PhoneNumber, "6754483676", "mwU6cwgS9zeN", "mwU6cwgS9zeN");
+            DataContainer.Accounts = CsvSerializer.LoadFromCsv(@"C:\Users\Yunasawa\Documents\Projects\G3 Hotel Reservation\Datas\AccountData.csv");
+            DataContainer.SignAccount(AccountSignType.SignUp, AccountVerificationType.PhoneNumber, "6754483676", "mwU6cwgS9zeN", "mwU6cwgS9zeN");
         }
     }
 }
