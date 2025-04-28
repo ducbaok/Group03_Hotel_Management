@@ -1,6 +1,11 @@
 ﻿namespace HotelReservation
 {
-    public class Room
+    public class RoomCategorization
+    {
+        public Dictionary<UID, RoomGroup> Rooms = new(); // Key is ID of RoomGroup
+    }
+
+    public class RoomGroup
     {
         public string Name { get; set; } = string.Empty;
         public RoomDescription Description { get; set; } = new();

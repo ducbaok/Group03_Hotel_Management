@@ -2,7 +2,7 @@
 
 namespace HotelReservation
 {
-    public static partial class Handler
+    public static partial class Extension
     {
         public static class Validator
         {

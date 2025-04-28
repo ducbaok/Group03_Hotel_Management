@@ -1,5 +1,18 @@
 ﻿namespace HotelReservation
 {
+    public enum AccountDeletionResult
+    {
+        AccountNotFound,
+        AccountDeletionFailed,
+        AccountDeletionSuccess
+    }
+
+    public enum AccountSignType
+    {
+        SignUp,
+        SignIn
+    }
+
     public enum AccountVerificationResult
     {
         SignUpPhoneNumberNotValid,  // Phone number not valid or not found
@@ -17,5 +30,11 @@
         SignInPasswordNotCorrect,   // Password not correct
         SignInSessionExpired,       // Authentication session has timed out
         SignInSuccess,              // Sign in success
+    }
+
+    public enum AccountVerificationType
+    {
+        Email,
+        PhoneNumber
     }
 }
