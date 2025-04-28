@@ -2,7 +2,7 @@
 {
     public class RoomCategorization
     {
-        public Dictionary<UID, RoomGroup> Rooms = new(); // Key is ID of RoomGroup
+        public Dictionary<UID, RoomGroup> Rooms { get; set; } = new(); // Key is ID of RoomGroup
     }
 
     public class RoomGroup
