@@ -1,7 +1,11 @@
-﻿namespace HotelReservation
+﻿using System.Collections.Concurrent;
+
+namespace HotelReservation
 {
     public struct UID
     {
+        public static ConcurrentDictionary<IDType, UID> UIDs = new();
+
         private uint _id;
 
         public UID(uint id)
@@ -15,7 +19,7 @@
         public static UID Parse(string id) => new(uint.Parse(id));
 
         public override string ToString() => $"{_id}";
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is UID other)
             {

@@ -33,7 +33,7 @@ Kỹ thuật phần mềm:
 	
 	- MySQL
 	- Backend: .Net C#
-	- Frontend: Flutter
+	- Frontend: MAUI
 
 4.Link github
 	
