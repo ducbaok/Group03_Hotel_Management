@@ -7,12 +7,12 @@
             private Account? GetAccount(AccountVerificationType type, string input)
             {
                 return type == AccountVerificationType.Email
-                    ? AccountManager.Accounts?.Find(i => i.Email == input)
-                    : AccountManager.Accounts?.Find(i => i.PhoneNumber == input);
+                    ? DataContainer.Accounts?.Find(i => i.Email == input)
+                    : DataContainer.Accounts?.Find(i => i.PhoneNumber == input);
             }
             private Account? GetAccount(UID id)
             {
-                return AccountManager.Accounts?.Find(i => i.ID == id);
+                return DataContainer.Accounts?.Find(i => i.ID == id);
             }
 
             public void SignAccount(AccountSignType signType, AccountVerificationType verificationType, string input, string password, string? confirmedPassword = null)
@@ -91,7 +91,7 @@
                     return;
                 }
 
-                AccountManager.Accounts?.Remove(account);
+                DataContainer.Accounts?.Remove(account);
                 Event.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountDeletionSuccess);
 
                 Console.WriteLine($"Account with ID {id} has been deleted.");
