@@ -5,7 +5,7 @@
 - Complete GetAverageRating() in Review.cs.
 - Create a Time property for checing-in and checing-out.
 - Create a Policy property for hotels.
-- Complete Fare system.
+- Complete RoomPrice system.
 - Complete Voucher system.
 
 # Programing Notes
