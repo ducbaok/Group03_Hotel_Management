@@ -2,18 +2,25 @@
 {
     public class RoomCategorization
     {
-        public Dictionary<UID, RoomGroup> Rooms { get; set; } = new(); // Key is ID of RoomGroup
+        public Dictionary<UID, RoomUnit> Rooms { get; set; } = new(); // Key is ID of RoomUnit
     }
 
-    public class RoomGroup
+    public class RoomUnit
     {
+        public UID ID { get; set; }
         public string Name { get; set; } = string.Empty;
         public RoomDescription Description { get; set; } = new();
+        public RoomPrice Price { get; set; } = new();
         public Dictionary<ushort, RoomStatus> Rooms { get; set; } = new();
     }
 
     public class RoomStatus
     {
         public bool IsAvailable { get; set; } = true;
+    }
+
+    public class RoomPrice
+    {
+
     }
 }

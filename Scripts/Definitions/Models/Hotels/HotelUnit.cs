@@ -1,9 +1,16 @@
 ﻿namespace HotelReservation
 {
-    public class Hotel
+    public class HotelContainer
+    {
+        public static Dictionary<UID, HotelUnit> Hotels = new();    // Key is ID of HotelUnit
+    }
+
+    public class HotelUnit
     {
         public UID ID { get; set; }
         public HotelDescription Description { get; set; } = new();
+        public HotelReview Review { get; set; } = new();
+        public RoomCategorization Rooms { get; set; } = new();
     }
 
     public class HotelDescription

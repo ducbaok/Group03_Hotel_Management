@@ -4,7 +4,7 @@ namespace HotelReservation
 {
     public struct UID
     {
-        public static ConcurrentDictionary<IDType, UID> UIDs = new();
+        public static UID SUID;
 
         private uint _id;
 
@@ -17,6 +17,7 @@ namespace HotelReservation
         public static implicit operator UID(uint id) => new(id);
 
         public static UID Parse(string id) => new(uint.Parse(id));
+        public static UID Get() => SUID++;
 
         public override string ToString() => $"{_id}";
         public override bool Equals(object? obj)
