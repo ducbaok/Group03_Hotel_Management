@@ -152,7 +152,7 @@ namespace HotelReservation.Utils
                 {
                     MaxOccupancy = maxOccupancy,
                     NumberOfBeds = numberOfBeds,
-                    BedType = new BedType
+                    BedType = new RoomBedType
                     {
                         Size = bedSize,
                         Design = (BedDesign)_rnd.Next(Enum.GetValues<BedDesign>().Length),

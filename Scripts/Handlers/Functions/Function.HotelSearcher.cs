@@ -8,7 +8,7 @@
             {
                 var normalizedInput = input.Trim().ToLower();
 
-                Func<KeyValuePair<UID, Hotel>, bool> searchCondition = h =>
+                Func<KeyValuePair<UID, HotelUnit>, bool> searchCondition = h =>
                        h.Value.Description.Name.ToLower().Contains(normalizedInput)
                     || h.Value.Description.Address.ToLower().Contains(normalizedInput);
 
