@@ -21,6 +21,15 @@
 
     public class RoomPrice
     {
-
+        public decimal BasePrice { get; set; } = 0m; 
+        public string Currency { get; set; } = "VND";
+        public decimal Discount { get; set; } = 0m;   
+        public decimal FinalPrice
+        {
+            get
+            {
+                return Math.Max(BasePrice - Discount, 0);
+            }
+        }
     }
 }
