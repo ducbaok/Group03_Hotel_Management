@@ -2,7 +2,7 @@
 {
     public class HotelContainer
     {
-        public static Dictionary<UID, HotelUnit> Hotels = new();    // Key is ID of HotelUnit
+        public Dictionary<UID, HotelUnit> Hotels = new();    // Key is ID of HotelUnit
     }
 
     public class HotelUnit
