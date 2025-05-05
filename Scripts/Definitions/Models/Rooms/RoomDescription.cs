@@ -12,8 +12,8 @@
     {
         public ushort MaxOccupancy { get; set; } = 5;
         public ushort NumberOfBeds { get; set; } = 2;
-        public RoomBedType BedType { get; set; } = new();
-        public RoomViewType ViewType { get; set; } = RoomViewType.Ocean;
+        public Room.BedType BedType { get; set; } = new();
+        public Room.ViewType ViewType { get; set; } = Room.ViewType.Ocean;
     }
 
     public class RoomAmenity

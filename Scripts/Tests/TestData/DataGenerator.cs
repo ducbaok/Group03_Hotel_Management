@@ -123,27 +123,27 @@ namespace HotelReservation.Utils
         {
             var maxOccupancy = (ushort)_rnd.Next(1, 6);
             ushort numberOfBeds;
-            BedSize bedSize;
+            Room.BedSize bedSize;
 
             if (maxOccupancy == 1)
             {
                 numberOfBeds = (ushort)_rnd.Next(1, 3);
-                bedSize = (BedSize)_rnd.Next(0, 3);
+                bedSize = (Room.BedSize)_rnd.Next(0, 3);
             }
             else if (maxOccupancy == 2 || maxOccupancy == 3)
             {
                 numberOfBeds = (ushort)_rnd.Next(1, 3);
-                bedSize = (BedSize)_rnd.Next(3, 5);
+                bedSize = (Room.BedSize)_rnd.Next(3, 5);
             }
             else if (maxOccupancy == 4)
             {
                 numberOfBeds = 2;
-                bedSize = (BedSize)_rnd.Next(3, 6);
+                bedSize = (Room.BedSize)_rnd.Next(3, 6);
             }
             else
             {
                 numberOfBeds = 2;
-                bedSize = (BedSize)_rnd.Next(5, 7);
+                bedSize = (Room.BedSize)_rnd.Next(5, 7);
             }
 
             return new RoomDescription
@@ -152,15 +152,15 @@ namespace HotelReservation.Utils
                 {
                     MaxOccupancy = maxOccupancy,
                     NumberOfBeds = numberOfBeds,
-                    BedType = new RoomBedType
+                    BedType = new Room.BedType
                     {
                         Size = bedSize,
-                        Design = (BedDesign)_rnd.Next(Enum.GetValues<BedDesign>().Length),
-                        Style = (BedStyle)_rnd.Next(Enum.GetValues<BedStyle>().Length),
-                        KidType = (BedKid)_rnd.Next(Enum.GetValues<BedKid>().Length),
-                        Frame = (BedFrame)_rnd.Next(Enum.GetValues<BedFrame>().Length)
+                        Design = (Room.BedDesign)_rnd.Next(Enum.GetValues<Room.BedDesign>().Length),
+                        Style = (Room.BedStyle)_rnd.Next(Enum.GetValues<Room.BedStyle>().Length),
+                        KidType = (Room.BedKid)_rnd.Next(Enum.GetValues<Room.BedKid>().Length),
+                        Frame = (Room.BedFrame)_rnd.Next(Enum.GetValues<Room.BedFrame>().Length)
                     },
-                    ViewType = (RoomViewType)_rnd.Next(Enum.GetValues<RoomViewType>().Length)
+                    ViewType = (Room.ViewType)_rnd.Next(Enum.GetValues<Room.ViewType>().Length)
                 },
                 Amenity = new RoomAmenity
                 {

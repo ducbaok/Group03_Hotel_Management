@@ -12,7 +12,7 @@
                        h.Value.Description.Name.ToLower().Contains(normalizedInput)
                     || h.Value.Description.Address.ToLower().Contains(normalizedInput);
 
-                return DataContainer.Hotels.Where(searchCondition).Select(h => h.Key).ToList();
+                return DataContainer.Hotel.Hotels.Where(searchCondition).Select(h => h.Key).ToList();
             }
         }
     }
