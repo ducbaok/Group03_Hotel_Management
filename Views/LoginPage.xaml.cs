@@ -9,6 +9,7 @@ namespace Hotel_Reservation.Views
         public LoginPage()
         {
             InitializeComponent();
+            //
         }
 
         private void OnShowPasswordClicked(object sender, EventArgs e)
