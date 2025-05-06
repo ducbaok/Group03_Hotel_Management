@@ -1,4 +1,6 @@
-﻿namespace Hotel_Reservation
+﻿using Hotel_Reservation.Views;
+
+namespace Hotel_Reservation
 {
     public partial class App : Application
     {
@@ -9,7 +11,9 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            var shell = new AppShell();
+            shell.GoToAsync("//LoginPage"); // Điều hướng đến LoginPage
+            return new Window(shell);
         }
     }
 }
