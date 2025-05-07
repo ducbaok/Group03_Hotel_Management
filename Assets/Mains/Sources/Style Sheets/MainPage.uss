@@ -1,0 +1,37 @@
+.search-input > .unity-base-text-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    color: rgb(255, 255, 255);
+}
+
+.frame-border {
+    border-left-color: rgb(115, 115, 115);
+    border-right-color: rgb(115, 115, 115);
+    border-top-color: rgb(115, 115, 115);
+    border-bottom-color: rgb(115, 115, 115);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.label-field {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+}
