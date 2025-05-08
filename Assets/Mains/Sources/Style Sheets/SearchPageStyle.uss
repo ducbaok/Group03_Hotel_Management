@@ -1,0 +1,201 @@
+.price-range-box {
+    height: 120px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(89, 89, 89);
+    border-right-color: rgb(89, 89, 89);
+    border-top-color: rgb(89, 89, 89);
+    border-bottom-color: rgb(89, 89, 89);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.price-range-box__text {
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(254, 209, 167);
+    font-size: 40px;
+    -unity-font-style: bold;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height: 60px;
+    -unity-text-align: middle-left;
+}
+
+.price-range-box__label {
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    height: 40px;
+    -unity-text-align: middle-left;
+}
+
+.filter-selection-button__label {
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 10px;
+    margin-bottom: 0;
+    height: 100%;
+    -unity-text-align: middle-left;
+    align-self: center;
+    -unity-font-style: bold;
+}
+
+.filter-selection-button__label.selected {
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(254, 209, 167);
+    font-size: 40px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 10px;
+    margin-bottom: 0;
+    height: 100%;
+    -unity-text-align: middle-left;
+    align-self: center;
+    -unity-font-style: bold;
+}
+
+.filter-selection-button {
+    flex-direction: row;
+    background-color: rgb(64, 64, 64);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    justify-content: center;
+    flex-basis: 30%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.filter-selection-button__icon {
+    height: 40px;
+    width: 40px;
+    align-self: center;
+    background-image: url("project://database/Assets/Mains/Sources/Icons/Star%20(Filled).png?fileID=2800000&guid=ce0be4c42e3056f44a239c5c6f5cfff8&type=3#Star (Filled)");
+    -unity-background-image-tint-color: rgb(251, 194, 60);
+    margin-bottom: 5px;
+}
+
+.filter-selection-button.selected {
+    flex-direction: row;
+    background-color: rgb(59, 47, 36);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    justify-content: center;
+    flex-basis: 33%;
+    border-left-color: rgb(254, 209, 167);
+    border-right-color: rgb(254, 209, 167);
+    border-top-color: rgb(254, 209, 167);
+    border-bottom-color: rgb(254, 209, 167);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.filter-selection-button.selected {
+    flex-direction: row;
+    background-color: rgb(59, 47, 36);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    justify-content: center;
+    flex-basis: 33%;
+    border-left-color: rgb(254, 209, 167);
+    border-right-color: rgb(254, 209, 167);
+    border-top-color: rgb(254, 209, 167);
+    border-bottom-color: rgb(254, 209, 167);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.filter-property-element {
+    display: flex;
+}
+
+.filter-attribute-toggle {
+    flex-direction: row;
+    border-left-color: rgb(78, 78, 78);
+    border-right-color: rgb(78, 78, 78);
+    border-top-color: rgb(78, 78, 78);
+    border-bottom-color: rgb(78, 78, 78);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    border-left-width: 0;
+    height: 100px;
+}
+
+.filter-attribute-toggle__label {
+    flex-grow: 1;
+    height: 100%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    -unity-text-align: middle-left;
+}
+
+.filter-attribute-toggle__toggle {
+    width: 75px;
+    height: 75px;
+    align-self: center;
+}
+
+.search-page-label {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 20px;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    font-size: 50px;
+}
