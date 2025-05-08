@@ -1,0 +1,36 @@
+.signing-text-field {
+    height: 100px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    -unity-font-definition: url("project://database/Assets/Mains/Sources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&guid=999150e03acf5b941a2f08bde59b51ae&type=2#Nunito-Regular SDF");
+    -unity-font-style: normal;
+    font-size: 35px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(95, 95, 95);
+    border-right-color: rgb(95, 95, 95);
+    border-top-color: rgb(95, 95, 95);
+    border-bottom-color: rgb(95, 95, 95);
+}
+
+.signing-text-field > .unity-base-text-field__input {
+    padding-left: 20px;
+    background-color: rgba(0, 0, 0, 0.27);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+}
