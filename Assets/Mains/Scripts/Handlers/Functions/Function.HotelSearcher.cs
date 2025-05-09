@@ -1,4 +1,8 @@
-﻿namespace HotelReservation
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace YNL.Checkotel
 {
     public partial class Function
     {

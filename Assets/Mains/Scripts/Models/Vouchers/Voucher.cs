@@ -1,4 +1,7 @@
-﻿namespace HotelReservation
+﻿using System;
+using System.Collections.Generic;
+
+namespace YNL.Checkotel
 {
     public class VoucherContainer
     {

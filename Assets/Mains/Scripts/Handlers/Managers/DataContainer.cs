@@ -1,4 +1,6 @@
-﻿namespace HotelReservation
+﻿using System.Collections.Generic;
+
+namespace YNL.Checkotel
 {
     public class DataContainer
     {

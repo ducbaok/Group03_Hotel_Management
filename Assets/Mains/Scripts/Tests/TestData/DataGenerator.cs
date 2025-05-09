@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace HotelReservation.Utils
+namespace YNL.Checkotel.Utils
 {
     public static class DataGenerator
     {
@@ -155,12 +155,12 @@ namespace HotelReservation.Utils
                     BedType = new Room.BedType
                     {
                         Size = bedSize,
-                        Design = (Room.BedDesign)_rnd.Next(Enum.GetValues<Room.BedDesign>().Length),
-                        Style = (Room.BedStyle)_rnd.Next(Enum.GetValues<Room.BedStyle>().Length),
-                        KidType = (Room.BedKid)_rnd.Next(Enum.GetValues<Room.BedKid>().Length),
-                        Frame = (Room.BedFrame)_rnd.Next(Enum.GetValues<Room.BedFrame>().Length)
+                        Design = (Room.BedDesign)_rnd.Next(Enum.GetValues(typeof(Room.BedDesign)).Length),
+                        Style = (Room.BedStyle)_rnd.Next(Enum.GetValues(typeof(Room.BedStyle)).Length),
+                        KidType = (Room.BedKid)_rnd.Next(Enum.GetValues(typeof(Room.BedKid)).Length),
+                        Frame = (Room.BedFrame)_rnd.Next(Enum.GetValues(typeof(Room.BedFrame)).Length)
                     },
-                    ViewType = (Room.ViewType)_rnd.Next(Enum.GetValues<Room.ViewType>().Length)
+                    ViewType = (Room.ViewType)_rnd.Next(Enum.GetValues(typeof(Room.ViewType)).Length)
                 },
                 Amenity = new RoomAmenity
                 {

@@ -1,0 +1,14 @@
+:root
+{
+	--color-light-legacy: #FED1A7;
+	--color-ground-legacy: #3B3B3B;
+
+	--font-nunito-regular: resource("Fonts/SDFs/Nunito/Nunito-Regular SDF");
+
+	--icon-location-light: resource("Icons/Location (Light)");
+	--icon-star-filled: resource("Icons/Star (Filled)");
+
+	--image-discount-frame: resource("Images/Frames/Discount Frame");
+
+	--time-transition-duration: 0.2s;
+}

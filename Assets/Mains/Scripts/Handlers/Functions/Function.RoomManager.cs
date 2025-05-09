@@ -1,4 +1,4 @@
-﻿namespace HotelReservation
+﻿namespace YNL.Checkotel
 {
     public partial class Function
     {

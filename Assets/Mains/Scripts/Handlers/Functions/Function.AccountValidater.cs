@@ -1,4 +1,6 @@
-﻿namespace HotelReservation
+﻿using UnityEngine;
+
+namespace YNL.Checkotel
 {
     public partial class Function
     {
@@ -23,7 +25,7 @@
                 {
                     if (!Extension.Validator.ValidateEmail(input))
                     {
-                        Event.OnAccountVerificated?.Invoke(signType == AccountSignType.SignUp
+                        Marker.OnAccountVerificated?.Invoke(signType == AccountSignType.SignUp
                             ? AccountVerificationResult.SignUpEmailNotValid
                             : AccountVerificationResult.SignInEmailNotValid);
 
@@ -34,7 +36,7 @@
                 {
                     if (!Extension.Validator.ValidatePhoneNumber(input))
                     {
-                        Event.OnAccountVerificated?.Invoke(signType == AccountSignType.SignUp
+                        Marker.OnAccountVerificated?.Invoke(signType == AccountSignType.SignUp
                             ? AccountVerificationResult.SignUpPhoneNumberNotValid
                             : AccountVerificationResult.SignInPhoneNumberNotValid);
 
@@ -46,7 +48,7 @@
                 {
                     if (account != null)
                     {
-                        Event.OnAccountVerificated?.Invoke(verificationType == AccountVerificationType.Email
+                        Marker.OnAccountVerificated?.Invoke(verificationType == AccountVerificationType.Email
                             ? AccountVerificationResult.SignUpEmailHasExisted
                             : AccountVerificationResult.SignUpPhoneNumberHasExisted);
 
@@ -54,29 +56,29 @@
                     }
                     else if (password != confirmedPassword)
                     {
-                        Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpPasswordNotMatch);
+                        Marker.OnAccountVerificated?.Invoke(AccountVerificationResult.SignUpPasswordNotMatch);
 
                         return;
                     }
 
-                    Console.WriteLine("Signing up may pass!");
+                    Debug.Log("Signing up may pass!");
                 }
                 else if (signType == AccountSignType.SignIn)
                 {
                     if (account == null)
                     {
-                        Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignInAccountNotFound);
+                        Marker.OnAccountVerificated?.Invoke(AccountVerificationResult.SignInAccountNotFound);
 
                         return;
                     }
                     else if (account.Password != password)
                     {
-                        Event.OnAccountVerificated?.Invoke(AccountVerificationResult.SignInPasswordNotCorrect);
+                        Marker.OnAccountVerificated?.Invoke(AccountVerificationResult.SignInPasswordNotCorrect);
 
                         return;
                     }
 
-                    Console.WriteLine($"Account ID: {account.ID}");
+                    Debug.Log($"Account ID: {account.ID}");
                 }
             }
 
@@ -86,15 +88,15 @@
 
                 if (account == null)
                 {
-                    Event.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountNotFound);
+                    Marker.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountNotFound);
 
                     return;
                 }
 
                 DataContainer.Accounts?.Remove(account);
-                Event.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountDeletionSuccess);
+                Marker.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountDeletionSuccess);
 
-                Console.WriteLine($"Account with ID {id} has been deleted.");
+                Debug.Log($"Account with ID {id} has been deleted.");
             }
         }
     }

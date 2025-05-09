@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace HotelReservation
+namespace YNL.Checkotel
 {
     public static partial class Extension
     {
