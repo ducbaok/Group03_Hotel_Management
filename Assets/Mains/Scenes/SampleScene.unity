@@ -295,13 +295,14 @@ GameObject:
   m_Component:
   - component: {fileID: 342035976}
   - component: {fileID: 342035977}
+  - component: {fileID: 342035978}
   m_Layer: 0
   m_Name: Main Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &342035976
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +337,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &342035978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342035975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2348c5cbd1e56a64eba1b37e570eb1ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &561081505
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963304530}
   - component: {fileID: 963304531}
+  - component: {fileID: 963304532}
   m_Layer: 0
   m_Name: Sort And Filter Page
   m_TagString: Untagged
@@ -524,6 +538,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &963304532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963304529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0892ea3c08a35f458a08fe4c946cd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1040390890
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,13 +560,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1040390891}
   - component: {fileID: 1040390892}
+  - component: {fileID: 1040390893}
   m_Layer: 0
   m_Name: Time Picking Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1040390891
 Transform:
   m_ObjectHideFlags: 0
@@ -575,6 +602,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &1040390893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040390890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99a811ab08cfd74f93458811d20c2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1267176883
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,12 +723,14 @@ MonoBehaviour:
       - HomeNavigationButtonUI
       - SuggestFilterButtonUI
       - HotelPreviewListUI
+      - SearchingSelectTypeUI
       _values:
       - {fileID: 7433441132597879392, guid: 49e6911f502a4884986b052a537ff52e, type: 3}
       - {fileID: 7433441132597879392, guid: b69a044b7b313ea4a82f714fb7ff84d8, type: 3}
       - {fileID: 7433441132597879392, guid: 81e927bfb8922e545bb122cfa2d81339, type: 3}
       - {fileID: 7433441132597879392, guid: 8589372d062a21849b84307a6af264fa, type: 3}
       - {fileID: 7433441132597879392, guid: 0cac0870ee56012448dbf25e4a2d9c72, type: 3}
+      - {fileID: 7433441132597879392, guid: 78281ef6e3b19a84bbe9434b21cd11e1, type: 3}
     Icons:
       _keys:
       - Home
@@ -698,6 +739,15 @@ MonoBehaviour:
       - Star (Filled)
       - Suggestion
       - Account
+      - Hourly
+      - Overnight (Filled)
+      - Daily
+      - Bed
+      - Family
+      - Business
+      - Bed (Filled)
+      - Overnight
+      - Family (Filled)
       _values:
       - {fileID: 2800000, guid: 4ac81693b7e200b44b33db6de9322ac6, type: 3}
       - {fileID: 2800000, guid: c14929e7b69c84d4f98fe3e725ad813c, type: 3}
@@ -705,6 +755,15 @@ MonoBehaviour:
       - {fileID: 2800000, guid: ce0be4c42e3056f44a239c5c6f5cfff8, type: 3}
       - {fileID: 2800000, guid: 0218670a7fabf7d4c92a76a9ea0d749b, type: 3}
       - {fileID: 2800000, guid: 8fab1c44bab0ba24da4e9a3dbacbf050, type: 3}
+      - {fileID: 2800000, guid: 3183ccdbfb97fe748b82b837d87381ce, type: 3}
+      - {fileID: 2800000, guid: ab6760c36dfcf6f48979639d749edf5f, type: 3}
+      - {fileID: 2800000, guid: 7aa27ed44dc2502449486ea51e65cf68, type: 3}
+      - {fileID: 2800000, guid: 5291dbe48464219458d7596ec8c29fb9, type: 3}
+      - {fileID: 2800000, guid: 7d2766e276c38344cbe45c5d04592dc2, type: 3}
+      - {fileID: 2800000, guid: 207e2dbc0e7633a438cc39957a268376, type: 3}
+      - {fileID: 2800000, guid: 8ca8565a8bd1f2a47a97399e10b34f3f, type: 3}
+      - {fileID: 2800000, guid: 63d6e2eaeb98473408e6171134a61405, type: 3}
+      - {fileID: 2800000, guid: db44ab00e81f1744bbac64985856951f, type: 3}
 --- !u!4 &1289038837
 Transform:
   m_ObjectHideFlags: 0
@@ -730,6 +789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1652320339}
   - component: {fileID: 1652320340}
+  - component: {fileID: 1652320341}
   m_Layer: 0
   m_Name: Result Page
   m_TagString: Untagged
@@ -771,6 +831,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &1652320341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652320338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c877a54a616c19347a667999d59198b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2063912290
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2063912291}
   - component: {fileID: 2063912292}
+  - component: {fileID: 2063912293}
   m_Layer: 0
   m_Name: Address Page
   m_TagString: Untagged
@@ -822,6 +895,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &2063912293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063912290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6509392fdc0bc4a4da18016bcd34c3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

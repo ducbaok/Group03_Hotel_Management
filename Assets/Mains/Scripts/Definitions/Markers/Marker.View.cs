@@ -8,5 +8,6 @@ namespace YNL.Checkotel
         public static Action OnSearchViewOpened { get; set; }
         public static Action OnNotificationViewOpened { get; set; }
         public static Action<SuggestFilterType> OnSuggestFilterSelected { get; set; }
+        public static Action<bool, SearchingStayType, SearchingRoomType> OnSearchingSelectTypeSelected { get; set; }
     }
 }

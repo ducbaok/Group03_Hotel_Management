@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -25,21 +26,18 @@ namespace YNL.Checkotel
         {
             _type = type;
 
-            this.styleSheets.Add(Main.Resources.Styles["StyleVariableUI"]);
-            this.styleSheets.Add(Main.Resources.Styles["SuggestFilterButtonUI"]);
-            this.AddToClassList(_rootClass);
-            this.EnableInClassList(_typeFilterClass, !isAvailableFilter);
+            this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
+            this.AddStyle(Main.Resources.Styles["SuggestFilterButtonUI"]);
+            this.AddClass(_rootClass).EnableClass(!isAvailableFilter, _typeFilterClass);
 
             _icon = new();
-            _icon.AddToClassList(_iconClass);
-            _icon.EnableInClassList(_typeFilterClass, !isAvailableFilter);
-            _icon.style.backgroundImage = icon;
-            this.Add(_icon);
+            _icon.AddClass(_iconClass).EnableClass(!isAvailableFilter, _typeFilterClass);
+            _icon.SetBackgroundImage(icon);
+            this.AddElements(_icon);
 
             _label = new();
-            _label.AddToClassList(_labelClass);
-            _label.text = label;
-            this.Add(_label);
+            _label.AddClass(_labelClass).SetText(label);
+            this.AddElements(_label);
 
 
             this.RegisterCallback<PointerDownEvent>(OnClicked_Button);

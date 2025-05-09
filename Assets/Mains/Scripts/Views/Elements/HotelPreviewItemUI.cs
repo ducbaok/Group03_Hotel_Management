@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -46,75 +47,75 @@ namespace YNL.Checkotel
 
         private void Initialize()
         {
-            this.styleSheets.Add(Main.Resources.Styles["StyleVariableUI"]);
-            this.styleSheets.Add(Main.Resources.Styles["HotelPreviewItemUI"]);
-            this.AddToClassList(_rootClass);
+            this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
+            this.AddStyle(Main.Resources.Styles["HotelPreviewItemUI"]);
+            this.AddClass(_rootClass);
 
             _previewImage = new VisualElement();
-            _previewImage.AddToClassList(_imageClass);
+            _previewImage.AddClass(_imageClass);
 
             _previewInfo = new VisualElement();
-            _previewInfo.AddToClassList(_infoClass);
+            _previewInfo.AddClass(_infoClass);
 
             _nameLabel = new Label();
-            _nameLabel.AddToClassList(_infoNameClass);
+            _nameLabel.AddClass(_infoNameClass);
 
             _locationField = new VisualElement();
-            _locationField.AddToClassList(_infoLocationClass);
+            _locationField.AddClass(_infoLocationClass);
 
             _locationIcon = new VisualElement();
-            _locationIcon.AddToClassList(_infoLocationIconClass);
+            _locationIcon.AddClass(_infoLocationIconClass);
 
             _locationText = new Label();
-            _locationText.AddToClassList(_infoLocationTextClass);
+            _locationText.AddClass(_infoLocationTextClass);
 
             _priceField = new VisualElement();
-            _priceField.AddToClassList(_infoPriceClass);
+            _priceField.AddClass(_infoPriceClass);
 
             _priceText = new Label();
-            _priceText.AddToClassList(_infoPriceTextClass);
+            _priceText.AddClass(_infoPriceTextClass);
 
             _ratingField = new VisualElement();
-            _ratingField.AddToClassList(_infoRatingClass);
+            _ratingField.AddClass(_infoRatingClass);
 
             _ratingIcon = new VisualElement();
-            _ratingIcon.AddToClassList(_infoRatingIconClass);
+            _ratingIcon.AddClass(_infoRatingIconClass);
 
             _ratingText = new Label();
-            _ratingText.AddToClassList(_infoRatingTextClass);
+            _ratingText.AddClass(_infoRatingTextClass);
 
             _discountField = new VisualElement();
-            _discountField.AddToClassList(_infoDiscountClass);
+            _discountField.AddClass(_infoDiscountClass);
 
             _discountFrame = new VisualElement();
-            _discountFrame.AddToClassList(_infoDiscountFrameClass);
+            _discountFrame.AddClass(_infoDiscountFrameClass);
 
             _discountAmount = new Label();
-            _discountAmount.AddToClassList(_infoDiscountAmountClass);
+            _discountAmount.AddClass(_infoDiscountAmountClass);
 
             _discountText = new Label();
-            _discountText.AddToClassList(_infoDiscountTextClass);
+            _discountText.AddClass(_infoDiscountTextClass);
 
-            this.Add(_previewImage);
-            this.Add(_previewInfo);
+            this.AddElements(_previewImage);
+            this.AddElements(_previewInfo);
 
-            _previewInfo.Add(_nameLabel);
-            _previewInfo.Add(_locationField);
-            _previewInfo.Add(_priceField);
-            _previewInfo.Add(_discountField);
+            _previewInfo.AddElements(_nameLabel);
+            _previewInfo.AddElements(_locationField);
+            _previewInfo.AddElements(_priceField);
+            _previewInfo.AddElements(_discountField);
 
-            _locationField.Add(_locationIcon);
-            _locationField.Add(_locationText);
+            _locationField.AddElements(_locationIcon);
+            _locationField.AddElements(_locationText);
 
-            _priceField.Add(_priceText);
-            _priceField.Add(_ratingField);
+            _priceField.AddElements(_priceText);
+            _priceField.AddElements(_ratingField);
 
-            _ratingField.Add(_ratingIcon);
-            _ratingField.Add(_ratingText);
+            _ratingField.AddElements(_ratingIcon);
+            _ratingField.AddElements(_ratingText);
 
-            _discountField.Add(_discountFrame);
-            _discountFrame.Add(_discountAmount);
-            _discountField.Add(_discountText);
+            _discountField.AddElements(_discountFrame);
+            _discountFrame.AddElements(_discountAmount);
+            _discountField.AddElements(_discountText);
         }
 
         public void AddValue()

@@ -1,4 +1,5 @@
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -19,32 +20,32 @@ namespace YNL.Checkotel
         {
             var items = new string[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
 
-            this.styleSheets.Add(Main.Resources.Styles["StyleVariableUI"]);
-            this.styleSheets.Add(Main.Resources.Styles["HotelPreviewListUI"]);
-            this.AddToClassList(_rootClass);
+            this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
+            this.AddStyle(Main.Resources.Styles["HotelPreviewListUI"]);
+            this.AddClass(_rootClass);
 
             _labelField = new();
             _labelField.AddToClassList(_labelFieldClass);
-            this.Add(_labelField);
+            this.AddElements(_labelField);
 
             _label = new(label);
-            _label.AddToClassList(_labelClass);
-            _labelField.Add(_label);
+            _label.AddClass(_labelClass);
+            _labelField.AddElements(_label);
 
             _seeMoreButton = new("See more");
-            _seeMoreButton.AddToClassList(_seeMoreButtonClass);
-            _labelField.Add(_seeMoreButton);
+            _seeMoreButton.AddClass(_seeMoreButtonClass);
+            _labelField.AddElements(_seeMoreButton);
 
             _previewList = new();
-            _previewList.AddToClassList(_previewListClass);
-            this.Add(_previewList);
+            _previewList.AddClass(_previewListClass);
+            this.AddElements(_previewList);
             _previewList.mode = ScrollViewMode.Horizontal;
             _previewList.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
             _previewList.verticalScrollerVisibility = ScrollerVisibility.Hidden;
 
             for (int i = 0; i < 10; i++)
             {
-                _previewList.Add(new HotelPreviewItemUI());
+                _previewList.AddElements(new HotelPreviewItemUI());
             }
         }
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -26,19 +27,19 @@ namespace YNL.Checkotel
             _isSelected = isSelected;
             _type = type;
 
-            this.styleSheets.Add(Main.Resources.Styles["StyleVariableUI"]);
-            this.styleSheets.Add(Main.Resources.Styles["HomeNavigationButtonUI"]);
-            this.AddToClassList(_rootClass);
+            this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
+            this.AddStyle(Main.Resources.Styles["HomeNavigationButtonUI"]);
+            this.AddClass(_rootClass);
 
             _icon = new();
-            _icon.AddToClassList(_iconClass);
+            _icon.AddClass(_iconClass);
             _icon.style.backgroundImage = icon;
-            this.Add(_icon);
+            this.AddElements(_icon);
 
             _label = new();
-            _label.AddToClassList(_labelClass);
+            _label.AddClass(_labelClass);
             _label.text = label;
-            this.Add(_label);
+            this.AddElements(_label);
 
             UpdateUI();
 
@@ -53,9 +54,9 @@ namespace YNL.Checkotel
 
         private void UpdateUI()
         {
-            this.EnableInClassList(_selected, _isSelected);
-            _icon.EnableInClassList(_selected, _isSelected);
-            _label.EnableInClassList(_selected, _isSelected);
+            this.EnableClass(_isSelected, _selected);
+            _icon.EnableClass(_isSelected, _selected);
+            _label.EnableClass(_isSelected, _selected);
         }
 
         private void OnClicked_Button(PointerDownEvent evt)

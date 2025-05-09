@@ -8,5 +8,7 @@
 - Complete RoomPrice system.
 - Complete Voucher system.
 
+- Handle UI and logic when click on Address Searching Button in Search Page - Address Page.
+
 # Programing Notes
 - UID.cs | L.5 : Initialize the pairs for all the types in IDType
