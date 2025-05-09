@@ -1,7 +1,5 @@
-using YNL.Checkotel;
 using UnityEngine;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
 
 namespace YNL.Checkotel
 {

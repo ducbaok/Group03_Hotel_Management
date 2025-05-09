@@ -115,7 +115,7 @@
 {
 	width: 100px;
 	background-image: var(--image-discount-frame);
-	background-color: #FED1A7;
+	unity-background-image-tint-color: #FED1A7;
 }
 
 .hotel-preview-item__info-discount-amount
