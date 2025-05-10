@@ -1,50 +1,129 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
     public partial class SearchingTimePickingPageUI
     {
-        public class HourlyPage : IInitializable<VisualElement, HourlyPage>
+        public class HourlyPage : IInitializable, IResetable
         {
+            public int TestMaxDuration = 15;
+
+            public DateTime SelectedDate = DateTime.Now.AddHours(1);
+            public byte CheckInTime;
+            public byte Duration;
+
+            public DateTime CheckInDate => SelectedDate.AddHours(CheckInTime);
+
+            private VisualElement _root;
             private VisualElement _hourlyPage;
             private ScrollView _checkInTimeScroll;
             private ScrollView _durationScroll;
             private VisualElement _calendarView;
 
-            public HourlyPage Initialize(VisualElement root)
+            private MonthCalendarViewUI _monthCalendarView;
+
+            private List<TimePointButtonUI> _checkInTimeButtons = new();
+            private List<TimePointButtonUI> _durationButtons = new();
+
+            public HourlyPage(VisualElement root)
             {
-                _hourlyPage = root.Q("ContentPage").Q("HourlyPage");
+                MonthCalendarViewUI.OnSelectedTimeChanged += OnSelected_CalendarDate;
+                TimePointButtonUI.OnSelected += OnSelected_TimePointButton;
+
+                _root = root;
+
+                Initialize();
+            }
+            ~HourlyPage()
+            {
+                MonthCalendarViewUI.OnSelectedTimeChanged -= OnSelected_CalendarDate;
+                TimePointButtonUI.OnSelected -= OnSelected_TimePointButton;
+            }
+
+            public void Initialize()
+            {
+                _hourlyPage = _root.Q("ContentPage").Q("HourlyPage");
 
                 _checkInTimeScroll = _hourlyPage.Q("CheckInTimeView").Q("TimeScroll") as ScrollView;
                 _checkInTimeScroll.Clear();
 
-                var nowTime = DateTime.Now;
-
-                for (int i = nowTime.Hour + 1; i < 24; i++)
+                for (int i = 0; i < 24; i++)
                 {
-                    bool isSelected = i == nowTime.Hour + 1;
-                    var timeButton = new TimePointButtonUI($"{i.ToString("00")}:00", isSelected, true);
+                    var timeButton = new TimePointButtonUI($"{i.ToString("00")}:00", false, true);
                     _checkInTimeScroll.Add(timeButton);
+                    _checkInTimeButtons.Add(timeButton);
                 }
 
                 _durationScroll = _hourlyPage.Q("DurationView").Q("TimeScroll") as ScrollView;
                 _durationScroll.Clear();
 
-                for (int i = 23; i > nowTime.Hour; i--)
+                for (int i = 1; i <= 24; i++)
                 {
-                    bool isSelected = i == 23;
-                    var timeButton = new TimePointButtonUI($"{24 - i} hours", isSelected, false);
+                    string durationText = i == 1 ? "1 hour" : $"{i} hours";
+                    var timeButton = new TimePointButtonUI($"{durationText}", false, false);
                     _durationScroll.Add(timeButton);
+                    _durationButtons.Add(timeButton);
                 }
 
                 _calendarView = _hourlyPage.Q("CalendarView");
                 _hourlyPage.Remove(_calendarView);
 
-                _hourlyPage.Insert(0, new MonthCalendarViewUI());
+                _monthCalendarView = new MonthCalendarViewUI(this);
+                _hourlyPage.Insert(0, _monthCalendarView);
 
-                return this;
+                Reset();
+            }
+
+            public void Reset()
+            {
+                foreach (var button in _checkInTimeButtons)
+                {
+                    if (button.GetDisplay() == DisplayStyle.Flex)
+                    {
+                        button.OnClicked_Button(null);
+                        break;
+                    }
+                }
+
+                foreach (var button in _durationButtons)
+                {
+                    if (button.GetDisplay() == DisplayStyle.Flex)
+                    {
+                        button.OnClicked_Button(null);
+                        break;
+                    }
+                }
+            }
+
+            private void OnSelected_CalendarDate(DateTime date)
+            {
+                bool isToday = date.Date == DateTime.Today.Date;
+
+                for (byte i = 0; i < _checkInTimeButtons.Count; i++)
+                {
+                    bool validButton = !isToday || i > DateTime.Now.Hour;
+                    _checkInTimeButtons[i].SetDisplay(validButton ? DisplayStyle.Flex : DisplayStyle.None);
+                }
+
+                Marker.OnTimeRangeChanged?.Invoke(CheckInDate, Duration);
+            }
+
+            private void OnSelected_TimePointButton(bool isCheckInTime, string value)
+            {
+                if (isCheckInTime)
+                {
+                    CheckInTime = byte.Parse(value.Split(':')[0]);
+                }
+                else
+                {
+                    Duration = byte.Parse(value.Split(' ')[0]);
+                }
+
+                Marker.OnTimeRangeChanged?.Invoke(CheckInDate, Duration);
             }
         }
     }

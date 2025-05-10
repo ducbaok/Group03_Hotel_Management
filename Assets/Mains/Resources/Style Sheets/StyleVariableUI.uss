@@ -4,6 +4,7 @@
 	--color-ground-legacy: #3B3B3B;
 	--color-contrast-solid: #FFFFFF;
 	--color-contrast-faded: #555555;
+	--color-not-valid: #753737;
 
 	--font-nunito-regular: resource("Fonts/SDFs/Nunito/Nunito-Regular SDF");
 

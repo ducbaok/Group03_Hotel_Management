@@ -31,8 +31,12 @@
 	width: 100px;
 	height: 100px;
 	background-image: var(--icon-back);
-	-unity-background-image-tint-color: var(--color-contrast-faded);
+	-unity-background-image-tint-color: var(--color-contrast-solid);
 	background-size: 50% 50%;
+}
+.month-calendar-view__previous-month-button.is-current-month
+{
+	-unity-background-image-tint-color: var(--color-contrast-faded);
 }
 
 .month-calendar-view__next-month-button

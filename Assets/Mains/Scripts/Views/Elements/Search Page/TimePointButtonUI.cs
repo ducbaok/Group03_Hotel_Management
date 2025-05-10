@@ -28,7 +28,7 @@ namespace YNL.Checkotel
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["TimePointButtonUI"]);
             this.AddClass(_rootClass);
-            this.SetWidth(isCheckInTime ? 200 : 250);
+            this.SetWidth(isCheckInTime ? 175 : 225);
             this.RegisterCallback<PointerDownEvent>(OnClicked_Button);
 
             _label = new(value);
@@ -44,7 +44,7 @@ namespace YNL.Checkotel
             OnSelected -= RecheckUI;
         }
 
-        private void OnClicked_Button(PointerDownEvent evt)
+        public void OnClicked_Button(PointerDownEvent evt)
         {
             OnSelected?.Invoke(_isCheckInTime, _value);
 

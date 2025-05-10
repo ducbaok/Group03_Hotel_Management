@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
+using static YNL.Checkotel.SearchingTimePickingPageUI;
 
 namespace YNL.Checkotel
 {
@@ -20,11 +22,13 @@ namespace YNL.Checkotel
         private void Awake()
         {
             Marker.OnSystemStart += Initialize;
+            Marker.OnTimeRangeChanged += OnTimeRangeChanged;
         }
 
         private void OnDestroy()
         {
             Marker.OnSystemStart -= Initialize;
+            Marker.OnTimeRangeChanged -= OnTimeRangeChanged;
         }
 
         public void Initialize()
@@ -42,7 +46,14 @@ namespace YNL.Checkotel
             _cancelButton = _root.Q("ToolBar").Q("CancelButton");
             _applyButton = _root.Q("ToolBar").Q("ApplyButton");
 
-            _hourlyPage = new HourlyPage().Initialize(_root);
+            _hourlyPage = new HourlyPage(_root);
+        }
+
+        private void OnTimeRangeChanged(DateTime checkInDate, byte duration)
+        {
+            _checkInTime.text = checkInDate.ToString("dd/MM, HH:mm");
+            _checkOutTime.text = checkInDate.AddHours(duration).ToString("dd/MM, HH:mm");
+            _durationTime.text = duration == 1 ? "1 hour" : $"{duration} hours";
         }
     }
 }
