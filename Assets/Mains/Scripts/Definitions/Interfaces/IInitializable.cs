@@ -4,4 +4,14 @@ namespace YNL.Checkotel
     {
         void Initialize();
     }
+
+    public interface IInitializable<T>
+    {
+        void Initialize(T input);
+    }
+
+    public interface IInitializable<TIn, TOut>
+    {
+        TOut Initialize(TIn input);
+    }
 }

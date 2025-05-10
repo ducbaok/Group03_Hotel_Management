@@ -1,0 +1,32 @@
+.month-calendar-row
+{
+	flex-direction: row;
+	height: 100px;
+	margin: 0px;
+}
+
+.month-calendar-row__item
+{
+	flex-grow: 1;
+	justify-content: center;
+	height: 100px;
+}
+
+.month-calendar-row__item-text
+{
+	align-self: center;
+	width: 75px;
+	height: 75px;
+	margin: 0px;
+	padding: 0px;
+	-unity-font-definition: var(--font-nunity-regular);
+	font-size: 40px;
+	color: var(--color-contrast-solid);
+	-unity-text-align: middle-center;
+	border-radius: 50px;
+}
+
+.month-calendar-row__item-text__not-in-month
+{
+	color: var(--color-contrast-faded);
+}

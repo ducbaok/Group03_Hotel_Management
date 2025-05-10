@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using YNL.Utilities.UIToolkits;
@@ -12,6 +13,8 @@ namespace YNL.Checkotel
     /// </summary>
     public class SearchingSelectTypeUI : VisualElement
     {
+        public static Action<bool, SearchingStayType, SearchingRoomType> OnSelected { get; set; }
+
         private const string _rootClass = "searching-select-type";
         private const string _iconClass = _rootClass + "__icon";
         private const string _labelClass = _rootClass + "__label";
@@ -50,11 +53,11 @@ namespace YNL.Checkotel
 
             this.RegisterCallback<PointerDownEvent>(OnClicked_Button);
 
-            Marker.OnSearchingSelectTypeSelected += RecheckUI;
+            OnSelected += RecheckUI;
         }
         ~SearchingSelectTypeUI()
         {
-            Marker.OnSearchingSelectTypeSelected -= RecheckUI;
+            OnSelected -= RecheckUI;
         }
 
         public SearchingSelectTypeUI SetStayType(SearchingStayType stayType)
@@ -73,7 +76,7 @@ namespace YNL.Checkotel
 
         private void OnClicked_Button(PointerDownEvent evt)
         {
-            Marker.OnSearchingSelectTypeSelected?.Invoke(_isStayType, _stayType, _roomType);
+            OnSelected?.Invoke(_isStayType, _stayType, _roomType);
 
             _isSelected = true;
             UpdateUI();

@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class SearchingTimePickingPageUI : MonoBehaviour, IInitializable
+    public partial class SearchingTimePickingPageUI : MonoBehaviour, IInitializable
     {
         private VisualElement _root;
 
@@ -13,6 +14,8 @@ namespace YNL.Checkotel
         private Label _durationTime;
         private VisualElement _cancelButton;
         private VisualElement _applyButton;
+
+        private HourlyPage _hourlyPage;
 
         private void Awake()
         {
@@ -38,6 +41,8 @@ namespace YNL.Checkotel
 
             _cancelButton = _root.Q("ToolBar").Q("CancelButton");
             _applyButton = _root.Q("ToolBar").Q("ApplyButton");
+
+            _hourlyPage = new HourlyPage().Initialize(_root);
         }
     }
 }

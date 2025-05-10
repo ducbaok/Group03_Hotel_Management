@@ -2,11 +2,14 @@
 {
 	--color-light-legacy: #FED1A7;
 	--color-ground-legacy: #3B3B3B;
+	--color-contrast-solid: #FFFFFF;
+	--color-contrast-faded: #555555;
 
 	--font-nunito-regular: resource("Fonts/SDFs/Nunito/Nunito-Regular SDF");
 
 	--icon-location-light: resource("Icons/Location (Light)");
 	--icon-star-filled: resource("Icons/Star (Filled)");
+	--icon-back: resource("Icons/Back");
 
 	--image-discount-frame: resource("Images/Frames/Discount Frame");
 

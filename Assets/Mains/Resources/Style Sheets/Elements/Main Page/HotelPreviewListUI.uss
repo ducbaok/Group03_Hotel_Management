@@ -21,7 +21,7 @@
 	-unity-font-definition: var(--font-nunity-regular);
 	-unity-font-style: bold;
 	font-size: 50px;
-	color: #FFFFFF;
+	color: var(--color-contrast-solid);
 	-unity-text-align: middle-left;
 }
 

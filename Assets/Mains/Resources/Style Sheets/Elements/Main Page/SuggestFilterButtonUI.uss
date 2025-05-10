@@ -36,6 +36,6 @@
 	-unity-font-definition: var(--font-nunito-regular);
 	-unity-font-style: bold;
 	font-size: 40px;
-	color: #FFFFFF;
+	color: var(--color-contrast-solid);
 	-unity-text-align: middle-left;
 }
