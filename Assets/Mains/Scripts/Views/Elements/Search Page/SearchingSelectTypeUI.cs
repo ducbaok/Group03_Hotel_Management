@@ -76,9 +76,12 @@ namespace YNL.Checkotel
 
         private void OnClicked_Button(PointerDownEvent evt)
         {
+            if (_isSelected) return;
+
             OnSelected?.Invoke(_isStayType, _stayType, _roomType);
 
             _isSelected = true;
+
             UpdateUI();
         }
 

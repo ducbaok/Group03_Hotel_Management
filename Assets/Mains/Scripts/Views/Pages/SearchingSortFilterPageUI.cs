@@ -3,9 +3,12 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class SearchingSortFilterPageUI : MonoBehaviour, IInitializable
+    public partial class SearchingSortFilterPageUI : MonoBehaviour, IInitializable
     {
         private VisualElement _root;
+
+        private SortingPage _sortingPage;
+        private FilteringPage _filteringPage;
 
         private void Awake()
         {
@@ -20,6 +23,9 @@ namespace YNL.Checkotel
         public void Initialize()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
+
+            _sortingPage = new SortingPage(_root);
+            _filteringPage = new FilteringPage(_root);
         }
     }
 }

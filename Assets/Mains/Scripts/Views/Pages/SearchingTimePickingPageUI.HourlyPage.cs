@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -89,12 +88,18 @@ namespace YNL.Checkotel
                     }
                 }
 
-                foreach (var button in _durationButtons)
+                bool durationSelected = false;
+
+                for (byte i = 0; i < _durationButtons.Count; i++)
                 {
-                    if (button.GetDisplay() == DisplayStyle.Flex)
+                    bool validDuration = i < TestMaxDuration;
+
+                    _durationButtons[i].SetDisplay(validDuration ? DisplayStyle.Flex : DisplayStyle.None);
+
+                    if (validDuration && !durationSelected)
                     {
-                        button.OnClicked_Button(null);
-                        break;
+                        _durationButtons[i].OnClicked_Button(null);
+                        durationSelected = true;
                     }
                 }
             }

@@ -1,10 +1,7 @@
-using Codice.Client.BaseCommands.CheckIn;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel

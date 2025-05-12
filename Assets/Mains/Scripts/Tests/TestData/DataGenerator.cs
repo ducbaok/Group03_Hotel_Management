@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -162,7 +163,7 @@ namespace YNL.Checkotel.Utils
                     },
                     ViewType = (Room.ViewType)_rnd.Next(Enum.GetValues(typeof(Room.ViewType)).Length)
                 },
-                Amenity = new RoomAmenity
+                Amenity = new RoomAmenitys
                 {
                     HasWifi = _rnd.NextDouble() < 0.9,
                     HasTV = _rnd.NextDouble() < 0.8,
@@ -216,3 +217,4 @@ namespace YNL.Checkotel.Utils
         }
     }
 }
+#endif
