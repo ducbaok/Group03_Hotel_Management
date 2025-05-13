@@ -56,6 +56,7 @@ namespace YNL.Checkotel
         HasParrkingLots = 1 << 5,
         HasFreeBreakfast = 1 << 6,
         HasEVChargingStation = 1 << 7,
+        HasElevator = 1 << 9,
 
         IsPetFriendly = 1 << 8,
     }
