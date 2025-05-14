@@ -18,7 +18,14 @@ namespace YNL.Checkotel
         public MainResources Resources = new();
         public MainInterfaces Interfaces = new();
 
-		private void Start()
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Application.targetFrameRate = 120;
+        }
+
+        private void Start()
         {
             Marker.OnSystemStart?.Invoke();
         }
