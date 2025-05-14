@@ -122,7 +122,7 @@ namespace YNL.Checkotel
         }
     }
 
-    public partial class SearchingResultItemUI : VisualElement, IInitializable, IResetable
+    public partial class SearchingResultItemUI : VisualElement, IInitializable, IRefreshable
     {
         public static Action<UID> OnSelected { get; set; }
 
@@ -171,7 +171,7 @@ namespace YNL.Checkotel
 
         }
 
-        public void Reset()
+        public void Refresh()
         {
 
         }

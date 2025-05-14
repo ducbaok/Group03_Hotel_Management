@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class SingingPageUI : MonoBehaviour, IInitializable
+    public class SingingPageUI : MonoBehaviour, ICollectible
     {
         private VisualElement _root;
 
@@ -21,10 +21,15 @@ namespace YNL.Checkotel
 
         private void Awake()
         {
-            Initialize();
+            Marker.OnSystemStart += Collect;
         }
 
-        public void Initialize()
+        private void OnDestroy()
+        {
+            Marker.OnSystemStart -= Collect;
+        }
+
+        public void Collect()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
 

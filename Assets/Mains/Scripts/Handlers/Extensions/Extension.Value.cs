@@ -1,8 +1,6 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using UnityEditor;
-using YNL.Utilities.Addons;
 
 namespace YNL.Checkotel
 {
@@ -39,6 +37,11 @@ namespace YNL.Checkotel
                 float roundedValue = (float)Math.Round(value, 1);
 
                 return roundedValue - 0.01f;
+            }
+
+            public static float AddAverage(float previousAverage, int count, float newValue)
+            {
+                return (previousAverage * count + newValue) / (count + 1);
             }
         }
     }

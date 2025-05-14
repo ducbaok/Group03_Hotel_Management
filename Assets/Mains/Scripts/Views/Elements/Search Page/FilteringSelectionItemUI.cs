@@ -4,8 +4,6 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    using FilteringPage = SearchingSortFilterPageUI.FilteringPage;
-
     public class FilteringSelectionItemUI : VisualElement
     {
         public static Action<HotelFacility> OnSelected { get; set; }
@@ -19,14 +17,14 @@ namespace YNL.Checkotel
         private VisualElement _toggle;
 
         private bool _isSelected = false;
-        private FilteringPage _filteringPage;
+        private SearchViewFilterPage _filterPage;
         private HotelFacility _hotelFacility;
 
-        public FilteringSelectionItemUI(FilteringPage filteringPage, HotelFacility type)
+        public FilteringSelectionItemUI(SearchViewFilterPage filterPage, HotelFacility type)
         {
             OnSelected += UpdateUI;
 
-            _filteringPage = filteringPage;
+            _filterPage = filterPage;
             _hotelFacility = type;
 
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
@@ -59,19 +57,19 @@ namespace YNL.Checkotel
 
             if (_hotelFacility == HotelFacility.None && _isSelected)
             {
-                _filteringPage.HotelFacility = _hotelFacility;
+                _filterPage.HotelFacility = _hotelFacility;
             }
             else if (_isSelected)
             {
-                _filteringPage.HotelFacility |= _hotelFacility;
-                _filteringPage.HotelFacility &= ~HotelFacility.None;
+                _filterPage.HotelFacility |= _hotelFacility;
+                _filterPage.HotelFacility &= ~HotelFacility.None;
             }
             else
             {
-                _filteringPage.HotelFacility &= ~_hotelFacility;    
-                if (_filteringPage.HotelFacility == 0)
+                _filterPage.HotelFacility &= ~_hotelFacility;    
+                if (_filterPage.HotelFacility == 0)
                 {
-                    _filteringPage.HotelFacility = HotelFacility.None;
+                    _filterPage.HotelFacility = HotelFacility.None;
                 }
             }
 
