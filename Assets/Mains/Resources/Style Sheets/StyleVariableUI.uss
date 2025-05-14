@@ -2,6 +2,7 @@
 {
 	--color-light-legacy: #FED1A7;
 	--color-ground-legacy: #3B3B3B;
+	--color-ground-dark: #303030;
 	--color-contrast-solid: #FFFFFF;
 	--color-contrast-faded: #555555;
 	--color-not-valid: #753737;
@@ -9,9 +10,12 @@
 	--color-button-selected: #3B2F24;
 	--color-star-yellow: #FBC23C;
 	--color-badge-red: #EC4E40;
+	--color-border-legacy: #606060;
+	--color-text-faded: #808080;
 
 	--value-transition-duration: 0.2s;
 	--value-divider-width: 2px;
+	--value-border-width: 2px;
 
 	--font-nunito-regular: resource("Fonts/SDFs/Nunito/Nunito-Regular SDF");
 
@@ -23,6 +27,8 @@
 	--icon-checkbox-checked: resource("Icons/Checkbox (Checked)");
 	--icon-hot: resource("Icons/Trending");
 	--icon-discount: resource("Icons/Discount");
+	--icon-account: resource("Icons/Account");
+	--icon-heart: resource("Icons/Heart");
 
 	--image-discount-frame: resource("Images/Frames/Discount Frame");
 }
