@@ -4,6 +4,8 @@ namespace YNL.Checkotel
 {
     public static partial class Marker
     {
+        public static Action<ViewType, byte> OnViewPageSwitched { get; set; }
+
         public static Action<HomeNavigationType> OnHomeNavigated { get; set; }
         public static Action OnSearchViewOpened { get; set; }
         public static Action OnNotificationViewOpened { get; set; }

@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class MainViewHomePageUI : MonoBehaviour, ICollectible
+    public class MainViewHomePageUI : ViewPageUI, ICollectible
     {
         private VisualElement _root;
 

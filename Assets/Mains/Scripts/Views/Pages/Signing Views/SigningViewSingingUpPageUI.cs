@@ -162,6 +162,7 @@ namespace YNL.Checkotel
             if (!isMatchWithPassword)
             {
                 _confirmMessage.SetText("Passwords do not match");
+                return;
             }
 
             _confirmMessage.SetDisplay(DisplayStyle.None);
@@ -186,7 +187,7 @@ namespace YNL.Checkotel
             account.Password = _passwordInput;
             Main.Database.Accounts.Add(account);
 
-
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage);
         }
 
         private void RecoveryAccount(PointerDownEvent evt)
