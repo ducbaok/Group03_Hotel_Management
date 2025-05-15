@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -21,6 +22,12 @@ namespace YNL.Checkotel
 
         private VisualElement _signInWithFacebookButton;
         private VisualElement _signInWithGoogleButton;
+
+        private string _accountInput;
+        private string _passwordInput;
+        private bool _validAccountInput;
+        private bool _validPasswordInput;
+        private bool _validConfirmInput;
 
         private void Awake()
         {
@@ -68,17 +75,44 @@ namespace YNL.Checkotel
 
         private void OnValueChanged_AccountInputField(ChangeEvent<string> evt)
         {
+            string input = evt.newValue;
 
+            var validEmailInput = Extension.Validator.ValidateEmail(input);
+            var validPhoneInput = Extension.Validator.ValidatePhoneNumber(input);
+
+            if (!validEmailInput && !validPhoneInput)
+            {
+                _accountMessage.SetDisplay(DisplayStyle.Flex);
+                _accountMessage.SetText("Email or Phone number is not valid!");
+            }
+            else
+            {
+                _accountMessage.SetDisplay(DisplayStyle.None);
+            }
         }
 
         private void OnValueChanged_PasswordInputField(ChangeEvent<string> evt)
         {
+            _passwordInput = evt.newValue;
 
+            
         }
 
         private void OnValueChanged_ConfirmInputField(ChangeEvent<string> evt)
         {
+            var input = evt.newValue;
 
+            var isMatchWithPassword = input == _passwordInput;
+
+            if (isMatchWithPassword)
+            {
+                _confirmMessage.SetDisplay(DisplayStyle.None);
+            }
+            else
+            {
+                _confirmMessage.SetDisplay(DisplayStyle.Flex);
+                _confirmMessage.SetText("Passwords do not match");
+            }
         }
 
         private void SigningWithFacebook(PointerDownEvent evt)
