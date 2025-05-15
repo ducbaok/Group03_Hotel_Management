@@ -8,8 +8,6 @@ namespace YNL.Checkotel
 {
     public class SigningViewSingingUpPageUI : ViewPageUI, ICollectible, IInitializable
     {
-        private VisualElement _root;
-
         private TextField _accountInputField;
         private Label _accountMessage;
         private TextField _passwordInputField;
@@ -32,7 +30,7 @@ namespace YNL.Checkotel
         private bool _validPasswordInput;
         private bool _validConfirmInput;
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
             Marker.OnSystemStart += Collect;
         }
@@ -44,9 +42,9 @@ namespace YNL.Checkotel
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            var signingInputField = _root.Q("SigningInputField");
+
+            var signingInputField = Root.Q("SigningInputField");
 
             _accountInputField = signingInputField.Q("AccountField").Q("TextField") as TextField;
             _accountInputField.RegisterValueChangedCallback(OnValueChanged_AccountInputField);
@@ -66,10 +64,10 @@ namespace YNL.Checkotel
 
             _confirmMessage = signingInputField.Q("ConfirmField").Q("Message") as Label;
 
-            _signInWithFacebookButton = _root.Q("SigningMethod").Q("FacebookSigning");
+            _signInWithFacebookButton = Root.Q("SigningMethod").Q("FacebookSigning");
             _signInWithFacebookButton.RegisterCallback<PointerDownEvent>(SigningWithFacebook);
 
-            _signInWithGoogleButton = _root.Q("SigningMethod").Q("GoogleSigning");
+            _signInWithGoogleButton = Root.Q("SigningMethod").Q("GoogleSigning");
             _signInWithGoogleButton.RegisterCallback<PointerDownEvent>(SignInWithGoogle);
 
             _signingButton = signingInputField.Q("SigningButton").Q("Button") as Button;
@@ -80,9 +78,9 @@ namespace YNL.Checkotel
 
         public void Initialize()
         {
-            _accountMessage.SetDisplay(DisplayStyle.None);
-            _passwordMessage.SetDisplay(DisplayStyle.None);
-            _confirmMessage.SetDisplay(DisplayStyle.None);
+            _accountMessage.SetText(string.Empty);
+            _passwordMessage.SetText(string.Empty);
+            _confirmMessage.SetText(string.Empty);
 
         }
 
@@ -95,7 +93,6 @@ namespace YNL.Checkotel
             _validEmailInput = Extension.Validator.ValidateEmail(_accountInput);
             var validPhoneInput = Extension.Validator.ValidatePhoneNumber(_accountInput);
 
-            _accountMessage.SetDisplay(DisplayStyle.Flex);
             _validAccountInput = false;
 
             if (!_validEmailInput && !validPhoneInput)
@@ -104,7 +101,7 @@ namespace YNL.Checkotel
                 return;
             }
 
-            _accountMessage.SetDisplay(DisplayStyle.None);
+            _accountMessage.SetText(string.Empty);
             _validAccountInput = true;
 
             // Validate if account is existed.
@@ -124,7 +121,6 @@ namespace YNL.Checkotel
             _oneNumberMessage.SetColor(valid1number ? "#5FFF9F" : "#FF5F5F");
             _oneSpecialCharacterMessage.SetColor(valid1special ? "#5FFF9F" : "#FF5F5F");
 
-            _passwordMessage.SetDisplay(DisplayStyle.Flex);
             _validPasswordInput = false;
 
             if (!valid8character && !valid1number && !valid1special)
@@ -144,7 +140,7 @@ namespace YNL.Checkotel
                 }
             }
 
-            _passwordMessage.SetDisplay(DisplayStyle.None);
+            _passwordMessage.SetText(string.Empty);
             _validPasswordInput = true;
         }
 
@@ -156,7 +152,6 @@ namespace YNL.Checkotel
 
             var isMatchWithPassword = input == _passwordInput;
 
-            _confirmMessage.SetDisplay(DisplayStyle.Flex);
             _validConfirmInput = false;
 
             if (!isMatchWithPassword)
@@ -165,7 +160,7 @@ namespace YNL.Checkotel
                 return;
             }
 
-            _confirmMessage.SetDisplay(DisplayStyle.None);
+            _confirmMessage.SetText(string.Empty);
             _validConfirmInput = true;
         }
 
@@ -187,7 +182,7 @@ namespace YNL.Checkotel
             account.Password = _passwordInput;
             Main.Database.Accounts.Add(account);
 
-            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage);
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage, true);
         }
 
         private void RecoveryAccount(PointerDownEvent evt)

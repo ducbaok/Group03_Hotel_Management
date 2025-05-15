@@ -5,8 +5,6 @@ namespace YNL.Checkotel
 {
     public class SigningViewSingingInPageUI : ViewPageUI, ICollectible
     {
-        private VisualElement _root;
-
         private TextField _accountInputField;
         private Label _accountMessage;
         private TextField _passwordInputField;
@@ -18,21 +16,21 @@ namespace YNL.Checkotel
         private VisualElement _signInWithFacebookButton;
         private VisualElement _signInWithGoogleButton;
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
-            Marker.OnSystemStart += Collect;
-        }
+			Marker.OnSystemStart += Collect;
+		}
 
         private void OnDestroy()
         {
-            Marker.OnSystemStart -= Collect;
-        }
+			Marker.OnSystemStart -= Collect;
+		}
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            var signingInputField = _root.Q("SigningInputField");
+
+            var signingInputField = Root.Q("SigningInputField");
 
             _accountInputField = signingInputField.Q("AccountField").Q("TextField") as TextField;
             _accountInputField.RegisterValueChangedCallback(OnValueChanged_AccountInputField);
@@ -44,13 +42,13 @@ namespace YNL.Checkotel
 
             _passwordMessage = signingInputField.Q("PasswordField").Q("Message") as Label;
 
-            _signInWithFacebookButton = _root.Q("SigningMethod").Q("FacebookSigning");
+            _signInWithFacebookButton = Root.Q("SigningMethod").Q("FacebookSigning");
             _signInWithFacebookButton.RegisterCallback<PointerDownEvent>(SigningWithFacebook);
 
-            _signInWithGoogleButton = _root.Q("SigningMethod").Q("GoogleSigning");
+            _signInWithGoogleButton = Root.Q("SigningMethod").Q("GoogleSigning");
             _signInWithGoogleButton.RegisterCallback<PointerDownEvent>(SignInWithGoogle);
 
-            _signingButton = signingInputField.Q("SigningButton") as Button;
+            _signingButton = signingInputField.Q("SigningButton").Q("Button") as Button;
             _signingButton.clicked += SigningAccount;
 
             _recoveryButton = signingInputField.Q("RecoveryButton");
