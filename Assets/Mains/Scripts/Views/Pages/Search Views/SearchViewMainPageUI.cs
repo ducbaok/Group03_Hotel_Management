@@ -71,12 +71,12 @@ namespace YNL.Checkotel
 
         private void OnClicked_AddressButton(PointerDownEvent evt)
         {
-            _addressPageUI.DisplayView(true);
+            _addressPageUI.Root.SetTranslate(0, 0, true);
         }
 
         private void OnClicked_TimeRangeButton(PointerDownEvent evt)
         {
-            _timeRangePageUI.DisplayView(true);
+            _timeRangePageUI.Root.SetTranslate(0, 0, true);
         }
 
         private void OnClicked_CheckingButton(PointerDownEvent evt)
@@ -85,6 +85,7 @@ namespace YNL.Checkotel
 
         private void OnClicked_SearchButton(PointerDownEvent evt)
         {
+            Marker.OnViewPageSwitched?.Invoke(ViewType.SearchView, ViewKey.SearchViewResultPage, true);
         }
     }
 }

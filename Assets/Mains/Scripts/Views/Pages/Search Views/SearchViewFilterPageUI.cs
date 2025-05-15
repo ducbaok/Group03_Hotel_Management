@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using YNL.Utilities.Extensions;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -40,7 +41,7 @@ namespace YNL.Checkotel
 
             _filteringPage = Root.Q("FilteringPage");
 
-            _closeButton = _filteringPage.Q("LabelField").Q("CloseButton");
+            _closeButton = _filteringPage.Q("LabelField");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
 
             _resetButton = _filteringPage.Q("LabelField").Q("ResetButton") as Button;
@@ -113,11 +114,12 @@ namespace YNL.Checkotel
             int maxPrice = Mathf.RoundToInt(ratio.max.Remap(new(0, 1), new(PriceRange.Min, PriceRange.Max)));
 
             _minLabel.text = $"<b>{minPrice.ToString("N0")}$</b>";
-            _maxLabel.text = maxPrice == PriceRange.Max ? $"<size=100>?</size>" : $"<b>{maxPrice.ToString("N0")}$</b>";
+            _maxLabel.text = maxPrice == PriceRange.Max ? $"<size=100>∞</size>" : $"<b>{maxPrice.ToString("N0")}$</b>";
         }
 
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
+            Root.SetTranslate(0, 100, true);
         }
 
         private void OnClicked_ResetButton()

@@ -22,7 +22,7 @@ namespace YNL.Checkotel
             Marker.OnViewPageSwitched -= OnViewPageSwitched;
         }
 
-        private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage = true)
+        private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage)
         {
             var currentGroup = Groups[CurrentViewType];
             if (hidePreviousPage)
@@ -60,5 +60,6 @@ namespace YNL.Checkotel
         public const byte MainViewAccountPage = 1;
 
         public const byte SearchViewMainPage = 0;
+        public const byte SearchViewResultPage = 1;
     }
 }

@@ -52,7 +52,7 @@ namespace YNL.Checkotel
 
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
-            Root.SetDisplay(DisplayStyle.None);
+            Root.SetTranslate(0, 100, true);
         }
 
         private void OnClicked_CancelButton(PointerDownEvent evt)

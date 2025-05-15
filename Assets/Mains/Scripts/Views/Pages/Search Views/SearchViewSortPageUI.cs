@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -30,11 +31,9 @@ namespace YNL.Checkotel
 
         public void Collect()
         {
-
-
             _sortingPage = Root.Q("SortingPage");
 
-            _closeButton = _sortingPage.Q("LabelField").Q("CloseButton");
+            _closeButton = _sortingPage.Q("LabelField");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
 
             _applyButton = _sortingPage.Q("Toolbar").Q("ApplyButton");
@@ -69,6 +68,7 @@ namespace YNL.Checkotel
 
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
+            Root.SetTranslate(0, 100, true);
         }
 
         private void OnClicked_ApplyButton(PointerDownEvent evt)

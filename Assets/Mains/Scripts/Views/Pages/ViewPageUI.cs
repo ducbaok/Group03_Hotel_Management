@@ -7,22 +7,46 @@ namespace YNL.Checkotel
     public abstract class ViewPageUI : MonoBehaviour
     {
         [SerializeField] private bool _hideOnAwake = true;
-        [SerializeField] private ViewPageUI _dependingView;
+        [SerializeField] private bool _isPopupPage = false;
         public VisualElement Root;
+
+        private bool _isDisplayThisTime;
 
         private void Awake()
         {
             Root = GetComponent<UIDocument>().rootVisualElement;
+            Root.SetTransitionProperty("translate");
+            Root.RegisterCallback<TransitionEndEvent>(OnTransitionEnded);
 
             VirtualAwake();
 
-            Root.SetDisplay(_hideOnAwake ? DisplayStyle.None : DisplayStyle.Flex);
+            if (!_isPopupPage)
+            {
+                Root.SetTranslate(_hideOnAwake ? 100 : 0, 0, true);
+                Root.SetTransitionDuration(0.2f);
+            }
+            else
+            {
+                Root.SetTranslate(0, 100, true);
+                _isDisplayThisTime = true;
+                Root.SetTransitionDuration(0.4f);
+            }
         }
 
         public void DisplayView(bool display)
         {
-            _dependingView?.Root.SetDisplay(display ? DisplayStyle.Flex : DisplayStyle.None);
-            Root.SetDisplay(display ? DisplayStyle.Flex : DisplayStyle.None);
+            Root.SetDisplay(DisplayStyle.Flex);
+            Root.SetTranslate(display ? 0 : -100, 0, true);
+
+            _isDisplayThisTime = display;
+        }
+
+        private void OnTransitionEnded(TransitionEndEvent evt)
+        {
+            if (_isDisplayThisTime) return;
+
+            Root.SetDisplay(DisplayStyle.None);
+            Root.SetTranslate(100, 0, true);
         }
 
         protected virtual void VirtualAwake() { }
