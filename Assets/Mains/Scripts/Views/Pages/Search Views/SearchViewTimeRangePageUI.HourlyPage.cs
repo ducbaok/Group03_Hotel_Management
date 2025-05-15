@@ -5,7 +5,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public partial class SearchViewTimeRangePage
+    public partial class SearchViewTimeRangePageUI
     {
         public class HourlyPage : ICollectible, IRefreshable
         {

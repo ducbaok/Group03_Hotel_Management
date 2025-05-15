@@ -4,15 +4,13 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class SearchViewResultPage : MonoBehaviour, ICollectible, IRefreshable
+    public class SearchViewResultPageUI : ViewPageUI, ICollectible, IRefreshable
     {
-        private VisualElement _root;
-
         private VisualElement _resultPage;
         private ScrollView _resultScroll;
         private ListView _resultList;
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
             Marker.OnSystemStart += Collect;
         }
@@ -24,15 +22,15 @@ namespace YNL.Checkotel
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _resultPage = _root.Q("SearchingResultPage");
 
-            _resultScroll = _root.Q("ResultScroll") as ScrollView;
+            _resultPage = Root.Q("SearchingResultPage");
+
+            _resultScroll = Root.Q("ResultScroll") as ScrollView;
             _resultPage.Remove(_resultScroll);
 
             _resultList = new ListView().SetFlexGrow(1).SetMarginTop(50);
-            _resultList.Add(_resultScroll);
+            _resultList.hierarchy.Add(_resultScroll);
 
             Refresh();
         }

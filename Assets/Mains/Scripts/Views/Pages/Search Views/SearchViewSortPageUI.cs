@@ -5,11 +5,10 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public partial class SearchViewSortPage : MonoBehaviour, ICollectible, IInitializable, IRefreshable
+    public partial class SearchViewSortPageUI : ViewPageUI, ICollectible, IInitializable, IRefreshable
     {
         public SortingSelectionType SortingType;
 
-        private VisualElement _root;
         private VisualElement _sortingPage;
         private VisualElement _closeButton;
         private VisualElement _applyButton;
@@ -17,7 +16,7 @@ namespace YNL.Checkotel
 
         private List<SortingSelectionItemUI> _sortingItemUI = new();
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
             Marker.OnSystemStart += Collect;
             SortingSelectionItemUI.OnSelected += OnSortingTypeSelected;
@@ -31,9 +30,9 @@ namespace YNL.Checkotel
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _sortingPage = _root.Q("SortingPage");
+
+            _sortingPage = Root.Q("SortingPage");
 
             _closeButton = _sortingPage.Q("LabelField").Q("CloseButton");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);

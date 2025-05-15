@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,13 +6,12 @@ using YNL.Utilities.Extensions;
 
 namespace YNL.Checkotel
 {
-    public partial class SearchViewFilterPage : MonoBehaviour, ICollectible, IInitializable, IRefreshable
+    public partial class SearchViewFilterPageUI : ViewPageUI, ICollectible, IInitializable, IRefreshable
     {
         public static (int Min, int Max) PriceRange = (5, 1000);
 
         public HotelFacility HotelFacility;
 
-        private VisualElement _root;
         private VisualElement _filteringPage;
         private VisualElement _closeButton;
         private Button _resetButton;
@@ -25,7 +24,7 @@ namespace YNL.Checkotel
         private VisualElement _hotelTypeField;
         private VisualElement _hotelFacilitiesList;
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
             Marker.OnSystemStart += Collect;
         }
@@ -37,9 +36,9 @@ namespace YNL.Checkotel
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _filteringPage = _root.Q("FilteringPage");
+
+            _filteringPage = Root.Q("FilteringPage");
 
             _closeButton = _filteringPage.Q("LabelField").Q("CloseButton");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
@@ -50,7 +49,7 @@ namespace YNL.Checkotel
             _applyButton = _filteringPage.Q("Toolbar").Q("ApplyButton");
             _applyButton.RegisterCallback<PointerDownEvent>(OnClicked_ApplyButton);
 
-            var priceRangeView = _root.Q("FilterScroll").Q("PriceRangeView");
+            var priceRangeView = Root.Q("FilterScroll").Q("PriceRangeView");
 
             _minLabel = priceRangeView.Q("PriceField").Q("MinPriceBox").Q("Text") as Label;
 
@@ -71,14 +70,14 @@ namespace YNL.Checkotel
         public void Initialize()
         {
             _reviewScoreField.Clear();
-            _reviewScoreField.Add(new FilterPropertyButtonUI("≥ 4.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE45));
-            _reviewScoreField.Add(new FilterPropertyButtonUI("≥ 4.0", FilterSelectionType.ReviewScore, FilterPropertyType.GE40));
-            _reviewScoreField.Add(new FilterPropertyButtonUI("≥ 3.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE35));
+            _reviewScoreField.Add(new FilterPropertyButtonUI("? 4.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE45));
+            _reviewScoreField.Add(new FilterPropertyButtonUI("? 4.0", FilterSelectionType.ReviewScore, FilterPropertyType.GE40));
+            _reviewScoreField.Add(new FilterPropertyButtonUI("? 3.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE35));
 
             _cleanlinessField.Clear();
             _cleanlinessField.Add(new FilterPropertyButtonUI("5.0", FilterSelectionType.Cleanliness, FilterPropertyType.E50));
-            _cleanlinessField.Add(new FilterPropertyButtonUI("≥ 4.9", FilterSelectionType.Cleanliness, FilterPropertyType.GE49));
-            _cleanlinessField.Add(new FilterPropertyButtonUI("≥ 4.8", FilterSelectionType.Cleanliness, FilterPropertyType.GE48));
+            _cleanlinessField.Add(new FilterPropertyButtonUI("? 4.9", FilterSelectionType.Cleanliness, FilterPropertyType.GE49));
+            _cleanlinessField.Add(new FilterPropertyButtonUI("? 4.8", FilterSelectionType.Cleanliness, FilterPropertyType.GE48));
 
             _hotelTypeField.Clear();
             _hotelTypeField.Add(new FilterPropertyButtonUI("Flash sale", FilterSelectionType.HotelType, FilterPropertyType.FlashSale));
@@ -114,7 +113,7 @@ namespace YNL.Checkotel
             int maxPrice = Mathf.RoundToInt(ratio.max.Remap(new(0, 1), new(PriceRange.Min, PriceRange.Max)));
 
             _minLabel.text = $"<b>{minPrice.ToString("N0")}$</b>";
-            _maxLabel.text = maxPrice == PriceRange.Max ? $"<size=100>∞</size>" : $"<b>{maxPrice.ToString("N0")}$</b>";
+            _maxLabel.text = maxPrice == PriceRange.Max ? $"<size=100>?</size>" : $"<b>{maxPrice.ToString("N0")}$</b>";
         }
 
         private void OnClicked_CloseButton(PointerDownEvent evt)
