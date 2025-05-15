@@ -11,12 +11,15 @@ namespace YNL.Checkotel
         public static MainManager Manager => MainManager.Instance;
         public static MainResources Resources => Manager.Resources;
         public static DatabaseContainerSO Database => Manager.Database;
+        public static ViewManager View => Manager.ViewManager;
 	}
 
     public class MainManager : Singleton<MainManager>
     {
         public MainResources Resources = new();
         public DatabaseContainerSO Database;
+
+        public ViewManager ViewManager;
 
         protected override void Awake()
         {

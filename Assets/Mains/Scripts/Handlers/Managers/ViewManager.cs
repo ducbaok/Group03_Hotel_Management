@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 using YNL.Utilities.Addons;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -10,7 +12,7 @@ namespace YNL.Checkotel
 
 		public SerializableDictionary<ViewType, ViewGroup> Groups = new();
 
-        private void Awake()
+        public void Awake()
         {
             Marker.OnViewPageSwitched += OnViewPageSwitched;
         }
@@ -20,15 +22,19 @@ namespace YNL.Checkotel
             Marker.OnViewPageSwitched -= OnViewPageSwitched;
         }
 
-        private void OnViewPageSwitched(ViewType type, byte page)
+        private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage = true)
         {
             var currentGroup = Groups[CurrentViewType];
-            currentGroup.View.SetActive(false);
-            currentGroup.Pages[CurrentViewPage].gameObject.SetActive(false);
+            if (hidePreviousPage)
+            {
+                currentGroup.Pages[CurrentViewPage].DisplayView(false);
+            }
 
-            var nextGroup = Groups[type];
-            nextGroup.View.SetActive(true);
-            nextGroup.Pages[page].gameObject.SetActive(true);
+            CurrentViewType = type;
+            CurrentViewPage = page;
+
+            currentGroup = Groups[CurrentViewType];
+            currentGroup.Pages[CurrentViewPage].DisplayView(true);
         }
     }
 

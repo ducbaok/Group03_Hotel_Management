@@ -17,10 +17,10 @@ namespace YNL.Checkotel
         private VisualElement _toggle;
 
         private bool _isSelected = false;
-        private SearchViewFilterPage _filterPage;
+        private SearchViewFilterPageUI _filterPage;
         private HotelFacility _hotelFacility;
 
-        public FilteringSelectionItemUI(SearchViewFilterPage filterPage, HotelFacility type)
+        public FilteringSelectionItemUI(SearchViewFilterPageUI filterPage, HotelFacility type)
         {
             OnSelected += UpdateUI;
 

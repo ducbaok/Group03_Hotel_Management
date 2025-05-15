@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -11,6 +13,8 @@ namespace YNL.Checkotel
 
     public class HomeNavigationButton : VisualElement
     {
+        private static Action<HomeNavigationType> _onNavigated { get; set; }
+
         private const string _rootClass = "home-navigation-button";
         private const string _iconClass = _rootClass + "__icon";
         private const string _labelClass = _rootClass + "__label";
@@ -45,11 +49,11 @@ namespace YNL.Checkotel
 
             this.RegisterCallback<PointerDownEvent>(OnClicked_Button);
 
-            Marker.OnHomeNavigated += RecheckUI;
+            _onNavigated += RecheckUI;
         }
         ~HomeNavigationButton()
         {
-            Marker.OnHomeNavigated -= RecheckUI;
+            _onNavigated -= RecheckUI;
         }
 
         private void UpdateUI()
@@ -61,10 +65,13 @@ namespace YNL.Checkotel
 
         private void OnClicked_Button(PointerDownEvent evt)
         {
-            Marker.OnHomeNavigated?.Invoke(_type);
-
             _isSelected = true;
             UpdateUI();
+
+            _onNavigated?.Invoke(_type);
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, (byte)_type, true);
+
+            evt.StopPropagation();
         }
 
         private void RecheckUI(HomeNavigationType type)

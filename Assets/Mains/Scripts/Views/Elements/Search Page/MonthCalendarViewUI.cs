@@ -6,7 +6,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    using HomePage = SearchViewTimeRangePage.HourlyPage;
+    using HomePage = SearchViewTimeRangePageUI.HourlyPage;
 
     public class MonthCalendarViewUI : VisualElement, IInitializable
     {
