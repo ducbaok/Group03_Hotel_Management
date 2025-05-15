@@ -16,7 +16,7 @@ namespace YNL.Checkotel
                        h.Value.Description.Name.ToLower().Contains(normalizedInput)
                     || h.Value.Description.Address.ToLower().Contains(normalizedInput);
 
-                return DataContainer.Hotel.Hotels.Where(searchCondition).Select(h => h.Key).ToList();
+                return null;// Main.Database.Hotels.Where(searchCondition).Select(h => h.Key).ToList();
             }
         }
     }

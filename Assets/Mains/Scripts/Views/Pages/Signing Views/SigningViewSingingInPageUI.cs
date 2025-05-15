@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class SigningViewSingingInPageUI : MonoBehaviour, ICollectible
+    public class SigningViewSingingInPageUI : ViewPageUI, ICollectible
     {
         private VisualElement _root;
 

@@ -10,13 +10,13 @@ namespace YNL.Checkotel
     {
         public static MainManager Manager => MainManager.Instance;
         public static MainResources Resources => Manager.Resources;
-        public static MainInterfaces Interfaces => Manager.Interfaces;
+        public static DatabaseContainerSO Database => Manager.Database;
 	}
 
     public class MainManager : Singleton<MainManager>
     {
         public MainResources Resources = new();
-        public MainInterfaces Interfaces = new();
+        public DatabaseContainerSO Database;
 
         protected override void Awake()
         {
@@ -36,11 +36,5 @@ namespace YNL.Checkotel
     {
         public SerializableDictionary<string, StyleSheet> Styles = new();
         public SerializableDictionary<string, Texture2D> Icons = new();
-    }
-
-    [System.Serializable]
-    public class MainInterfaces
-    {
-        
     }
 }

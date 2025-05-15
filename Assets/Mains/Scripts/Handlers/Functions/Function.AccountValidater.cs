@@ -6,20 +6,20 @@ namespace YNL.Checkotel
     {
         public class AccountValidater
         {
-            private static Account? GetAccount(AccountVerificationType type, string input)
+            private static Account GetAccount(AccountVerificationType type, string input)
             {
                 return type == AccountVerificationType.Email
-                    ? DataContainer.Accounts?.Find(i => i.Email == input)
-                    : DataContainer.Accounts?.Find(i => i.PhoneNumber == input);
+                    ? Main.Database.Accounts?.Find(i => i.Email == input)
+                    : Main.Database.Accounts?.Find(i => i.PhoneNumber == input);
             }
-            private static Account? GetAccount(UID id)
+            private static Account GetAccount(UID id)
             {
-                return DataContainer.Accounts?.Find(i => i.ID == id);
+                return Main.Database.Accounts?.Find(i => i.ID == id);
             }
 
             public static void SignAccount(AccountSignType signType, AccountVerificationType verificationType, string input, string password, string? confirmedPassword = null)
             {
-                Account? account = GetAccount(verificationType, input);
+                Account account = GetAccount(verificationType, input);
 
                 if (verificationType == AccountVerificationType.Email)
                 {
@@ -84,7 +84,7 @@ namespace YNL.Checkotel
 
             public static void DeleteAccount(UID id)
             {
-                Account? account = GetAccount(id);
+                Account account = GetAccount(id);
 
                 if (account == null)
                 {
@@ -93,7 +93,7 @@ namespace YNL.Checkotel
                     return;
                 }
 
-                DataContainer.Accounts?.Remove(account);
+                Main.Database.Accounts?.Remove(account);
                 Marker.OnAccountDeleted?.Invoke(AccountDeletionResult.AccountDeletionSuccess);
 
                 Debug.Log($"Account with ID {id} has been deleted.");
