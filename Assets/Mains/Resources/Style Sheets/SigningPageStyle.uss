@@ -19,6 +19,7 @@
     border-top-color: rgb(95, 95, 95);
     border-bottom-color: rgb(95, 95, 95);
     -unity-font-definition: resource('Fonts/SDFs/Nunito/Nunito-Regular SDF');
+    --unity-cursor-color: var(--color-contrast-solid);
 }
 
 .signing-text-field > .unity-base-text-field__input {

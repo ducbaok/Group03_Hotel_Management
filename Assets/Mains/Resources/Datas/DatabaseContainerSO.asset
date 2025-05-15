@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f9a1ca3fab8164285c5eb1da5b26df, type: 3}
   m_Name: DatabaseContainerSO
   m_EditorClassIdentifier: 
-  Accounts: []
+  Accounts:
+  - ID:
+      ID: 1
+    Name: 
+    Email: yunasawa100@gmail.com
+    PhoneNumber: 
+    Password: long051104@
