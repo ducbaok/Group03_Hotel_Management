@@ -3,31 +3,29 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public partial class InformationViewReviewPage : MonoBehaviour, ICollectible, IInitializable
+    public partial class InformationViewReviewPage : ViewPageUI, ICollectible, IInitializable
     {
-        private VisualElement _root;
-
         private VisualElement _backButton;
         private RatingView _ratingView;
         private VisualElement _reviewScroll;
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
-            Marker.OnSystemStart += Collect;
-        }
+			Marker.OnSystemStart += Collect;
+		}
 
         private void OnDestroy()
         {
-            Marker.OnSystemStart -= Collect;
-        }
+			Marker.OnSystemStart -= Collect;
+		}
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _ratingView = new(_root.Q("TopBar").Q("RatingView"));
 
-            _reviewScroll = _root.Q("ContentScroll").Q("unity-content-container");
+            _ratingView = new(Root.Q("TopBar").Q("RatingView"));
+
+            _reviewScroll = Root.Q("ContentScroll").Q("unity-content-container");
 
             Initialize();
         }

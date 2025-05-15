@@ -107,10 +107,8 @@ namespace YNL.Checkotel
         }
     }
 
-    public partial class InformationViewMainPage : MonoBehaviour, ICollectible, IInitializable
+    public partial class InformationViewMainPage : ViewPageUI, ICollectible, IInitializable
     {
-        private VisualElement _root;
-
         private VisualElement _backButton;
         private VisualElement _favoriteButton;
         private VisualElement _shareButton;
@@ -124,27 +122,27 @@ namespace YNL.Checkotel
         private VisualElement _hotelPolicy;
         private VisualElement _cancellationPolicy;
 
-        private void Awake()
+        protected override void VirtualAwake()
         {
             Marker.OnSystemStart += Collect;
         }
 
         private void OnDestroy()
         {
-            Marker.OnSystemStart -= Collect;
-        }
+			Marker.OnSystemStart -= Collect;
+		}
 
         public void Collect()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _backButton = _root.Q("TopBar").Q("BackButton");
-            _favoriteButton = _root.Q("TopBar").Q("FavoriteButton");
-            _shareButton = _root.Q("TopBar").Q("ShareButton");
 
-            _priceField = new(_root);
+            _backButton = Root.Q("TopBar").Q("BackButton");
+            _favoriteButton = Root.Q("TopBar").Q("FavoriteButton");
+            _shareButton = Root.Q("TopBar").Q("ShareButton");
 
-            var contentContainer = _root.Q("ContentScroll").Q("unity-content-container");
+            _priceField = new(Root);
+
+            var contentContainer = Root.Q("ContentScroll").Q("unity-content-container");
 
             _imageView = contentContainer.Q("ImageView");
 
