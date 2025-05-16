@@ -22,7 +22,6 @@ namespace YNL.Checkotel
         private string _passwordInput;
         private bool _validAccountInput;
         private bool _validPasswordInput;
-        private bool _validEmailInput;
 
         protected override void VirtualAwake()
         {
@@ -40,12 +39,10 @@ namespace YNL.Checkotel
 
             _accountInputField = signingInputField.Q("AccountField").Q("TextField") as TextField;
             _accountInputField.RegisterValueChangedCallback(OnValueChanged_AccountInputField);
-
             _accountMessage = signingInputField.Q("AccountField").Q("Message") as Label;
 
             _passwordInputField = signingInputField.Q("PasswordField").Q("TextField") as TextField;
             _passwordInputField.RegisterValueChangedCallback(OnValueChanged_PasswordInputField);
-
             _passwordMessage = signingInputField.Q("PasswordField").Q("Message") as Label;
 
             _signInWithFacebookButton = Root.Q("SigningMethod").Q("FacebookSigning");
@@ -71,84 +68,47 @@ namespace YNL.Checkotel
 
         private void OnValueChanged_AccountInputField(ChangeEvent<string> evt)
         {
-            _accountInput = evt.newValue;
+            _accountInput = evt.newValue.Trim();
+            _validAccountInput = !string.IsNullOrEmpty(_accountInput);
 
-            if (_accountInput == string.Empty)
+            if (!_validAccountInput)
             {
-                _accountMessage.SetText(string.Empty);
-                _validAccountInput = false;
-                return;
-            }
-
-            _validEmailInput = Extension.Validator.ValidateEmail(_accountInput);
-            var validPhoneInput = Extension.Validator.ValidatePhoneNumber(_accountInput);
-
-            _validAccountInput = false;
-
-            if (!_validEmailInput && !validPhoneInput)
-            {
-                _accountMessage.SetText("Email or Phone number is not valid!");
+                _accountMessage.SetText("Account field cannot be empty.");
                 return;
             }
 
             _accountMessage.SetText(string.Empty);
-            _validAccountInput = true;
         }
 
         private void OnValueChanged_PasswordInputField(ChangeEvent<string> evt)
         {
             _passwordInput = evt.newValue;
+            _validPasswordInput = !string.IsNullOrEmpty(_passwordInput);
 
-            if (_passwordInput == string.Empty)
+            if (!_validPasswordInput)
             {
-                _passwordMessage.SetText(string.Empty);
-                _validPasswordInput = false;
-                return;
-            }
-
-            if (_passwordInput.Length < 8)
-            {
-                _passwordMessage.SetText("Password must be at least 8 characters.");
-                _validPasswordInput = false;
+                _passwordMessage.SetText("Password cannot be empty.");
                 return;
             }
 
             _passwordMessage.SetText(string.Empty);
-            _validPasswordInput = true;
-        }
-
-        private void SigningWithFacebook(PointerDownEvent evt)
-        {
-            // Handle Facebook sign-in logic
-        }
-
-        private void SignInWithGoogle(PointerDownEvent evt)
-        {
-            // Handle Google sign-in logic
         }
 
         private void SigningAccount()
         {
             if (!_validAccountInput || !_validPasswordInput)
             {
-                _passwordMessage.SetText("Please correct the inputs before signing in.");
+                _passwordMessage.SetText("Please complete all fields correctly.");
                 return;
             }
 
-            Account foundAccount = null;
-            foreach (var acc in Main.Database.Accounts)
-            {
-                if ((_validEmailInput && acc.Email == _accountInput) ||
-                    (!string.IsNullOrEmpty(acc.PhoneNumber) && acc.PhoneNumber == _accountInput))
-                {
-                    foundAccount = acc;
-                    break;
-                }
-            }
+            var matchedAccount = Main.Database.Accounts.Find(acc =>
+                (acc.Email == _accountInput || acc.PhoneNumber == _accountInput) &&
+                acc.Password == _passwordInput);
 
-            if (foundAccount == null || foundAccount.Password != _passwordInput)
+            if (matchedAccount == null)
             {
-                _passwordMessage.SetText("Incorrect account or password.");
+                _passwordMessage.SetText("Incorrect email/phone or password.");
                 return;
             }
 
@@ -156,9 +116,19 @@ namespace YNL.Checkotel
             Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage, true);
         }
 
+        private void SigningWithFacebook(PointerDownEvent evt)
+        {
+            
+        }
+
+        private void SignInWithGoogle(PointerDownEvent evt)
+        {
+            
+        }
+
         private void RecoveryAccount(PointerDownEvent evt)
         {
-            // Handle password recovery logic
+            
         }
     }
 }
