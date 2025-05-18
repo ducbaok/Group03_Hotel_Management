@@ -11,6 +11,7 @@ namespace YNL.Checkotel
         public static MainManager Manager => MainManager.Instance;
         public static MainResources Resources => Manager.Resources;
         public static DatabaseContainerSO Database => Manager.Database;
+        public static RuntimePropertiesSO Runtime => Manager.Runtime;
         public static ViewManager View => Manager.ViewManager;
 	}
 
@@ -18,6 +19,7 @@ namespace YNL.Checkotel
     {
         public MainResources Resources = new();
         public DatabaseContainerSO Database;
+        public RuntimePropertiesSO Runtime;
 
         public ViewManager ViewManager;
 
@@ -25,7 +27,7 @@ namespace YNL.Checkotel
         {
             base.Awake();
 
-            Application.targetFrameRate = 120;
+            Application.targetFrameRate = -1;
         }
 
         private void Start()

@@ -9,5 +9,8 @@ namespace YNL.Checkotel
         public static Action OnNotificationViewOpened { get; set; }
         public static Action<SuggestFilterType> OnSuggestFilterSelected { get; set; }
         public static Action<DateTime, byte> OnTimeRangeChanged { get; set; }
+
+        public static Action<string> OnAddressSearchSubmited { get; set; }
+        public static Action<DateTime, byte> OnTimeRangeSubmited { get; set; }
     }
 }

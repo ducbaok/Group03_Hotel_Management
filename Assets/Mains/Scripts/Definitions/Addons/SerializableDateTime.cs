@@ -1,24 +1,31 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class SerializableDateTime
+namespace YNL.Checkotel
 {
-    [SerializeField] private string _dateTimeString;
-
-    public DateTime DateTime
+    [Serializable]
+    public class SerializableDateTime
     {
-        get => DateTime.Parse(_dateTimeString);
-        set => _dateTimeString = value.ToString("o");
-    }
+        [SerializeField] private string _dateTimeString;
 
-    public SerializableDateTime(DateTime dateTime)
-    {
-        DateTime = dateTime;
-    }
+        public DateTime DateTime
+        {
+            get => DateTime.Parse(_dateTimeString);
+            set => _dateTimeString = value.ToString("o");
+        }
 
-    public override string ToString()
-    {
-        return DateTime.ToString();
+        public SerializableDateTime(DateTime dateTime)
+        {
+            DateTime = dateTime;
+        }
+
+        public override string ToString() => DateTime.ToString();
+
+        public static implicit operator DateTime(SerializableDateTime serializableDateTime) => serializableDateTime.DateTime;
+
+        public static bool operator >(SerializableDateTime left, DateTime right) => left.DateTime > right;
+        public static bool operator <(SerializableDateTime left, DateTime right) => left.DateTime < right;
+        public static bool operator >=(SerializableDateTime left, DateTime right) => left.DateTime >= right;
+        public static bool operator <=(SerializableDateTime left, DateTime right) => left.DateTime <= right;
     }
 }
