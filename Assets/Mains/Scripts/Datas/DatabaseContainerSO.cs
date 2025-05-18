@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using YNL.Utilities.Addons;
@@ -10,5 +9,6 @@ namespace YNL.Checkotel
     {
         public List<Account> Accounts = new();
         public SerializableDictionary<UID, HotelUnit> Hotels = new();
+        public List<string> Locations = new();
     }
 }

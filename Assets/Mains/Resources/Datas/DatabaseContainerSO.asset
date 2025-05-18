@@ -28,7 +28,7 @@ MonoBehaviour:
           can enjoy world-class dining, a rejuvenating spa, and breathtaking ocean
           views from their private balconies. Whether you're here for relaxation
           or adventure, this resort promises an unforgettable stay.
-        Image: {fileID: 2800000, guid: 02d98c3dea1e2fd4caa16db9748986b3, type: 3}
+        ImageURL: https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/562244826.jpg?k=f9f813f8d234f00c31067b281400c19ecf81d306b123354d1abbf6f4294bac87&o=&s=1024x
       Review:
         Feedbacks: []
       Rooms:
@@ -49,13 +49,14 @@ MonoBehaviour:
                 Style: 3
                 KidType: 0
                 Frame: 2
+              StayType: 0
               ViewType: 2
             Facility: 87
             Restriction:
               Refundable: 0
               MinStay: 1
               MaxStay: 14
-            Image: {fileID: 2800000, guid: 5b4bd4f6c811d744a998d3620b29d85e, type: 3}
+            ImageURL: 
           Price:
             BasePrice: 150
             Discount: 0
@@ -77,13 +78,14 @@ MonoBehaviour:
                 Style: 7
                 KidType: 0
                 Frame: 4
+              StayType: 0
               ViewType: 2
             Facility: 87
             Restriction:
               Refundable: 0
               MinStay: 2
               MaxStay: 21
-            Image: {fileID: 2800000, guid: 37495ce6ee0e5c040ac965c1b0599b86, type: 3}
+            ImageURL: 
           Price:
             BasePrice: 250
             Discount: 0
@@ -100,13 +102,14 @@ MonoBehaviour:
                 Style: 1
                 KidType: 0
                 Frame: 2
+              StayType: 0
               ViewType: 2
             Facility: 87
             Restriction:
               Refundable: 0
               MinStay: 2
               MaxStay: 21
-            Image: {fileID: 2800000, guid: 57dde482411347146866d78bb80af15f, type: 3}
+            ImageURL: 
           Price:
             BasePrice: 280
             Discount: 0
@@ -114,6 +117,7 @@ MonoBehaviour:
       Status:
         ParticipationDate:
           _dateTimeString: 2025-05-17T22:35:50.4682018+07:00
+        ReservationAmount: 0
     - Description:
         Name: Elements of Byron
         Address: 144 Bayshore Dr, Belongil Beach, Byron Bay, Australia
@@ -126,7 +130,7 @@ MonoBehaviour:
           to visit Cape Byron Lighthouse as well as Belongil Beach nearby. Rated
           with 5 stars, this high-quality property provides guests with access to
           massage, restaurant and hot tub on-site.
-        Image: {fileID: 0}
+        ImageURL: https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/589400562.jpg?k=dd534dd740558d9c848dc6bf8a61a68c5e2097390a4e1e9c553e7293b69600be&o=&s=1024x
       Review:
         Feedbacks: []
       Rooms:
@@ -143,13 +147,14 @@ MonoBehaviour:
                 Style: 3
                 KidType: 0
                 Frame: 0
+              StayType: 0
               ViewType: 0
             Facility: 75
             Restriction:
               Refundable: 0
               MinStay: 1
               MaxStay: 10
-            Image: {fileID: 0}
+            ImageURL: 
           Price:
             BasePrice: 250
             Discount: 0
@@ -157,3 +162,15 @@ MonoBehaviour:
       Status:
         ParticipationDate:
           _dateTimeString: 2025-05-18T01:35:07.3905620+07:00
+        ReservationAmount: 0
+  Locations:
+  - New South Wales
+  - Victoria
+  - Queensland
+  - Western Australia
+  - South Australia
+  - Tasmania
+  - Australian Capital Territory
+  - Northern Territory
+  - Sydney
+  - Melbourne
