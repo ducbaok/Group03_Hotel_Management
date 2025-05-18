@@ -2,13 +2,14 @@
 {
     public partial class Room
     {
+        [System.Serializable]
         public class BedType
         {
-            public BedSize Size { get; set; } = BedSize.Single;
-            public BedDesign Design { get; set; } = BedDesign.Futon;
-            public BedStyle Style { get; set; } = BedStyle.Traditional;
-            public BedKid KidType { get; set; } = BedKid.Single;
-            public BedFrame Frame { get; set; } = BedFrame.Simple;
+            public BedSize Size = BedSize.Single;
+            public BedDesign Design = BedDesign.Futon;
+            public BedStyle Style = BedStyle.Traditional;
+            public BedKid KidType = BedKid.None;
+            public BedFrame Frame = BedFrame.Simple;
 
         }
 
@@ -58,6 +59,7 @@
 
         public enum BedKid
         {
+            None,           // No bed kid available
             Single,         // Simple bed for a child.
             Bunk,           // Stacked beds for two.
             TripleBunk,     // Three-tier bunk setup.

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace YNL.Checkotel
 {
+    [System.Serializable]
     public class HotelReview
     {
         public ReviewRating AverageRating
@@ -24,21 +26,23 @@ namespace YNL.Checkotel
             }
         }
 
-        public List<ReviewFeedback> Feedbacks { get; set; } = new();
+        public List<ReviewFeedback> Feedbacks = new();
     }
 
+    [System.Serializable]
     public struct ReviewRating
     {
-        private float _rating;
+        [SerializeField] private float _rating;
 
         public static implicit operator float(ReviewRating rating) => rating._rating;
         public static implicit operator ReviewRating(float rating) => new() { _rating = rating };
     }
 
+    [System.Serializable]
     public class ReviewFeedback
     {
-        public UID CustomerID { get; set; }
-        public ReviewRating Rating { get; set; } = 0;
-        public string Comment { get; set; } = string.Empty;
+        public UID CustomerID;
+        public ReviewRating Rating = 0;
+        public string Comment = string.Empty;
     }
 }

@@ -3,31 +3,33 @@ using System.Collections.Generic;
 
 namespace YNL.Checkotel
 {
+    [System.Serializable]
     public class RoomCategorization
     {
-        public Dictionary<UID, RoomUnit> Rooms { get; set; } = new(); // Key is ID of RoomUnit
+        public List<RoomUnit> Rooms = new();
     }
 
+    [System.Serializable]
     public class RoomUnit
     {
-        public UID ID { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public RoomDescription Description { get; set; } = new();
-        public RoomPrice Price { get; set; } = new();
-        public Dictionary<ushort, RoomStatus> Rooms { get; set; } = new();
+        public string Name = string.Empty;
+        public RoomDescription Description = new();
+        public RoomPrice Price = new();
+        public ushort RoomAmount = new();
     }
 
+    [System.Serializable]
     public class RoomStatus
     {
-        public bool IsAvailable { get; set; } = true;
+        public bool IsAvailable = true;
     }
 
+    [System.Serializable]
     public class RoomPrice
     {
-        public decimal BasePrice { get; set; } = 0m; 
-        public string Currency { get; set; } = "VND";
-        public decimal Discount { get; set; } = 0m;   
-        public decimal FinalPrice
+        public uint BasePrice = 0; 
+        public uint Discount = 0;   
+        public uint FinalPrice
         {
             get
             {

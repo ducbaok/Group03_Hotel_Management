@@ -1,27 +1,34 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using UnityEngine;
 
 namespace YNL.Checkotel
 {
+    [System.Serializable]
     public class RoomDescription
     {
-        public RoomProperty Property { get; set; } = new();
-        public RoomFacility Facility { get; set; } = new();
-        public RoomRestriction Restriction { get; set; } = new();
+        public string Description = string.Empty;
+        public RoomProperty Property = new();
+        public RoomFacility Facility = new();
+        public RoomRestriction Restriction = new();
+        [JsonIgnore] public Texture2D Image;
     }
 
+    [System.Serializable]
     public class RoomProperty
     {
-        public ushort MaxOccupancy { get; set; } = 5;
-        public ushort NumberOfBeds { get; set; } = 2;
-        public Room.BedType BedType { get; set; } = new();
-        public Room.ViewType ViewType { get; set; } = Room.ViewType.Ocean;
+        public ushort MaxOccupancy = 5;
+        public ushort NumberOfBeds = 2;
+        public Room.BedType BedType = new();
+        public Room.ViewType ViewType = Room.ViewType.Ocean;
     }
 
+    [System.Serializable]
     public class RoomRestriction
     {
-        public bool Refundable { get; set; } = false;
-        public ushort MinStay { get; set; } = 1;
-        public ushort MaxStay { get; set; } = 10;
+        public bool Refundable = false;
+        public ushort MinStay = 1;
+        public ushort MaxStay = 10;
     }
 
     [Flags]
