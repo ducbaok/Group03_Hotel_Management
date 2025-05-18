@@ -3,7 +3,7 @@
 	overflow: hidden;
 	height: 650px;
 	margin: 0px 0px 50px 0px;
-	background-color: var(--color-ground-legacy);
+	background-color: var(--color-ground-light);
 	border-radius: 25px;
 }
 
@@ -12,7 +12,7 @@
 	height: 350px;
 	background-image: resource("Images/Starting Background 1");
 	-unity-background-scale-mode: scale-and-crop;
-	border-color: var(--color-ground-legacy);
+	border-color: var(--color-ground-light);
 	border-width: 2px 2px 0px 2px;
 }
 
@@ -160,7 +160,7 @@
 	width: 30px;
 	padding: 0px 5px 0px 5px;
 	background-image: var(--icon-discount);
-	-unity-background-image-tint-color: var(--color-ground-legacy);
+	-unity-background-image-tint-color: var(--color-ground-light);
 	-unity-background-scale-mode: scale-to-fit;
 }
 
@@ -171,7 +171,7 @@
 	-unity-font-definition: var(--font-nunito-regular);
 	-unity-font-style: bold;
 	font-size: 30px;
-	color: var(--color-ground-legacy);
+	color: var(--color-ground-light);
 	-unity-text-align: middle-left;
 }
 

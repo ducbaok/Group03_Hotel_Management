@@ -24,7 +24,7 @@
 	align-self: center;
 	width: 75px;
 	height: 75px;
-	background-color: var(--color-ground-legacy);
+	background-color: var(--color-ground-light);
 	background-image: var(--icon-account);
 	background-size: 60% 60%;
 	border-color: var(--color-border-legacy);
