@@ -5,7 +5,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class SearchViewMainPageUI : ViewPageUI, ICollectible
+    public class SearchViewMainPageUI : ViewPageUI
     {
         [SerializeField] private SearchViewAddressPageUI _addressPageUI;
         [SerializeField] private SearchViewTimeRangePageUI _timeRangePageUI;
@@ -19,17 +19,7 @@ namespace YNL.Checkotel
         private Label _checkOutTime;
         private VisualElement _searchButton;
 
-        protected override void VirtualAwake()
-        {
-            Marker.OnSystemStart += Collect;
-        }
-
-        private void OnDestroy()
-        {
-            Marker.OnSystemStart -= Collect;
-        }
-
-        public void Collect()
+        protected override void Collect()
         {
             _closeButton = Root.Q("LabelField");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
@@ -38,20 +28,12 @@ namespace YNL.Checkotel
             _addressButton.RegisterCallback<PointerDownEvent>(OnClicked_AddressButton);
 
             _stayTypeField = Root.Q("StayTypeField").Q("TimeField");
-            _stayTypeField.Clear();
-            _stayTypeField.Add(new SearchingSelectTypeUI("Hourly", "Hourly", "Hourly", true).SetStayType(SearchingStayType.Hourly));
-            _stayTypeField.Add(new SearchingSelectTypeUI("Overnight", "Overnight (Filled)", "Overnight", false).SetStayType(SearchingStayType.Overnight));
-            _stayTypeField.Add(new SearchingSelectTypeUI("Daily", "Daily", "Daily", false).SetStayType(SearchingStayType.Daily));
 
             _roomTypeField = Root.Q("RoomTypeField").Q("TypeField");
-            _roomTypeField.Clear();
-            _roomTypeField.Add(new SearchingSelectTypeUI("Bed", "Bed (Filled)", "Standard", true).SetRoomType(SearchingRoomType.Standard));
-            _roomTypeField.Add(new SearchingSelectTypeUI("Family", "Family (Filled)", "Family", false).SetRoomType(SearchingRoomType.Family));
-            _roomTypeField.Add(new SearchingSelectTypeUI("Business", "Business", "Business", false).SetRoomType(SearchingRoomType.Business));
 
             var timeRangeField = Root.Q("TimeRangeField");
 
-            _timeRangeButton = timeRangeField.Q("TimeFIeld");
+            _timeRangeButton = timeRangeField.Q("TimeField");
             _timeRangeButton.RegisterCallback<PointerDownEvent>(OnClicked_TimeRangeButton);
 
             _checkInTime = _timeRangeButton.Q("CheckInField").Q("Time") as Label;
@@ -64,6 +46,19 @@ namespace YNL.Checkotel
             _searchButton.RegisterCallback<PointerDownEvent>(OnClicked_SearchButton);
         }
 
+        protected override void Initialize()
+        {
+            _stayTypeField.Clear();
+            _stayTypeField.Add(new SearchingSelectTypeUI("Hourly", "Hourly", "Hourly", true).SetStayType(SearchingStayType.Hourly));
+            _stayTypeField.Add(new SearchingSelectTypeUI("Overnight", "Overnight (Filled)", "Overnight", false).SetStayType(SearchingStayType.Overnight));
+            _stayTypeField.Add(new SearchingSelectTypeUI("Daily", "Daily", "Daily", false).SetStayType(SearchingStayType.Daily));
+
+            _roomTypeField.Clear();
+            _roomTypeField.Add(new SearchingSelectTypeUI("Bed", "Bed (Filled)", "Standard", true).SetRoomType(SearchingRoomType.Standard));
+            _roomTypeField.Add(new SearchingSelectTypeUI("Family", "Family (Filled)", "Family", false).SetRoomType(SearchingRoomType.Family));
+            _roomTypeField.Add(new SearchingSelectTypeUI("Business", "Business", "Business", false).SetRoomType(SearchingRoomType.Business));
+        }
+
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage, true);
@@ -71,12 +66,12 @@ namespace YNL.Checkotel
 
         private void OnClicked_AddressButton(PointerDownEvent evt)
         {
-            _addressPageUI.Root.SetTranslate(0, 0, true);
+            _addressPageUI.OnPageOpened(true);
         }
 
         private void OnClicked_TimeRangeButton(PointerDownEvent evt)
         {
-            _timeRangePageUI.Root.SetTranslate(0, 0, true);
+            _timeRangePageUI.OnPageOpened(true);
         }
 
         private void OnClicked_CheckingButton(PointerDownEvent evt)

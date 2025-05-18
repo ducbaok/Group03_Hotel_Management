@@ -5,25 +5,21 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class SearchViewAddressPageUI : ViewPageUI, ICollectible
+    public class SearchViewAddressPageUI : ViewPageUI
     {
+        private VisualElement _background;
+        private VisualElement _page;
         private VisualElement _closeButton;
         private TextField _addressInput;
         private VisualElement _nearMeButton;
         private ScrollView _historyScroll;
 
-        protected override void VirtualAwake()
+        protected override void Collect()
         {
-            Marker.OnSystemStart += Collect;
-        }
+            _background = Root.Q("ScreenBackground");
+            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _page = Root.Q("AddressPage");
 
-        private void OnDestroy()
-        {
-            Marker.OnSystemStart -= Collect;
-        }
-
-        public void Collect()
-        {
             _closeButton = Root.Q("LabelField");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
 
@@ -36,9 +32,25 @@ namespace YNL.Checkotel
             _historyScroll = Root.Q("SearchingHistory").Q("HistoryScroll") as ScrollView;
         }
 
+        public override void OnPageOpened(bool isOpen)
+        {
+            if (isOpen)
+            {
+                _background.SetPickingMode(PickingMode.Position);
+                _background.SetBackgroundColor(new Color(0.0865f, 0.0865f, 0.0865f, 0.725f));
+                _page.SetTranslate(0, 0, true);
+            }
+            else
+            {
+                _background.SetBackgroundColor(Color.clear);
+                _background.SetPickingMode(PickingMode.Ignore);
+                _page.SetTranslate(0, 100, true);
+            }
+        }
+
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
-            Root.SetTranslate(0, 100, true);
+            OnPageOpened(false);
         }
 
         private void OnValueChanged_AddressInput(ChangeEvent<string> evt)

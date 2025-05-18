@@ -7,12 +7,14 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public partial class SearchViewFilterPageUI : ViewPageUI, ICollectible, IInitializable, IRefreshable
+    public partial class SearchViewFilterPageUI : ViewPageUI
     {
         public static (int Min, int Max) PriceRange = (5, 1000);
 
         public HotelFacility HotelFacility;
 
+        private VisualElement _background;
+        private VisualElement _page;
         private VisualElement _filteringPage;
         private VisualElement _closeButton;
         private Button _resetButton;
@@ -25,19 +27,11 @@ namespace YNL.Checkotel
         private VisualElement _hotelTypeField;
         private VisualElement _hotelFacilitiesList;
 
-        protected override void VirtualAwake()
+        protected override void Collect()
         {
-            Marker.OnSystemStart += Collect;
-        }
-
-        private void OnDestroy()
-        {
-            Marker.OnSystemStart -= Collect;
-        }
-
-        public void Collect()
-        {
-
+            _background = Root.Q("ScreenBackground");
+            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _page = Root.Q("FilteringPage");
 
             _filteringPage = Root.Q("FilteringPage");
 
@@ -64,11 +58,9 @@ namespace YNL.Checkotel
             _hotelTypeField = _filteringPage.Q("FilterScroll").Q("HotelTypeField").Q("SelectionField");
 
             _hotelFacilitiesList = _filteringPage.Q("FilterScroll").Q("HotelFacilitiesField").Q("SelectionList");
-
-            Initialize();
         }
 
-        public void Initialize()
+        protected override void Initialize()
         {
             _reviewScoreField.Clear();
             _reviewScoreField.Add(new FilterPropertyButtonUI("? 4.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE45));
@@ -93,17 +85,31 @@ namespace YNL.Checkotel
             {
                 _hotelFacilitiesList.Add(new FilteringSelectionItemUI(this, type));
             }
-
-            Refresh();
         }
 
-        public void Refresh()
+        protected override void Refresh()
         {
             _slider.value = new(0, 1);
 
             (_reviewScoreField.Children().ToArray()[0] as FilterPropertyButtonUI).OnClicked__Button();
             (_cleanlinessField.Children().ToArray()[0] as FilterPropertyButtonUI).OnClicked__Button();
             (_hotelTypeField.Children().ToArray()[0] as FilterPropertyButtonUI).OnClicked__Button();
+        }
+
+        public override void OnPageOpened(bool isOpen)
+        {
+            if (isOpen)
+            {
+                _background.SetPickingMode(PickingMode.Position);
+                _background.SetBackgroundColor(new Color(0.0865f, 0.0865f, 0.0865f, 0.725f));
+                _page.SetTranslate(0, 0, true);
+            }
+            else
+            {
+                _background.SetBackgroundColor(Color.clear);
+                _background.SetPickingMode(PickingMode.Ignore);
+                _page.SetTranslate(0, 100, true);
+            }
         }
 
         private void OnValueChanged_Slider(ChangeEvent<Vector2> evt)
@@ -119,7 +125,7 @@ namespace YNL.Checkotel
 
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
-            Root.SetTranslate(0, 100, true);
+            OnPageOpened(false);
         }
 
         private void OnClicked_ResetButton()

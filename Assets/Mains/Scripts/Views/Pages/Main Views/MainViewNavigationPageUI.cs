@@ -2,27 +2,18 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class MainViewNavigationPageUI : ViewPageUI, ICollectible
+    public class MainViewNavigationPageUI : ViewPageUI
     {
         private VisualElement _navigationBar;
 
-        protected override void VirtualAwake()
+        protected override void Collect()
         {
-            Marker.OnSystemStart += Collect;
-        }
-
-        private void OnDestroy()
-        {
-            Marker.OnSystemStart -= Collect;
-        }
-
-        public void Collect()
-        {
-
-
             _navigationBar = Root.Q("NavigationBar");
-            _navigationBar.Clear();
+        }
 
+        protected override void Initialize()
+        {
+            _navigationBar.Clear();
             _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Home"], "Home", true, HomeNavigationType.Home));
             _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Star"], "Favorite", false, HomeNavigationType.Favorite));
             _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Suggestion"], "Suggestion", false, HomeNavigationType.Suggestion));

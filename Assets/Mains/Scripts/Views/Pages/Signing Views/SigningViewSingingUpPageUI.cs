@@ -6,7 +6,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class SigningViewSingingUpPageUI : ViewPageUI, ICollectible, IInitializable
+    public class SigningViewSingingUpPageUI : ViewPageUI
     {
         private TextField _accountInputField;
         private Label _accountMessage;
@@ -30,20 +30,8 @@ namespace YNL.Checkotel
         private bool _validPasswordInput;
         private bool _validConfirmInput;
 
-        protected override void VirtualAwake()
+        protected override void Collect()
         {
-            Marker.OnSystemStart += Collect;
-        }
-
-        private void OnDestroy()
-        {
-            Marker.OnSystemStart -= Collect;
-        }
-
-        public void Collect()
-        {
-
-
             var signingInputField = Root.Q("SigningInputField");
 
             _accountInputField = signingInputField.Q("AccountField").Q("TextField") as TextField;
@@ -72,16 +60,13 @@ namespace YNL.Checkotel
 
             _signingButton = signingInputField.Q("SigningButton").Q("Button") as Button;
             _signingButton.clicked += SigningAccount;
-
-            Initialize();
         }
 
-        public void Initialize()
+        protected override void Initialize()
         {
             _accountMessage.SetText(string.Empty);
             _passwordMessage.SetText(string.Empty);
             _confirmMessage.SetText(string.Empty);
-
         }
 
         private void OnValueChanged_AccountInputField(ChangeEvent<string> evt)

@@ -7,10 +7,10 @@ namespace YNL.Checkotel
     public abstract class ViewPageUI : MonoBehaviour
     {
         [SerializeField] private bool _hideOnAwake = true;
-        [SerializeField] private bool _isPopupPage = false;
+        [SerializeField] protected bool _isPopupPage = false;
         public VisualElement Root;
 
-        private bool _isDisplayThisTime;
+        private bool _isDisplayThisTime = false;
 
         private void Awake()
         {
@@ -20,6 +20,8 @@ namespace YNL.Checkotel
 
             VirtualAwake();
 
+            Collect();
+
             if (!_isPopupPage)
             {
                 Root.SetTranslate(_hideOnAwake ? 100 : 0, 0, true);
@@ -27,11 +29,23 @@ namespace YNL.Checkotel
             }
             else
             {
-                Root.SetTranslate(0, 100, true);
-                _isDisplayThisTime = true;
-                Root.SetTransitionDuration(0.4f);
+                OnPageOpened(false);
             }
+
+            _isDisplayThisTime = _hideOnAwake;
         }
+
+        private void Start()
+        {
+            Initialize();
+            Refresh();
+        }
+
+        protected virtual void VirtualAwake() { }
+
+        protected virtual void Collect() { }
+        protected virtual void Initialize() { }
+        protected virtual void Refresh() { }
 
         public void DisplayView(bool display)
         {
@@ -39,6 +53,16 @@ namespace YNL.Checkotel
             Root.SetTranslate(display ? 0 : -100, 0, true);
 
             _isDisplayThisTime = display;
+
+            if (Main.View != null)
+            {
+                Main.View.IsAbleToMovePage = false;
+            }
+        }
+
+        public virtual void OnPageOpened(bool isOpen)
+        {
+            Root.SetTranslate(0, isOpen ? 0 : 100, true);
         }
 
         private void OnTransitionEnded(TransitionEndEvent evt)
@@ -47,8 +71,13 @@ namespace YNL.Checkotel
 
             Root.SetDisplay(DisplayStyle.None);
             Root.SetTranslate(100, 0, true);
-        }
 
-        protected virtual void VirtualAwake() { }
+            _isDisplayThisTime = true;
+
+            if (Main.View != null)
+            {
+                Main.View.IsAbleToMovePage = true;
+            }
+        }
     }
 }

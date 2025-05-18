@@ -5,10 +5,12 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public partial class SearchViewTimeRangePageUI : ViewPageUI, ICollectible
+    public partial class SearchViewTimeRangePageUI : ViewPageUI
     {
         public (DateTime CheckInTime, byte Duration) TimeRange;
 
+        private VisualElement _background;
+        private VisualElement _page;
         private VisualElement _closeButton;
         private Label _checkInTime;
         private Label _checkOutTime;
@@ -20,18 +22,20 @@ namespace YNL.Checkotel
 
         protected override void VirtualAwake()
         {
-            Marker.OnSystemStart += Collect;
             Marker.OnTimeRangeChanged += OnTimeRangeChanged;
         }
 
         private void OnDestroy()
         {
-            Marker.OnSystemStart -= Collect;
             Marker.OnTimeRangeChanged -= OnTimeRangeChanged;
         }
 
-        public void Collect()
+        protected override void Collect()
         {
+            _background = Root.Q("ScreenBackground");
+            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _page = Root.Q("TimePickingPage");
+
             _closeButton = Root.Q("LabelField");
             _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
 
@@ -50,9 +54,25 @@ namespace YNL.Checkotel
             _hourlyPage = new HourlyPage(Root);
         }
 
+        public override void OnPageOpened(bool isOpen)
+        {
+            if (isOpen)
+            {
+                _background.SetPickingMode(PickingMode.Position);
+                _background.SetBackgroundColor(new Color(0.0865f, 0.0865f, 0.0865f, 0.725f));
+                _page.SetTranslate(0, 0, true);
+            }
+            else
+            {
+                _background.SetBackgroundColor(Color.clear);
+                _background.SetPickingMode(PickingMode.Ignore);
+                _page.SetTranslate(0, 100, true);
+            }
+        }
+
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
-            Root.SetTranslate(0, 100, true);
+            OnPageOpened(false);
         }
 
         private void OnClicked_CancelButton(PointerDownEvent evt)

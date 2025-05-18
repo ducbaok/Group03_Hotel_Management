@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class SigningViewSingingInPageUI : ViewPageUI, ICollectible
+    public class SigningViewSingingInPageUI : ViewPageUI
     {
         private TextField _accountInputField;
         private Label _accountMessage;
@@ -16,20 +16,8 @@ namespace YNL.Checkotel
         private VisualElement _signInWithFacebookButton;
         private VisualElement _signInWithGoogleButton;
 
-        protected override void VirtualAwake()
+        protected override void Collect()
         {
-			Marker.OnSystemStart += Collect;
-		}
-
-        private void OnDestroy()
-        {
-			Marker.OnSystemStart -= Collect;
-		}
-
-        public void Collect()
-        {
-
-
             var signingInputField = Root.Q("SigningInputField");
 
             _accountInputField = signingInputField.Q("AccountField").Q("TextField") as TextField;

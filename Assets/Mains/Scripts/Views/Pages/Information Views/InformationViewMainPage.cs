@@ -107,7 +107,7 @@ namespace YNL.Checkotel
         }
     }
 
-    public partial class InformationViewMainPage : ViewPageUI, ICollectible, IInitializable
+    public partial class InformationViewMainPage : ViewPageUI
     {
         private VisualElement _backButton;
         private VisualElement _favoriteButton;
@@ -122,20 +122,8 @@ namespace YNL.Checkotel
         private VisualElement _hotelPolicy;
         private VisualElement _cancellationPolicy;
 
-        protected override void VirtualAwake()
-        {
-            Marker.OnSystemStart += Collect;
-        }
-
-        private void OnDestroy()
-        {
-			Marker.OnSystemStart -= Collect;
-		}
-
-        public void Collect()
-        {
-
-
+        protected override void Collect()
+        { 
             _backButton = Root.Q("TopBar").Q("BackButton");
             _favoriteButton = Root.Q("TopBar").Q("FavoriteButton");
             _shareButton = Root.Q("TopBar").Q("ShareButton");
@@ -159,10 +147,9 @@ namespace YNL.Checkotel
             _hotelPolicy = contentContainer.Q("HotelPolicy");
 
             _cancellationPolicy = contentContainer.Q("CancellationPolicy");
-
         }
 
-        public void Initialize()
+        protected override void Initialize()
         {
             
         }

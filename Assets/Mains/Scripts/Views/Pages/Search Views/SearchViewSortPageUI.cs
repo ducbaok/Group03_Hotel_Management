@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public partial class SearchViewSortPageUI : ViewPageUI, ICollectible, IInitializable, IRefreshable
+    public partial class SearchViewSortPageUI : ViewPageUI
     {
         public SortingSelectionType SortingType;
 
+        private VisualElement _background;
+        private VisualElement _page;
         private VisualElement _sortingPage;
         private VisualElement _closeButton;
         private VisualElement _applyButton;
@@ -19,18 +22,20 @@ namespace YNL.Checkotel
 
         protected override void VirtualAwake()
         {
-            Marker.OnSystemStart += Collect;
             SortingSelectionItemUI.OnSelected += OnSortingTypeSelected;
         }
 
         private void OnDestroy()
         {
-            Marker.OnSystemStart -= Collect;
             SortingSelectionItemUI.OnSelected -= OnSortingTypeSelected;
         }
 
-        public void Collect()
+        protected override void Collect()
         {
+            _background = Root.Q("ScreenBackground");
+            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _page = Root.Q("SortingPage");
+
             _sortingPage = Root.Q("SortingPage");
 
             _closeButton = _sortingPage.Q("LabelField");
@@ -41,11 +46,9 @@ namespace YNL.Checkotel
 
             _sortSelectionArea = _sortingPage.Q("SortSelectionArea");
             _sortSelectionArea.Clear();
-
-            Initialize();
         }
 
-        public void Initialize()
+        protected override void Initialize()
         {
             var sortingTypes = Enum.GetValues(typeof(SortingSelectionType)) as SortingSelectionType[];
 
@@ -57,18 +60,32 @@ namespace YNL.Checkotel
                 _sortingItemUI.Add(item);
                 _sortSelectionArea.Add(item);
             }
-
-            Refresh();
         }
 
-        public void Refresh()
+        protected override void Refresh()
         {
             _sortingItemUI[0].OnClicked__Toggle();
         }
 
+        public override void OnPageOpened(bool isOpen)
+        {
+            if (isOpen)
+            {
+                _background.SetPickingMode(PickingMode.Position);
+                _background.SetBackgroundColor(new Color(0.0865f, 0.0865f, 0.0865f, 0.725f));
+                _page.SetTranslate(0, 0, true);
+            }
+            else
+            {
+                _background.SetBackgroundColor(Color.clear);
+                _background.SetPickingMode(PickingMode.Ignore);
+                _page.SetTranslate(0, 100, true);
+            }
+        }
+
         private void OnClicked_CloseButton(PointerDownEvent evt)
         {
-            Root.SetTranslate(0, 100, true);
+            OnPageOpened(false);
         }
 
         private void OnClicked_ApplyButton(PointerDownEvent evt)

@@ -2,7 +2,7 @@ using UnityEngine.UIElements;
 
 namespace YNL.Checkotel
 {
-    public class MainViewAccountPageUI : ViewPageUI, ICollectible
+    public class MainViewAccountPageUI : ViewPageUI
     {
         private VisualElement _profilePicture;
         private Label _nameText;
@@ -20,20 +20,8 @@ namespace YNL.Checkotel
         private VisualElement _contactField;
         private VisualElement _signOutField;
 
-        protected override void VirtualAwake()
+        protected override void Collect()
         {
-            Marker.OnSystemStart += Collect;
-        }
-
-        private void OnDestroy()
-        {
-            Marker.OnSystemStart -= Collect;
-        }
-
-        public void Collect()
-        {
-
-
             var contentContainer = Root.Q("ContentScroll").Q("unity-content-container");
 
             var accountField = contentContainer.Q("AccountField");
