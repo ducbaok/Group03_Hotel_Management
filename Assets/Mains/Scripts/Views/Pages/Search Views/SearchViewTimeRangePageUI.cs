@@ -77,12 +77,14 @@ namespace YNL.Checkotel
 
         private void OnClicked_CancelButton(PointerDownEvent evt)
         {
-
+            OnPageOpened(false);
         }
 
         private void OnClicked_ApplyButton(PointerDownEvent evt)
         {
+            Marker.OnTimeRangeSubmited?.Invoke(TimeRange.CheckInTime, TimeRange.Duration);
 
+            OnPageOpened(false);
         }
 
         private void OnTimeRangeChanged(DateTime checkInTime, byte duration)
