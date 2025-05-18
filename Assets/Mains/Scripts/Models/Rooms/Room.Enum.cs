@@ -2,6 +2,11 @@
 {
     public partial class Room
     {
+        public enum StayType
+        {
+            Hourly, Overnight, Daily
+        }
+
         public enum ViewType
         {
             None,

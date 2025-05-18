@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace YNL.Checkotel
 {
@@ -7,6 +8,15 @@ namespace YNL.Checkotel
     public class RoomCategorization
     {
         public List<RoomUnit> Rooms = new();
+
+        public uint HighestPrice
+        {
+            get
+            {
+                var orderedRooms = Rooms.OrderByDescending(r => r.Price.BasePrice).ToArray();
+                return orderedRooms[0].Price.BasePrice;
+            }
+        }
     }
 
     [System.Serializable]

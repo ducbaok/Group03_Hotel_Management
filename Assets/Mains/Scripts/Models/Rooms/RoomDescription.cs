@@ -11,7 +11,7 @@ namespace YNL.Checkotel
         public RoomProperty Property = new();
         public RoomFacility Facility = new();
         public RoomRestriction Restriction = new();
-        [JsonIgnore] public Texture2D Image;
+        public string ImageURL;
     }
 
     [System.Serializable]
@@ -20,6 +20,7 @@ namespace YNL.Checkotel
         public ushort MaxOccupancy = 5;
         public ushort NumberOfBeds = 2;
         public Room.BedType BedType = new();
+        public Room.StayType StayType = Room.StayType.Hourly;
         public Room.ViewType ViewType = Room.ViewType.Ocean;
     }
 

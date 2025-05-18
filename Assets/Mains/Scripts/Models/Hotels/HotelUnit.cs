@@ -28,12 +28,13 @@ namespace YNL.Checkotel
         public string Phone = string.Empty;
         public string Email = string.Empty;
         public string Description = string.Empty;
-        [JsonIgnore] public Texture2D Image;
+        public string ImageURL;
     }
 
     [System.Serializable]
     public class HotelStatus
     {
         public SerializableDateTime ParticipationDate = new(DateTime.Now);
+        public uint ReservationAmount;
     }
 }
