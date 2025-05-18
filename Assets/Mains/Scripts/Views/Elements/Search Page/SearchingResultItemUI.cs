@@ -101,7 +101,7 @@ namespace YNL.Checkotel
                 _originalField = new VisualElement().AddClass(_originalFieldClass);
                 this.AddElements(_originalField);
 
-                _originalPrice = new Label($"Only <s>{Extension.Value.ToClosestPrice(price)}$</s>").AddClass(_originalPriceClass);
+                _originalPrice = new Label($"Only <s>{Extension.Function.ToClosestPrice(price)}$</s>").AddClass(_originalPriceClass);
                 _originalField.AddElements(_originalPrice);
 
                 _discountField = new VisualElement().AddClass(_discountFieldClass);
@@ -113,7 +113,7 @@ namespace YNL.Checkotel
                 _discountText = new Label($"Discount {discount}%").AddClass(_discountTextClass);
                 _discountField.AddElements(_discountText);
 
-                float lastPrice = Extension.Value.ToClosestPrice(price * (1 - discount / 100f));
+                float lastPrice = Extension.Function.ToClosestPrice(price * (1 - discount / 100f));
                 string priceText = $"<b><color=#FED1A7>{lastPrice}$</color></b> <size=45>/ {duration} hours • <color=#75caff>Only {roomAmount} room left</color></size>";
 
                 _lastPrice = new Label(priceText).AddClass(_lastPriceClass);

@@ -13,6 +13,7 @@ namespace YNL.Checkotel
     /// </summary>
     public class SearchingSelectTypeUI : VisualElement
     {
+        public delegate void OnSelectedEvent(bool a, SearchingStayType b, SearchingRoomType c);
         public static Action<bool, SearchingStayType, SearchingRoomType> OnSelected { get; set; }
 
         private const string _rootClass = "searching-select-type";
@@ -30,11 +31,14 @@ namespace YNL.Checkotel
         private Texture2D _lightIcon;
         private Texture2D _filledIcon;
 
-        public SearchingSelectTypeUI(string lightIcon, string filledIcon, string label, bool isSelected)
+        private OnSelectedEvent _selectedEvent;
+
+        public SearchingSelectTypeUI(string label, OnSelectedEvent evt, bool isSelected)
         {
+            _selectedEvent = evt;
             _isSelected = isSelected;
-            _lightIcon = Main.Resources.Icons[lightIcon];
-            _filledIcon = Main.Resources.Icons[filledIcon];
+            _lightIcon = Main.Resources.Icons[label];
+            _filledIcon = Main.Resources.Icons[label];
 
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["SearchingSelectTypeUI"]);
@@ -79,6 +83,7 @@ namespace YNL.Checkotel
             if (_isSelected) return;
 
             OnSelected?.Invoke(_isStayType, _stayType, _roomType);
+            _selectedEvent(_isStayType, _stayType, _roomType);
 
             _isSelected = true;
 

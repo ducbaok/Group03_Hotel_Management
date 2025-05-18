@@ -1,3 +1,7 @@
+using Cysharp.Threading.Tasks;
+using System;
+using System.Globalization;
+using System.Linq;
 using UnityEngine.UIElements;
 using YNL.Utilities.UIToolkits;
 
@@ -5,7 +9,7 @@ namespace YNL.Checkotel
 {
     public enum PreviewListFilterType : byte
     {
-        NewHotels, MostPopular, HighRated, LuxuryStays, FamilyFriendlyHotels, ExceptionalChoices
+        NewHotels, MostPopular, HighRated, LuxuryStays, ExceptionalChoices
     }
 
     public class HotelPreviewListUI : VisualElement
@@ -30,7 +34,7 @@ namespace YNL.Checkotel
             _labelField = new VisualElement().AddClass(_labelFieldClass);
             this.AddElements(_labelField);
 
-            _label = new Label(Extension.Value.ToSentenceCase(type)).AddClass(_labelClass);
+            _label = new Label(Extension.Function.ToSentenceCase(type)).AddClass(_labelClass);
             _labelField.AddElements(_label);
 
             _seeMoreButton = new Label("See more").AddClass(_seeMoreButtonClass);
@@ -42,15 +46,21 @@ namespace YNL.Checkotel
             _previewList.verticalScrollerVisibility = ScrollerVisibility.Hidden;
             this.AddElements(_previewList);
 
-            Initialize(isMini);
+            Initialize(type, isMini);
         }
 
-        private void Initialize(bool isMini)
+        private void Initialize(PreviewListFilterType type, bool isMini)
         {
-            for (int i = 0; i < 10; i++)
+#if false
+            var previewItems = GetPreviewItems(type);
+
+            for (int i = 0; i < previewItems.Length; i++)
             {
-                _previewList.AddElements(new HotelPreviewItemUI(100000001, isMini));
+                _previewList.AddElements(new HotelPreviewItemUI(previewItems[i], isMini).SetAsLastItem(i == previewItems.Length - 1));
             }
+#else
+            Test(type, isMini).Forget();
+#endif
         }
 
         public HotelPreviewListUI SetAsLastItem()
@@ -58,6 +68,30 @@ namespace YNL.Checkotel
             this.SetMarginBottom(275);
 
             return this;
+        }
+
+        private UID[] GetPreviewItems(PreviewListFilterType type)
+        {
+            switch (type)
+            {
+                case PreviewListFilterType.NewHotels: return Extension.Query.GetNewHotelsList();
+                case PreviewListFilterType.MostPopular: return Extension.Query.GetMostPopularList();
+                case PreviewListFilterType.HighRated: return Extension.Query.GetHighRatedList();
+                case PreviewListFilterType.LuxuryStays: return Extension.Query.GetLuxuryStaysList();
+                case PreviewListFilterType.ExceptionalChoices: return Extension.Query.GetExceptionalChoicesList();
+                default: return null;
+            }
+        }
+
+        private async UniTaskVoid Test(PreviewListFilterType type, bool isMini)
+        {
+            var previewItems = GetPreviewItems(type);
+
+            for (int i = 0; i < previewItems.Length; i++)
+            {
+                await UniTask.Yield();
+                _previewList.AddElements(new HotelPreviewItemUI(previewItems[i], isMini).SetAsLastItem(i == previewItems.Length - 1));
+            }
         }
     }
 }

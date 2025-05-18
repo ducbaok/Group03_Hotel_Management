@@ -1,4 +1,7 @@
+using Cysharp.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UIElements;
 using YNL.Utilities.UIToolkits;
 
@@ -104,13 +107,13 @@ namespace YNL.Checkotel
             _discountField.AddElements(_discountText);
         }
 
-        public void Apply(UID id)
+        private void Apply(UID id)
         {
             var unit = Main.Database.Hotels[id];
 
             int discountPercentage = Random.Range(0, 50);
 
-            _previewImage.style.backgroundImage = unit.Description.Image;
+            Extension.Function.ApplyClouldImageAsync(_previewImage, unit.Description.ImageURL);
 
             _nameLabel.text = unit.Description.Name;
             _locationText.text = unit.Description.Address;
@@ -128,6 +131,15 @@ namespace YNL.Checkotel
             {
                 _discountField.style.display = DisplayStyle.None;
             }
+        }
+
+        public HotelPreviewItemUI SetAsLastItem(bool set = true)
+        {
+            if (!set) return this;
+
+            this.SetMarginRight(50);
+
+            return this;
         }
     }
 }
