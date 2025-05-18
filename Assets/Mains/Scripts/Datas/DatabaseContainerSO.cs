@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using YNL.Utilities.Addons;
 
 namespace YNL.Checkotel
 {
@@ -7,5 +9,6 @@ namespace YNL.Checkotel
     public class DatabaseContainerSO : ScriptableObject
     {
         public List<Account> Accounts = new();
+        public SerializableDictionary<UID, HotelUnit> Hotels = new();
     }
 }

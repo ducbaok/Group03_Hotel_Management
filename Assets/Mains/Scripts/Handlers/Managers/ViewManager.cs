@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using YNL.Utilities.Addons;
-using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -9,6 +7,7 @@ namespace YNL.Checkotel
 	{
 		public ViewType CurrentViewType;
 		public byte CurrentViewPage;
+        public bool IsAbleToMovePage = true;
 
 		public SerializableDictionary<ViewType, ViewGroup> Groups = new();
 
@@ -24,6 +23,8 @@ namespace YNL.Checkotel
 
         private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage)
         {
+            if (!IsAbleToMovePage) return;
+
             var currentGroup = Groups[CurrentViewType];
             if (hidePreviousPage)
             {
