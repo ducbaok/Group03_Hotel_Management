@@ -103,3 +103,14 @@
     -unity-font-style: normal;
     font-size: 50px;
 }
+
+.background-transition {
+    transition-property: background-color;
+    transition-duration: 0.4s;
+}
+
+.popup-page-transition {
+    transition-property: translate;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out-cubic;
+}
