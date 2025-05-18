@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5b4bd4f6c811d744a998d3620b29d85e
+guid: d0d0cd568f6645b49a4e307308926a61
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7898587513665965459
-    second: Coastal Twin Room_0
+      213: -1370150288747598966
+    second: Building_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coastal Twin Room_0
+      name: Building_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1280
-        height: 850
+        x: 1
+        y: 1
+        width: 62
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 39d4563ce7b6d9d60800000000000000
-      internalID: 7898587513665965459
+      spriteID: a8bec4e529f3cfce0800000000000000
+      internalID: -1370150288747598966
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Coastal Twin Room_0: 7898587513665965459
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
