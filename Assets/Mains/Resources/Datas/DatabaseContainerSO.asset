@@ -28,92 +28,202 @@ MonoBehaviour:
           can enjoy world-class dining, a rejuvenating spa, and breathtaking ocean
           views from their private balconies. Whether you're here for relaxation
           or adventure, this resort promises an unforgettable stay.
-        ImageURL: https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/562244826.jpg?k=f9f813f8d234f00c31067b281400c19ecf81d306b123354d1abbf6f4294bac87&o=&s=1024x
+        ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000000.jpg
       Review:
         Feedbacks: []
       Rooms:
-        Rooms:
-        - Name: Coastal Twin Room
-          Description:
-            Description: 'A stylish and cozy retreat offering a <b>serene garden
-              view</b> for guests looking to unwind. Featuring <b>modern panel-style
-              twin beds with wooden frames</b>, this room balances elegance and comfort
-              perfectly. Additional amenities include a <b>nightstand with lamp</b>
-              and <b>framed artwork</b>, adding a touch of warmth to the space. '
-            Property:
-              MaxOccupancy: 2
-              NumberOfBeds: 2
-              BedType:
-                Size: 1
-                Design: 10
-                Style: 3
-                KidType: 0
-                Frame: 2
-              StayType: 0
-              ViewType: 2
-            Facility: 87
-            Restriction:
-              Refundable: 0
-              MinStay: 1
-              MaxStay: 14
-            ImageURL: 
-          Price:
-            BasePrice: 150
-            Discount: 0
-          RoomAmount: 10
-        - Name: Oceanview Deluxe Suite
-          Description:
-            Description: 'The <b>Oceanview Deluxe Suite</b> offers a luxurious escape
-              with breathtaking <b>ocean views</b>. Featuring a <b>French-style upholstered
-              queen bed with a wingback frame</b>, this suite exudes elegance and
-              comfort. Guests can unwind on their <b>private balcony</b>, enjoying
-              the fresh sea breeze. Additional amenities include a <b>bath tub</b>
-              for relaxation and a <b>stylish bedside lamp</b> to enhance the ambiance. '
-            Property:
-              MaxOccupancy: 2
-              NumberOfBeds: 1
-              BedType:
-                Size: 4
-                Design: 13
-                Style: 7
-                KidType: 0
-                Frame: 4
-              StayType: 0
-              ViewType: 2
-            Facility: 87
-            Restriction:
-              Refundable: 0
-              MinStay: 2
-              MaxStay: 21
-            ImageURL: 
-          Price:
-            BasePrice: 250
-            Discount: 0
-          RoomAmount: 5
-        - Name: Sunset Retreat Suite
-          Description:
-            Description: 
-            Property:
-              MaxOccupancy: 2
-              NumberOfBeds: 1
-              BedType:
-                Size: 5
-                Design: 10
-                Style: 1
-                KidType: 0
-                Frame: 2
-              StayType: 0
-              ViewType: 2
-            Facility: 87
-            Restriction:
-              Refundable: 0
-              MinStay: 2
-              MaxStay: 21
-            ImageURL: 
-          Price:
-            BasePrice: 280
-            Discount: 0
-          RoomAmount: 4
+      - Name: Coastal Twin Room
+        Description:
+          Description: 'A stylish and cozy retreat offering a <b>serene garden view</b>
+            for guests looking to unwind. Featuring <b>modern panel-style twin beds
+            with wooden frames</b>, this room balances elegance and comfort perfectly.
+            Additional amenities include a <b>nightstand with lamp</b> and <b>framed
+            artwork</b>, adding a touch of warmth to the space. '
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 2
+            BedType:
+              Size: 1
+              Design: 10
+              Style: 3
+              KidType: 0
+              Frame: 2
+            ViewType: 2
+          Facility: 87
+          Restriction:
+            RoomType: 0
+            StayType: 0
+            ValidTime:
+              TimeIn: 8
+              TimeOut: 18
+            ValidStay:
+              TimeIn: 1
+              TimeOut: 10
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 150
+          Discount: 0
+        RoomAmount: 10
+      - Name: Oceanview Deluxe Suite
+        Description:
+          Description: 'The <b>Oceanview Deluxe Suite</b> offers a luxurious escape
+            with breathtaking <b>ocean views</b>. Featuring a <b>French-style upholstered
+            queen bed with a wingback frame</b>, this suite exudes elegance and comfort.
+            Guests can unwind on their <b>private balcony</b>, enjoying the fresh
+            sea breeze. Additional amenities include a <b>bath tub</b> for relaxation
+            and a <b>stylish bedside lamp</b> to enhance the ambiance. '
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 1
+            BedType:
+              Size: 4
+              Design: 13
+              Style: 7
+              KidType: 0
+              Frame: 4
+            ViewType: 2
+          Facility: 87
+          Restriction:
+            RoomType: 0
+            StayType: 2
+            ValidTime:
+              TimeIn: 1
+              TimeOut: 25
+            ValidStay:
+              TimeIn: 1
+              TimeOut: 30
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 250
+          Discount: 0
+        RoomAmount: 5
+      - Name: Sunset Retreat Suite
+        Description:
+          Description: 
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 1
+            BedType:
+              Size: 5
+              Design: 10
+              Style: 1
+              KidType: 0
+              Frame: 2
+            ViewType: 2
+          Facility: 87
+          Restriction:
+            RoomType: 0
+            StayType: 2
+            ValidTime:
+              TimeIn: 1
+              TimeOut: 15
+            ValidStay:
+              TimeIn: 1
+              TimeOut: 30
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 280
+          Discount: 0
+        RoomAmount: 4
+      - Name: Coastal Twin Room
+        Description:
+          Description: 'A stylish and cozy retreat offering a <b>serene garden view</b>
+            for guests looking to unwind. Featuring <b>modern panel-style twin beds
+            with wooden frames</b>, this room balances elegance and comfort perfectly.
+            Additional amenities include a <b>nightstand with lamp</b> and <b>framed
+            artwork</b>, adding a touch of warmth to the space. '
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 2
+            BedType:
+              Size: 1
+              Design: 10
+              Style: 3
+              KidType: 0
+              Frame: 2
+            ViewType: 2
+          Facility: 87
+          Restriction:
+            RoomType: 0
+            StayType: 0
+            ValidTime:
+              TimeIn: 8
+              TimeOut: 18
+            ValidStay:
+              TimeIn: 0
+              TimeOut: 0
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 150
+          Discount: 0
+        RoomAmount: 10
+      - Name: Oceanview Deluxe Suite
+        Description:
+          Description: 'The <b>Oceanview Deluxe Suite</b> offers a luxurious escape
+            with breathtaking <b>ocean views</b>. Featuring a <b>French-style upholstered
+            queen bed with a wingback frame</b>, this suite exudes elegance and comfort.
+            Guests can unwind on their <b>private balcony</b>, enjoying the fresh
+            sea breeze. Additional amenities include a <b>bath tub</b> for relaxation
+            and a <b>stylish bedside lamp</b> to enhance the ambiance. '
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 1
+            BedType:
+              Size: 4
+              Design: 13
+              Style: 7
+              KidType: 0
+              Frame: 4
+            ViewType: 2
+          Facility: 87
+          Restriction:
+            RoomType: 0
+            StayType: 2
+            ValidTime:
+              TimeIn: 1
+              TimeOut: 25
+            ValidStay:
+              TimeIn: 0
+              TimeOut: 0
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 250
+          Discount: 0
+        RoomAmount: 5
+      - Name: Sunset Retreat Suite
+        Description:
+          Description: 
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 1
+            BedType:
+              Size: 5
+              Design: 10
+              Style: 1
+              KidType: 0
+              Frame: 2
+            ViewType: 2
+          Facility: 87
+          Restriction:
+            RoomType: 0
+            StayType: 2
+            ValidTime:
+              TimeIn: 1
+              TimeOut: 15
+            ValidStay:
+              TimeIn: 0
+              TimeOut: 0
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 280
+          Discount: 0
+        RoomAmount: 4
       Status:
         ParticipationDate:
           _dateTimeString: 2025-05-17T22:35:50.4682018+07:00
@@ -130,35 +240,39 @@ MonoBehaviour:
           to visit Cape Byron Lighthouse as well as Belongil Beach nearby. Rated
           with 5 stars, this high-quality property provides guests with access to
           massage, restaurant and hot tub on-site.
-        ImageURL: https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/589400562.jpg?k=dd534dd740558d9c848dc6bf8a61a68c5e2097390a4e1e9c553e7293b69600be&o=&s=1024x
+        ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000001.jpg
       Review:
         Feedbacks: []
       Rooms:
-        Rooms:
-        - Name: wheelchair accessible studio
-          Description:
-            Description: 
-            Property:
-              MaxOccupancy: 2
-              NumberOfBeds: 1
-              BedType:
-                Size: 5
-                Design: 10
-                Style: 3
-                KidType: 0
-                Frame: 0
-              StayType: 0
-              ViewType: 0
-            Facility: 75
-            Restriction:
-              Refundable: 0
-              MinStay: 1
-              MaxStay: 10
-            ImageURL: 
-          Price:
-            BasePrice: 250
-            Discount: 0
-          RoomAmount: 3
+      - Name: wheelchair accessible studio
+        Description:
+          Description: 
+          Property:
+            MaxOccupancy: 2
+            NumberOfBeds: 1
+            BedType:
+              Size: 5
+              Design: 10
+              Style: 3
+              KidType: 0
+              Frame: 0
+            ViewType: 0
+          Facility: 75
+          Restriction:
+            RoomType: 0
+            StayType: 1
+            ValidTime:
+              TimeIn: 20
+              TimeOut: 12
+            ValidStay:
+              TimeIn: 0
+              TimeOut: 0
+            Refundable: 0
+          ImageURL: 
+        Price:
+          BasePrice: 250
+          Discount: 0
+        RoomAmount: 3
       Status:
         ParticipationDate:
           _dateTimeString: 2025-05-18T01:35:07.3905620+07:00
