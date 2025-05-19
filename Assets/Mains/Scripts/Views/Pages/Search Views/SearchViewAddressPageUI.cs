@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -15,6 +16,8 @@ namespace YNL.Checkotel
         private TextField _addressInput;
         private VisualElement _nearMeButton;
         private ListView _historyList;
+        private Label _suggestionLabel;
+        private VisualElement _emptyLabel;
 
         private List<(string name, bool isBuilding)> _resultLocations = new();
 
@@ -47,6 +50,10 @@ namespace YNL.Checkotel
                 item.Apply(_resultLocations[index].name, _resultLocations[index].isBuilding);
                 item.OnSelected = ApplyAddressResult;
             };
+
+            _suggestionLabel = Root.Q("SearchingHistory").Q("Label") as Label;
+
+            _emptyLabel = Root.Q("SearchingHistory").Q("EmptyResultLabel");
         }
 
         protected override void Initialize()
@@ -55,7 +62,7 @@ namespace YNL.Checkotel
             RebuildHistoryList();
         }
 
-        public override void OnPageOpened(bool isOpen)
+        public override void OnPageOpened(bool isOpen, bool needRefresh = true)
         {
             if (isOpen)
             {
@@ -69,6 +76,8 @@ namespace YNL.Checkotel
                 _background.SetPickingMode(PickingMode.Ignore);
                 _page.SetTranslate(0, 100, true);
             }
+
+            if (isOpen && needRefresh) Refresh();
         }
 
         private void OnClicked_CloseButton(PointerDownEvent evt)
@@ -78,7 +87,7 @@ namespace YNL.Checkotel
 
         private void OnFocusOut_AddressInput(FocusOutEvent evt)
         {
-
+            Marker.OnAddressSearchSubmitted?.Invoke(_addressInput.value);
         }
 
         private void OnValueChanged_AddressInput(ChangeEvent<string> evt)
@@ -87,12 +96,15 @@ namespace YNL.Checkotel
 
             if (value == string.Empty)
             {
+                _suggestionLabel.SetText("Searching history");
                 _resultLocations = Main.Runtime.SearchingAddressHistory.Select(i => (i, false)).ToList();
             }
             else
             {
-                Func<string, bool> validLocations = i => Extension.Function.FuzzyContains(i, value);
-                Func<KeyValuePair<UID, HotelUnit>, bool> validHotels = i => Extension.Function.FuzzyContains(i.Value.Description.Address, value);
+                _suggestionLabel.SetText("Suggestions");
+
+                Func<string, bool> validLocations = i => i.FuzzyContains(value);
+                Func<KeyValuePair<UID, HotelUnit>, bool> validHotels = i => i.Value.Description.Address.FuzzyContains(value);
 
                 var locations = Main.Database.Locations.Where(validLocations).ToList();
                 var hotels = Main.Database.Hotels.Where(validHotels).Select(p => p.Value.Description.Address).ToList();
@@ -101,12 +113,12 @@ namespace YNL.Checkotel
                 _resultLocations.AddRange(hotels.Select(i => (i, true)).ToList());
             }
 
-            RebuildHistoryList();
-        }
+            bool emptyResult = _resultLocations.IsEmpty();
 
-        private void OnSubmited_AddressInput()
-        {
-            Marker.OnAddressSearchSubmited?.Invoke(_addressInput.value);
+            _emptyLabel.SetDisplay(emptyResult ? DisplayStyle.Flex : DisplayStyle.None);
+            _historyList.SetDisplay(emptyResult ? DisplayStyle.None : DisplayStyle.Flex);
+
+            if (!emptyResult) RebuildHistoryList();
         }
 
         private void OnClicked_NearMeButton(PointerDownEvent evt)
@@ -127,7 +139,7 @@ namespace YNL.Checkotel
 
             OnPageOpened(false);
 
-            Marker.OnAddressSearchSubmited.Invoke(result);
+            Marker.OnAddressSearchSubmitted?.Invoke(result);
         }
     }
 }

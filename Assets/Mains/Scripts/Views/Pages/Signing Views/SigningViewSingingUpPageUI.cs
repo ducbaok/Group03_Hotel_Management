@@ -167,7 +167,7 @@ namespace YNL.Checkotel
             account.Password = _passwordInput;
             Main.Database.Accounts.Add(account);
 
-            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage, true);
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage, true, true);
         }
 
         private void RecoveryAccount(PointerDownEvent evt)

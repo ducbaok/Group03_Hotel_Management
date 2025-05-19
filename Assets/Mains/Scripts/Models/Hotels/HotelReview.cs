@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace YNL.Checkotel
@@ -30,12 +31,17 @@ namespace YNL.Checkotel
     }
 
     [System.Serializable]
-    public struct ReviewRating
+    public struct ReviewRating : IComparable<ReviewRating>
     {
         [SerializeField] private float _rating;
 
         public static implicit operator float(ReviewRating rating) => rating._rating;
         public static implicit operator ReviewRating(float rating) => new() { _rating = rating };
+
+        public int CompareTo(ReviewRating other)
+        {
+            return _rating.CompareTo(other._rating);
+        }
     }
 
     [System.Serializable]

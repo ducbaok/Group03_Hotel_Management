@@ -96,7 +96,7 @@ namespace YNL.Checkotel
             (_hotelTypeField.Children().ToArray()[0] as FilterPropertyButtonUI).OnClicked__Button();
         }
 
-        public override void OnPageOpened(bool isOpen)
+        public override void OnPageOpened(bool isOpen, bool needRefresh = true)
         {
             if (isOpen)
             {
@@ -110,6 +110,8 @@ namespace YNL.Checkotel
                 _background.SetPickingMode(PickingMode.Ignore);
                 _page.SetTranslate(0, 100, true);
             }
+
+            if (isOpen && needRefresh) Refresh();
         }
 
         private void OnValueChanged_Slider(ChangeEvent<Vector2> evt)

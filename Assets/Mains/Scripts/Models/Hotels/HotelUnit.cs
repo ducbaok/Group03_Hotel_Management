@@ -1,5 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using YNL.Utilities.Addons;
 
@@ -16,8 +19,11 @@ namespace YNL.Checkotel
     {
         public HotelDescription Description = new();
         public HotelReview Review = new();
-        public RoomCategorization Rooms = new();
+        public List<RoomUnit> Rooms = new();
         public HotelStatus Status = new();
+
+        public (float Price, Room.StayType Type) HighestPrice = (0, Room.StayType.Hourly);
+        public (float Price, Room.StayType Type) LowestPrice = (0, Room.StayType.Hourly);
     }
 
     [System.Serializable]

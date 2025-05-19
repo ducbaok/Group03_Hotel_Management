@@ -69,7 +69,7 @@ namespace YNL.Checkotel
             UpdateUI();
 
             _onNavigated?.Invoke(_type);
-            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, (byte)_type, true);
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, (byte)_type, true, true);
 
             evt.StopPropagation();
         }

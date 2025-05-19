@@ -21,21 +21,21 @@ namespace YNL.Checkotel
             Marker.OnViewPageSwitched -= OnViewPageSwitched;
         }
 
-        private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage)
+        private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage, bool needRefresh)
         {
             if (!IsAbleToMovePage) return;
 
             var currentGroup = Groups[CurrentViewType];
             if (hidePreviousPage)
             {
-                currentGroup.Pages[CurrentViewPage].DisplayView(false);
+                currentGroup.Pages[CurrentViewPage].DisplayView(false, needRefresh);
             }
 
             CurrentViewType = type;
             CurrentViewPage = page;
 
             currentGroup = Groups[CurrentViewType];
-            currentGroup.Pages[CurrentViewPage].DisplayView(true);
+            currentGroup.Pages[CurrentViewPage].DisplayView(true, needRefresh);
         }
     }
 

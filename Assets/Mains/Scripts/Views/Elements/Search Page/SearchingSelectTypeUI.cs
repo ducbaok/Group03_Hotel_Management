@@ -5,16 +5,13 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public enum SearchingStayType : byte { Hourly, Overnight, Daily }
-    public enum SearchingRoomType : byte { Standard, Family, Business }
-
     /// <summary>
     /// Used in <b>Searching Page - Main Page</b> to show the type of searching.
     /// </summary>
     public class SearchingSelectTypeUI : VisualElement
     {
-        public delegate void OnSelectedEvent(bool a, SearchingStayType b, SearchingRoomType c);
-        public static Action<bool, SearchingStayType, SearchingRoomType> OnSelected { get; set; }
+        public delegate void OnSelectedEvent(bool a, Room.StayType b, Room.RoomType c);
+        public static Action<bool, Room.StayType, Room.RoomType> OnSelected { get; set; }
 
         private const string _rootClass = "searching-select-type";
         private const string _iconClass = _rootClass + "__icon";
@@ -26,8 +23,8 @@ namespace YNL.Checkotel
 
         private bool _isSelected;
         private bool _isStayType;
-        private SearchingStayType _stayType;
-        private SearchingRoomType _roomType;
+        private Room.StayType _stayType;
+        private Room.RoomType _roomType;
         private Texture2D _lightIcon;
         private Texture2D _filledIcon;
 
@@ -64,14 +61,14 @@ namespace YNL.Checkotel
             OnSelected -= RecheckUI;
         }
 
-        public SearchingSelectTypeUI SetStayType(SearchingStayType stayType)
+        public SearchingSelectTypeUI SetStayType(Room.StayType stayType)
         {
             _isStayType = true;
             _stayType = stayType;
             return this;
         }
 
-        public SearchingSelectTypeUI SetRoomType(SearchingRoomType roomType)
+        public SearchingSelectTypeUI SetRoomType(Room.RoomType roomType)
         {
             _isStayType = false;
             _roomType = roomType;
@@ -90,7 +87,7 @@ namespace YNL.Checkotel
             UpdateUI();
         }
 
-        private void RecheckUI(bool isStayType, SearchingStayType stayType, SearchingRoomType roomType)
+        private void RecheckUI(bool isStayType, Room.StayType stayType, Room.RoomType roomType)
         {
             if (_isStayType != isStayType) return;
 

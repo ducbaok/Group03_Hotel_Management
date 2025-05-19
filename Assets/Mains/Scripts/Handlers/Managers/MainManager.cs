@@ -27,7 +27,7 @@ namespace YNL.Checkotel
         {
             base.Awake();
 
-            Application.targetFrameRate = -1;
+            Application.targetFrameRate = 120;
         }
 
         private void Start()

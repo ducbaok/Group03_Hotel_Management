@@ -16,19 +16,22 @@ namespace YNL.Checkotel
         private const string _iconClass = _rootClass + "__icon";
         private const string _labelClass = _rootClass + "__label";
         private const string _typeFilterClass = "type-filter";
+        private const string _firstClass = "first";
 
         private VisualElement _icon;
         private Label _label;
 
         private SuggestFilterType _type;
 
-        public SuggestFilterButtonUI(bool isAvailableFilter, Texture2D icon, string label, SuggestFilterType type)
+        public SuggestFilterButtonUI(bool isAvailableFilter, string iconName, string label, SuggestFilterType type, bool isFirstItem = false)
         {
             _type = type;
 
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["SuggestFilterButtonUI"]);
-            this.AddClass(_rootClass).EnableClass(!isAvailableFilter, _typeFilterClass);
+            this.AddClass(_rootClass).EnableClass(!isAvailableFilter, _typeFilterClass).EnableClass(isFirstItem, _firstClass);
+
+            var icon = Main.Resources.Icons[iconName];
 
             _icon = new();
             _icon.AddClass(_iconClass).EnableClass(!isAvailableFilter, _typeFilterClass);
