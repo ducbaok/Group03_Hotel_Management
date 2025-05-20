@@ -97,19 +97,19 @@
                     <engine:Label text="Check in time" class="label-field" style="font-size: 40px; margin-top: 50px; -unity-font-style: bold;" />
                     <engine:ScrollView mode="Horizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="TimeScroll" style="flex-grow: 1; margin-bottom: 30px; margin-top: 0;">
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 200px; background-color: rgb(59, 59, 59); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="04:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="04:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="width: 175px; background-color: rgb(77, 70, 63); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center; height: 100px;">
-                            <engine:Label text="05:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(254, 209, 167);" />
+                            <engine:Label text="05:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(254, 209, 167); font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 200px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="06:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="06:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 200px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="07:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="07:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 200px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="08:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="08:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 0;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 200px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
                             <engine:Label text="04:00" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
@@ -121,16 +121,16 @@
                     <engine:Label text="Hours of use" class="label-field" style="font-size: 40px; margin-top: 50px; -unity-font-style: bold;" />
                     <engine:ScrollView mode="Horizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="TimeScroll" style="flex-grow: 1; margin-bottom: 30px; margin-top: 0;">
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 250px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="1 hour" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="1 hour" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 250px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="2 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="2 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 225px; background-color: rgb(77, 70, 63); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="3 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(254, 209, 167);" />
+                            <engine:Label text="3 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(254, 209, 167); font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 250px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
-                            <engine:Label text="4 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />
+                            <engine:Label text="4 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center; font-size: 40px;" />
                         </engine:VisualElement>
                         <engine:VisualElement name="TimeItem" style="height: 100px; width: 250px; background-color: rgb(57, 57, 57); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: 30px; align-self: center;">
                             <engine:Label text="2 hours" class="label-field" style="height: 100%; width: 100%; -unity-text-align: middle-center;" />

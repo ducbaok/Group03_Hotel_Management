@@ -16,5 +16,6 @@ namespace YNL.Checkotel
         public UID AccountID;
         public List<string> SearchingAddressHistory = new();
         public SerializableDictionary<UID, LikedFeedback> LikedFeedbacks = new();
+        public List<UID> FavoriteHotels = new();
     }
 }

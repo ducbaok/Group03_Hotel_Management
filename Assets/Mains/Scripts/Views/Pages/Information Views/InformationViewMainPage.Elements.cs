@@ -97,7 +97,7 @@ namespace YNL.Checkotel
                 var review = Main.Database.Hotels[id].Review;
 
                 _ratingText.SetText(review.AverageRating.ToString("0.0"));
-                _reviewAmount.SetText(review.FeebackAmount.ToString());
+                _reviewAmount.SetText($"({review.FeebackAmount} reviews)");
 
                 bool emptyFeedback = review.FeebackAmount == 0;
 
@@ -193,7 +193,7 @@ namespace YNL.Checkotel
 
             public void Apply(string description)
             {
-                _descriptionText.SetText(description);
+                _descriptionText.SetText(description == string.Empty ? "<color=#808080>No description!</color>" : description);
             }
 
             private void OnClicked_DescriptionText(PointerDownEvent evt)

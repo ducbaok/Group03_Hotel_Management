@@ -1,4 +1,5 @@
 using UnityEngine.UIElements;
+using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
@@ -62,12 +63,23 @@ namespace YNL.Checkotel
 
         private void OnClicked_BackButton(PointerDownEvent evt)
         {
-
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, false);
         }
 
         private void OnClicked_FavoriteButton(PointerDownEvent evt)
         {
+            bool isFavorited = Main.Runtime.FavoriteHotels.Contains(_hotelID);
 
+            if (isFavorited)
+            {
+                Main.Runtime.FavoriteHotels.Remove(_hotelID);
+                _favoriteButton.SetBackgroundImage(Main.Resources.Icons["Heart"]);
+            }
+            else
+            {
+                Main.Runtime.FavoriteHotels.Add(_hotelID);
+                _favoriteButton.SetBackgroundImage(Main.Resources.Icons["Heart (Filled)"]);
+            }
         }
 
         private void OnHotelInformationDisplayed(UID id)
@@ -80,6 +92,10 @@ namespace YNL.Checkotel
             _reviewView.Apply(id);
             _facilityView.Apply(unit);
             _descriptionField.Apply(unit.Description.Description);
+
+            bool isFavorited = Main.Runtime.FavoriteHotels.Contains(id);
+
+            _favoriteButton.SetBackgroundImage(Main.Resources.Icons[isFavorited ? "Heart (Filled)" : "Heart"]);
         }
     }
 }

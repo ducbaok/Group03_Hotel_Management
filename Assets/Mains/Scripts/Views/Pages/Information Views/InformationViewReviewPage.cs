@@ -27,6 +27,9 @@ namespace YNL.Checkotel
 
         protected override void Collect()
         {
+            _backButton = Root.Q("TopBar").Q("LabelField");
+            _backButton.RegisterCallback<PointerDownEvent>(OnClicked_BackButton);
+
             _ratingView = new(Root.Q("TopBar").Q("RatingView"));
 
             _reviewScroll = Root.Q("ContentScroll") as ScrollView;
@@ -43,6 +46,11 @@ namespace YNL.Checkotel
                 var item = element as ReviewResultItemUI;
                 item.Apply(_hotelID, _feedbackIDs[index]);
             };
+        }
+
+        private void OnClicked_BackButton(PointerDownEvent evt)
+        {
+            Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
         }
 
         private void RebuildHistoryList()
