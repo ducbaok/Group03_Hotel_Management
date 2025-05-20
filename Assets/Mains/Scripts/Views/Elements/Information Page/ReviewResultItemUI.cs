@@ -1,12 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using YNL.Utilities.Addons;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class ReviewResultItemUI : VisualElement, IInitializable, IRefreshable
+    public class ReviewResultItemUI : VisualElement
     {
+        private static SerializableDictionary<UID, ReviewFeedback> _feedbacks => Main.Database.Feedbacks;
+        private static SerializableDictionary<UID, LikedFeedback> _likedFeedbacks => Main.Runtime.LikedFeedbacks;
+
         private const string _rootClass = "review-result-item";
+        private const string _backgroundClass = _rootClass + "__background";
         private const string _infoFieldClass = _rootClass + "__info-field";
         private const string _accountPictureClass = _rootClass + "__account-picture";
         private const string _accountTextClass = _rootClass + "__account-text";
@@ -18,8 +24,6 @@ namespace YNL.Checkotel
         private const string _likeFieldClass = _rootClass + "__like-field";
         private const string _likeAmountClass = _rootClass + "__like-amount";
         private const string _likeIconClass = _rootClass + "__like-icon";
-        
-        private const string _firstItemClass = "first-item";
 
         private VisualElement _accountPicture;
         private Label _accountText;
@@ -30,11 +34,17 @@ namespace YNL.Checkotel
         private VisualElement _likeIcon;
         private List<VisualElement> _starIcons = new();
 
+        private UID _hotelID;
+        private UID _feedbackID;
+
         public ReviewResultItemUI()
         {
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["ReviewResultItemUI"]);
             this.AddClass(_rootClass);
+
+            var background = new VisualElement().AddClass(_backgroundClass);
+            this.AddElements(background);
 
             var infoField = new VisualElement().AddClass(_infoFieldClass);
             this.AddElements(infoField);
@@ -58,6 +68,7 @@ namespace YNL.Checkotel
             toolField.AddElements(_timeStamp);
 
             var likeField = new VisualElement().AddClass(_likeFieldClass);
+            likeField.RegisterCallback<PointerDownEvent>(OnClicked_LikeField);
             toolField.AddElements(likeField);
 
             _likeAmount = new Label().AddClass(_likeAmountClass);
@@ -78,23 +89,84 @@ namespace YNL.Checkotel
                 _starIcons.Add(starIcon);
                 _starField.AddElements(starIcon);
             }
-
-            Refresh();
         }
 
-        public void Refresh()
+        public void Apply(UID hotelID, UID feedbackID)
         {
-            _accountText.SetText("Sam Winchester\r\n<size=35><color=#808080>Room 302</color></size>");
+            _hotelID = hotelID;
+            _feedbackID = feedbackID;
+            var feedback = Main.Database.Feedbacks[feedbackID];
+            var status = Main.Database.Hotels[hotelID].Review.Feedbacks[_feedbackID];
 
-            _commentText.SetText("I had a wonderful stay at this hotel! The staff were incredibly welcoming and attentive, ensuring every aspect of my visit was comfortable.");
-            _timeStamp.SetText("Created on 12/05");
+            var account = Main.Database.Accounts[feedback.CustomerID];
 
-            _likeAmount.SetText("1,233");
+            _accountText.SetText($"{account.Name}");//\r\n<size=35><color=#808080>Room 302</color></size>");
+
+            _commentText.SetText(feedback.Comment);
+            _timeStamp.SetText(string.Empty);// "Created on 12/05");
+
+
+            bool isLiked = _likedFeedbacks.TryGetValue(hotelID, out var uids) && uids.Feedbacks.Contains(feedbackID);
+
+            _likeAmount.SetText(status.Like.ToString());
+            _likeIcon.SetBackgroundImage(Main.Resources.Icons[isLiked ? "Heart (Filled)" : "Heart"]);
+            _likeIcon.SetBackgroundImageTintColor(isLiked ? "#FF4040" : "#FFFFFF");
+
+            UpdateStarField(feedback.AverageRating);
         }
 
-        public void SetAsFirstItem()
+        private void OnClicked_LikeField(PointerDownEvent evt)
         {
-            this.EnableClass(true, _firstItemClass);
+            bool isLiked = false;
+            var status = Main.Database.Hotels[_hotelID].Review.Feedbacks[_feedbackID];
+
+            if (_likedFeedbacks.TryGetValue(_hotelID, out var uids))
+            {
+                if (uids.Feedbacks.Contains(_feedbackID))
+                {
+                    uids.Feedbacks.Remove(_feedbackID);
+                    status.Like--;
+                    isLiked = false;
+                }
+                else
+                {
+                    uids.Feedbacks.Add(_feedbackID);
+                    status.Like++;
+                    isLiked = true;
+                }
+            }
+            else
+            {
+                _likedFeedbacks.Add(_hotelID, new() { Feedbacks = new() { _feedbackID } });
+                status.Like++;
+                isLiked = true;
+            }
+
+            _likeAmount.SetText(status.Like.ToString());
+            _likeIcon.SetBackgroundImage(Main.Resources.Icons[isLiked ? "Heart (Filled)" : "Heart"]);
+            _likeIcon.SetBackgroundImageTintColor(isLiked ? "#FF4040" : "#FFFFFF");
+        }
+
+        private void UpdateStarField(float rating)
+        {
+            int fullStarAmount = (int)rating;
+            bool hasHalfStar = rating - fullStarAmount >= 0.5f;
+
+            for (byte i = 0; i < _starIcons.Count; i++)
+            {
+                if (i < fullStarAmount)
+                {
+                    _starIcons[i].SetBackgroundImage(Main.Resources.Icons["Star (Filled)"]);
+                }
+                else if (i == fullStarAmount && hasHalfStar)
+                {
+                    _starIcons[i].SetBackgroundImage(Main.Resources.Icons["Star (Half)"]);
+                }
+                else
+                {
+                    _starIcons[i].SetBackgroundImage(Main.Resources.Icons["Star"]);
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -47,22 +48,29 @@ namespace YNL.Checkotel
         protected virtual void Initialize() { }
         protected virtual void Refresh() { }
 
-        public void DisplayView(bool display)
+        public void DisplayView(bool display, bool needRefresh = true)
         {
             Root.SetDisplay(DisplayStyle.Flex);
             Root.SetTranslate(display ? 0 : -100, 0, true);
 
             _isDisplayThisTime = display;
 
-            if (Main.View != null)
+            if (Main.View != null) Main.View.IsAbleToMovePage = false;
+
+            if (display && needRefresh)
             {
-                Main.View.IsAbleToMovePage = false;
+                Refresh();
             }
         }
 
-        public virtual void OnPageOpened(bool isOpen)
+        public virtual void OnPageOpened(bool isOpen, bool needRefresh = true)
         {
             Root.SetTranslate(0, isOpen ? 0 : 100, true);
+
+            if (isOpen && needRefresh)
+            {
+                Refresh();
+            }
         }
 
         private void OnTransitionEnded(TransitionEndEvent evt)

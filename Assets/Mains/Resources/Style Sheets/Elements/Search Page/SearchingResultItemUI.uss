@@ -2,15 +2,22 @@
 {
 	overflow: hidden;
 	height: 650px;
-	margin: 0px 0px 50px 0px;
-	background-color: var(--color-ground-light);
+	padding: 0px 0px 50px 0px;
 	border-radius: 25px;
+}
+.searching-result-item:hover
+{
+	background-color: transparent;
+}
+.searching-result-item:select
+{
+	background-color: transparent;
 }
 
 .searching-result-item__preview-area
 {
 	height: 350px;
-	background-image: resource("Images/Starting Background 1");
+	background-color: var(--color-ground-dark);
 	-unity-background-scale-mode: scale-and-crop;
 	border-color: var(--color-ground-light);
 	border-width: 2px 2px 0px 2px;
@@ -50,6 +57,8 @@
 {
 	flex-grow: 1;
 	padding: 20px 30px 20px 30px;
+	background-color: var(--color-ground-light);
+	border-radius: 0px 0px 25px 25px;
 }
 
 .searching-result-item__name-field

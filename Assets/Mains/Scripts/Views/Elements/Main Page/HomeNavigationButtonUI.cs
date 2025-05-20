@@ -1,19 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public enum HomeNavigationType : byte
-    {
-        Home, Favorite, Suggestion, Account
-    }
-
     public class HomeNavigationButton : VisualElement
     {
-        private static Action<HomeNavigationType> _onNavigated { get; set; }
+        private static Action<ViewType> _onNavigated { get; set; }
 
         private const string _rootClass = "home-navigation-button";
         private const string _iconClass = _rootClass + "__icon";
@@ -24,9 +18,9 @@ namespace YNL.Checkotel
         private Label _label;
 
         private bool _isSelected;
-        private HomeNavigationType _type;
+        private ViewType _type;
 
-        public HomeNavigationButton(Texture2D icon, string label, bool isSelected, HomeNavigationType type)
+        public HomeNavigationButton(Texture2D icon, string label, bool isSelected, ViewType type)
         {
             _isSelected = isSelected;
             _type = type;
@@ -69,12 +63,12 @@ namespace YNL.Checkotel
             UpdateUI();
 
             _onNavigated?.Invoke(_type);
-            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, (byte)_type, true);
+            Marker.OnViewPageSwitched?.Invoke(_type, true, true);
 
             evt.StopPropagation();
         }
 
-        private void RecheckUI(HomeNavigationType type)
+        private void RecheckUI(ViewType type)
         {
             if (_type == type) return;
 

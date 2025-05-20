@@ -1,15 +1,27 @@
 .review-result-item 
 {
-	margin: 0px 0px 25px 0px;
-	padding: 25px 25px 15px 25px;
+	padding: 0px 25px 15px 25px;
+}
+.review-result-item:hover
+{
+	background-color: transparent;
+}
+.review-result-item:select
+{
+	background-color: transparent;
+}
+	
+.review-result-item__background
+{
+	position: absolute;
+	top: 25px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 	background-color: var(--color-ground-dark);
 	border-color: var(--color-border-legacy);
 	border-width: var(--value-border-width);
 	border-radius: 15px;
-}
-.review-result-item.first-item
-{
-	margin: 25px 0px 25px 0px;
 }
 
 .review-result-item__info-field 
@@ -17,6 +29,7 @@
 	flex-direction: row;
 	height: 75px;
 	min-height: 75px;
+	margin: 50px 0px 0px 0px;
 }
 
 .review-result-item__account-picture 

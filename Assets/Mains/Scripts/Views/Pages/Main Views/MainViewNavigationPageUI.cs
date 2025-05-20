@@ -14,10 +14,10 @@ namespace YNL.Checkotel
         protected override void Initialize()
         {
             _navigationBar.Clear();
-            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Home"], "Home", true, HomeNavigationType.Home));
-            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Star"], "Favorite", false, HomeNavigationType.Favorite));
-            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Suggestion"], "Suggestion", false, HomeNavigationType.Suggestion));
-            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Account"], "Account", false, HomeNavigationType.Account));
+            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Home"], "Home", true, ViewType.MainViewHomePage));
+            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Star"], "Favorite", false, ViewType.MainViewFavoritePage));
+            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Suggestion"], "Suggestion", false, ViewType.MainViewRewardPage));
+            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Account"], "Account", false, ViewType.MainViewAccountPage));
         }
     }
 }

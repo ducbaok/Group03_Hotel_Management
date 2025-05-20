@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UIElements;
@@ -7,7 +8,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public partial class HotelPreviewItemUI : VisualElement
+    public partial class HotelPreviewItemUI : VisualElement, IRefreshable
     {
         private const string _rootClass = "hotel-preview-item";
         private const string _imageClass = _rootClass + "__image";
@@ -45,8 +46,12 @@ namespace YNL.Checkotel
         private Label _discountText;
         private VisualElement _space;
 
+        private UID _id;
+
         public HotelPreviewItemUI(UID hotelID, bool isMini = false)
         {
+            _id = hotelID;
+
             Initialize(isMini);
             Apply(hotelID);
         }
@@ -56,6 +61,7 @@ namespace YNL.Checkotel
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["HotelPreviewItemUI"]);
             this.AddClass(_rootClass).EnableClass(isMini, _miniClass);
+            this.RegisterCallback<PointerDownEvent>(OnClicked_PreviewItem);
 
             _previewImage = new VisualElement().AddClass(_imageClass);
             this.AddElements(_previewImage);
@@ -117,7 +123,7 @@ namespace YNL.Checkotel
 
             _nameLabel.text = unit.Description.Name;
             _locationText.text = unit.Description.Address;
-            var price = unit.Rooms.Rooms[0].Price.BasePrice;
+            var price = unit.Rooms[0].Price.BasePrice;
             _priceText.text = $"<b><color=#FED1A7>${price * (1 - (discountPercentage / 100f))}</color></b> <s>${price}</s> <b><size=30>/ 2 days</size></b>";
             _ratingText.text = $"<b>{Random.Range(3.0f, 5.0f).ToString("F1")}</b> ({Random.Range(100, 100)})";
 
@@ -133,6 +139,11 @@ namespace YNL.Checkotel
             }
         }
 
+        public void Refresh()
+        {
+            Apply(_id);
+        }
+
         public HotelPreviewItemUI SetAsLastItem(bool set = true)
         {
             if (!set) return this;
@@ -140,6 +151,12 @@ namespace YNL.Checkotel
             this.SetMarginRight(50);
 
             return this;
+        }
+
+        private void OnClicked_PreviewItem(PointerDownEvent evt)
+        {
+            Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
+            Marker.OnHotelInformationDisplayed?.Invoke(_id);
         }
     }
 }

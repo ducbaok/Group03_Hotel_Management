@@ -1,112 +1,7 @@
-using UnityEngine;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
-using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public partial class InformationViewMainPage
-    {
-        public class NameView
-        {
-            private VisualElement _nameView;
-            private VisualElement _badgeField;
-            private Label _nameText;
-            private Label _addressText;
-
-            public NameView(VisualElement contentContainer)
-            {
-                _nameView = contentContainer.Q("NameView");
-                _badgeField = contentContainer.Q("BadgeField");
-                _nameText = contentContainer.Q("NameText") as Label;
-                _addressText = contentContainer.Q("AddressText") as Label;
-            }
-
-            public void Update(string name, string address)
-            {
-                _nameText.SetText(name);
-                _addressText.SetText(address);
-            }
-        }
-    
-        public class ReviewView
-        {
-            private Label _ratingText;
-            private Label _reviewAmount;
-            private Label _seeMoreButton;
-            private ScrollView _reviewScroll;
-
-            public ReviewView(VisualElement contentContainer)
-            {
-                var reviewView = contentContainer.Q("ReviewView");
-                var scoreField = reviewView.Q("ScoreField");
-
-                _ratingText = scoreField.Q("Rating") as Label;
-                _reviewAmount = scoreField.Q("Amount") as Label;
-                _seeMoreButton = scoreField.Q("SeeMore") as Label;
-
-                _reviewScroll = reviewView.Q("ReviewScroll") as ScrollView;
-            }
-
-            public void Update(float rating, int amount)
-            {
-                _ratingText.SetText(rating.ToString());
-                _reviewAmount.SetText(amount.ToString());
-            }
-        }
-    
-        public class FacilityView
-        {
-            private Label _seeMoreButton;
-            private VisualElement _facilityField;
-
-            public FacilityView(VisualElement contentContainer)
-            {
-                var facilityView = contentContainer.Q("FacilityView");
-
-                _seeMoreButton = facilityView.Q("LabelField").Q("SeeMore") as Label;
-                _facilityField = facilityView.Q("FacilityField");
-            }
-        }
-    
-        public class DescriptionField
-        {
-            private Label _descriptionText;
-
-            private bool _isExpanded = false;
-
-            public DescriptionField(VisualElement contentContainer)
-            {
-                _descriptionText = contentContainer.Q("DescriptionField").Q("DescriptionText") as Label;
-                _descriptionText.RegisterCallback<PointerDownEvent>(OnClicked_DescriptionText);
-            }
-
-            public void Update(string description)
-            {
-                _descriptionText.SetText(description);
-            }
-
-            private void OnClicked_DescriptionText(PointerDownEvent evt)
-            {
-                _isExpanded = !_isExpanded;
-
-                if (_isExpanded)
-                {
-                    _descriptionText.SetMaxHeight(StyleKeyword.Auto);
-                }
-                else
-                {
-                    _descriptionText.SetMaxHeight(175);
-                }
-            }
-        }
-    
-        public class TimeField
-        {
-
-        }
-    }
-
     public partial class InformationViewMainPage : ViewPageUI
     {
         private VisualElement _backButton;
@@ -122,10 +17,26 @@ namespace YNL.Checkotel
         private VisualElement _hotelPolicy;
         private VisualElement _cancellationPolicy;
 
+        private UID _hotelID;
+
+        protected override void VirtualAwake()
+        {
+            Marker.OnHotelInformationDisplayed += OnHotelInformationDisplayed;
+        }
+
+        private void OnDestroy()
+        {
+            Marker.OnHotelInformationDisplayed -= OnHotelInformationDisplayed;
+        }
+
         protected override void Collect()
         { 
             _backButton = Root.Q("TopBar").Q("BackButton");
+            _backButton.RegisterCallback<PointerDownEvent>(OnClicked_BackButton);
+
             _favoriteButton = Root.Q("TopBar").Q("FavoriteButton");
+            _favoriteButton.RegisterCallback<PointerDownEvent>(OnClicked_FavoriteButton);
+
             _shareButton = Root.Q("TopBar").Q("ShareButton");
 
             _priceField = new(Root);
@@ -134,7 +45,7 @@ namespace YNL.Checkotel
 
             _imageView = contentContainer.Q("ImageView");
 
-            _nameView = new(contentContainer);
+            _nameView = new(contentContainer.Q("NameView"));
 
             _reviewView = new(contentContainer);
 
@@ -149,9 +60,26 @@ namespace YNL.Checkotel
             _cancellationPolicy = contentContainer.Q("CancellationPolicy");
         }
 
-        protected override void Initialize()
+        private void OnClicked_BackButton(PointerDownEvent evt)
         {
-            
+
+        }
+
+        private void OnClicked_FavoriteButton(PointerDownEvent evt)
+        {
+
+        }
+
+        private void OnHotelInformationDisplayed(UID id)
+        {
+            _hotelID = id;
+
+            var unit = Main.Database.Hotels[id];
+
+            _nameView.Apply(unit.Description.Name, unit.Description.Address);
+            _reviewView.Apply(id);
+            _facilityView.Apply(unit);
+            _descriptionField.Apply(unit.Description.Description);
         }
     }
 }

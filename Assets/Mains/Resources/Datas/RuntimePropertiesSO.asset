@@ -17,3 +17,13 @@ MonoBehaviour:
   SearchingAddressHistory:
   - Sydney
   - Boudi
+  LikedFeedbacks:
+    _keys: []
+  TestLikedFeedbacks:
+    _keys:
+    - _id: 0
+    _values:
+    - Feedbacks:
+      - _id: 0
+      - _id: 0
+      - _id: 0

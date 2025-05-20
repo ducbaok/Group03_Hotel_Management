@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using UnityEngine;
+﻿using System;
 
 namespace YNL.Checkotel
 {
@@ -20,16 +18,17 @@ namespace YNL.Checkotel
         public ushort MaxOccupancy = 5;
         public ushort NumberOfBeds = 2;
         public Room.BedType BedType = new();
-        public Room.StayType StayType = Room.StayType.Hourly;
         public Room.ViewType ViewType = Room.ViewType.Ocean;
     }
 
     [System.Serializable]
     public class RoomRestriction
     {
+        public Room.RoomType RoomType = Room.RoomType.Standard;
+        public Room.StayType StayType = Room.StayType.Hourly;
+        public TimeRange ValidTime;
+        public TimeRange ValidStay;
         public bool Refundable = false;
-        public ushort MinStay = 1;
-        public ushort MaxStay = 10;
     }
 
     [Flags]
@@ -61,7 +60,7 @@ namespace YNL.Checkotel
         HasSpa = 1 << 2,
         HasRestaurant = 1 << 3,
         HasBar = 1 << 4,
-        HasParrkingLots = 1 << 5,
+        HasFreeParking = 1 << 5,
         HasFreeBreakfast = 1 << 6,
         HasEVChargingStation = 1 << 7,
         HasElevator = 1 << 9,

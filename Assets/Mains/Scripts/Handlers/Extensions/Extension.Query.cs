@@ -25,7 +25,7 @@ namespace YNL.Checkotel
             }
             public static UID[] GetLuxuryStaysList()
             {
-                return _hotels.OrderByDescending(u => u.Value.Rooms.HighestPrice).Take(10).Select(p => p.Key).ToArray();
+                return _hotels.OrderByDescending(u => u.Key.GetHighestPrice()).Take(10).Select(p => p.Key).ToArray();
             }
             public static UID[] GetExceptionalChoicesList()
             {
@@ -34,7 +34,7 @@ namespace YNL.Checkotel
         
             public static UID[] SearchForHotels(string location)
             {
-                Func<KeyValuePair<UID, HotelUnit>, bool> validAddress = u => Function.FuzzyContains(u.Value.Description.Address, location);
+                Func<KeyValuePair<UID, HotelUnit>, bool> validAddress = u => u.Value.Description.Address.FuzzyContains(location);
 
                 return _hotels.Where(validAddress).Select(p => p.Key).ToArray();
             }

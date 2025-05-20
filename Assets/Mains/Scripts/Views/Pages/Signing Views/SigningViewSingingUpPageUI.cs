@@ -165,9 +165,9 @@ namespace YNL.Checkotel
             if (_validEmailInput) account.Email = _accountInput;
             else account.PhoneNumber = _accountInput;
             account.Password = _passwordInput;
-            Main.Database.Accounts.Add(account);
+            Main.Database.Accounts.Add(account.ID, account);
 
-            Marker.OnViewPageSwitched?.Invoke(ViewType.MainView, ViewKey.MainViewHomePage, true);
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, true);
         }
 
         private void RecoveryAccount(PointerDownEvent evt)

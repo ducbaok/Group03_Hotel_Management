@@ -33,7 +33,7 @@ namespace YNL.Checkotel
             this.AddClass(_rootClass);
             this.RegisterCallback<PointerDownEvent>(OnClicked__Toggle);
 
-            _label = new(Extension.Function.ToSentenceCase(_type));
+            _label = new(_type.ToSentenceCase());
             _label.AddClass(_labelClass);
             this.AddElements(_label);
 

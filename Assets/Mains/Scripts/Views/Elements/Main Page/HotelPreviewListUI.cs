@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine.UIElements;
@@ -12,7 +13,7 @@ namespace YNL.Checkotel
         NewHotels, MostPopular, HighRated, LuxuryStays, ExceptionalChoices
     }
 
-    public class HotelPreviewListUI : VisualElement
+    public class HotelPreviewListUI : VisualElement, IRefreshable
     {
         private const string _rootClass = "hotel-preview-list";
         private const string _labelFieldClass = _rootClass + "__label-field";
@@ -25,6 +26,8 @@ namespace YNL.Checkotel
         private Label _seeMoreButton;
         private ScrollView _previewList;
 
+        private List<HotelPreviewItemUI> _previewItems = new();
+
         public HotelPreviewListUI(PreviewListFilterType type, bool isMini = false)
         {
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
@@ -34,7 +37,7 @@ namespace YNL.Checkotel
             _labelField = new VisualElement().AddClass(_labelFieldClass);
             this.AddElements(_labelField);
 
-            _label = new Label(Extension.Function.ToSentenceCase(type)).AddClass(_labelClass);
+            _label = new Label(type.ToSentenceCase()).AddClass(_labelClass);
             _labelField.AddElements(_label);
 
             _seeMoreButton = new Label("See more").AddClass(_seeMoreButtonClass);
@@ -51,16 +54,12 @@ namespace YNL.Checkotel
 
         private void Initialize(PreviewListFilterType type, bool isMini)
         {
-#if false
-            var previewItems = GetPreviewItems(type);
+            CreatePreviewItems(type, isMini).Forget();
+        }
 
-            for (int i = 0; i < previewItems.Length; i++)
-            {
-                _previewList.AddElements(new HotelPreviewItemUI(previewItems[i], isMini).SetAsLastItem(i == previewItems.Length - 1));
-            }
-#else
-            Test(type, isMini).Forget();
-#endif
+        public void Refresh()
+        {
+            foreach (var item in _previewItems) item.Refresh();
         }
 
         public HotelPreviewListUI SetAsLastItem()
@@ -83,14 +82,17 @@ namespace YNL.Checkotel
             }
         }
 
-        private async UniTaskVoid Test(PreviewListFilterType type, bool isMini)
+        private async UniTaskVoid CreatePreviewItems(PreviewListFilterType type, bool isMini)
         {
             var previewItems = GetPreviewItems(type);
 
             for (int i = 0; i < previewItems.Length; i++)
             {
                 await UniTask.Yield();
-                _previewList.AddElements(new HotelPreviewItemUI(previewItems[i], isMini).SetAsLastItem(i == previewItems.Length - 1));
+
+                var previewItem = new HotelPreviewItemUI(previewItems[i], isMini).SetAsLastItem(i == previewItems.Length - 1);
+                _previewItems.Add(previewItem);
+                _previewList.AddElements(previewItem);
             }
         }
     }

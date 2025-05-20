@@ -67,7 +67,7 @@ namespace YNL.Checkotel
             _sortingItemUI[0].OnClicked__Toggle();
         }
 
-        public override void OnPageOpened(bool isOpen)
+        public override void OnPageOpened(bool isOpen, bool needRefresh = true)
         {
             if (isOpen)
             {
@@ -81,6 +81,8 @@ namespace YNL.Checkotel
                 _background.SetPickingMode(PickingMode.Ignore);
                 _page.SetTranslate(0, 100, true);
             }
+
+            if (isOpen && needRefresh) Refresh();
         }
 
         private void OnClicked_CloseButton(PointerDownEvent evt)

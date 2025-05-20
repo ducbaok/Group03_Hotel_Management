@@ -11,7 +11,7 @@ namespace YNL.Checkotel
     [System.Serializable]
     public struct UID
     {
-        private static uint _sUID;
+        public static uint SUID;
 
         [SerializeField] private uint _id;
 
@@ -22,9 +22,10 @@ namespace YNL.Checkotel
 
         public static implicit operator uint(UID id) => id._id;
         public static implicit operator UID(uint id) => new(id);
+        public static implicit operator UID(int id) => (uint)id;
 
         public static UID Parse(string id) => new(uint.Parse(id));
-        public static UID Create(UIDType type) => new((uint)type * 10000000 + _sUID++);
+        public static UID Create(UIDType type) => new((uint)type * 10000000 + SUID++);
 
         public override string ToString() => $"{_id.ToString("D5")}";
         public override bool Equals(object obj)

@@ -6,10 +6,9 @@ namespace YNL.Checkotel
 	public class ViewManager : MonoBehaviour
 	{
 		public ViewType CurrentViewType;
-		public byte CurrentViewPage;
         public bool IsAbleToMovePage = true;
 
-		public SerializableDictionary<ViewType, ViewGroup> Groups = new();
+		public SerializableDictionary<ViewType, ViewPageUI> Pages = new();
 
         public void Awake()
         {
@@ -21,46 +20,36 @@ namespace YNL.Checkotel
             Marker.OnViewPageSwitched -= OnViewPageSwitched;
         }
 
-        private void OnViewPageSwitched(ViewType type, byte page, bool hidePreviousPage)
+        private void OnViewPageSwitched(ViewType type, bool hidePreviousPage, bool needRefresh)
         {
             if (!IsAbleToMovePage) return;
 
-            var currentGroup = Groups[CurrentViewType];
             if (hidePreviousPage)
             {
-                currentGroup.Pages[CurrentViewPage].DisplayView(false);
+                Pages[CurrentViewType].DisplayView(false, needRefresh);
             }
 
             CurrentViewType = type;
-            CurrentViewPage = page;
 
-            currentGroup = Groups[CurrentViewType];
-            currentGroup.Pages[CurrentViewPage].DisplayView(true);
+            Pages[CurrentViewType].DisplayView(true, needRefresh);
         }
     }
 
     public enum ViewType : byte
     {
-        SigningView, MainView, SearchView, InformationView
-    }
-
-    [System.Serializable]
-    public class ViewGroup
-    {
-        public GameObject View;
-        public SerializableDictionary<byte, ViewPageUI> Pages;
-    }
-
-
-    public static class ViewKey
-    {
-        public const byte SingingViewSignUpPage = 0;
-        public const byte SingingViewSignInPage = 1;
-
-        public const byte MainViewHomePage = 0;
-        public const byte MainViewAccountPage = 1;
-
-        public const byte SearchViewMainPage = 0;
-        public const byte SearchViewResultPage = 1;
+        SigningViewSignUpPage, 
+        SigningViewSignInPage,
+        
+        MainViewHomePage,
+        MainViewFavoritePage,
+        MainViewRewardPage,
+        MainViewAccountPage,
+        
+        SearchViewMainPage, 
+        SearchViewResultPage,
+        
+        InformationViewMainPage,
+        InformationViewReviewPage,
+        InformationViewFacilitiesPage,
     }
 }
