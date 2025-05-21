@@ -32,27 +32,39 @@ namespace YNL.Checkotel
                 return (previousAverage * count + newValue) / (count + 1);
             }
 
-            public static void ApplyClouldImageAsync(VisualElement element, string url)
+            public static void ApplyCloudImageAsync(VisualElement element, string url)
             {
-                ApplyClouldImage(element, url).Forget();
+                ApplyCloudImage(element, url).Forget();
 
-                async UniTaskVoid ApplyClouldImage(VisualElement element, string url)
+                async UniTaskVoid ApplyCloudImage(VisualElement element, string url)
                 {
-                    using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
-                    {
-                        var operation = uwr.SendWebRequest();
-                        await UniTask.WaitUntil(() => operation.isDone);
+                    int maxRetries = 10;
+                    int attempt = 0;
+                    float retryDelay = 1f; // Delay between retries (seconds)
 
-                        if (uwr.result == UnityWebRequest.Result.Success)
+                    while (attempt < maxRetries)
+                    {
+                        using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
                         {
-                            Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-                            element.SetBackgroundImage(texture);
-                        }
-                        else
-                        {
-                            Debug.LogError($"Failed to load texture: {uwr.error}");
+                            var operation = uwr.SendWebRequest();
+                            await UniTask.WaitUntil(() => operation.isDone);
+
+                            if (uwr.result == UnityWebRequest.Result.Success)
+                            {
+                                Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+                                element.SetBackgroundImage(texture);
+                                return;
+                            }
+                            else
+                            {
+                                Debug.LogWarning($"Attempt {attempt + 1} failed: {uwr.error}");
+                                attempt++;
+                                await UniTask.Delay(TimeSpan.FromSeconds(retryDelay)); // Wait before retrying
+                            }
                         }
                     }
+
+                    Debug.LogError($"Failed to load texture after {maxRetries} attempts.");
                 }
             }
         }

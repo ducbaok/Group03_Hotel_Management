@@ -41,7 +41,7 @@ namespace YNL.Checkotel
 
             UpdateUI();
 
-            this.RegisterCallback<PointerDownEvent>(OnClicked_Button);
+            this.RegisterCallback<PointerUpEvent>(OnClicked_Button);
 
             _onNavigated += RecheckUI;
         }
@@ -57,7 +57,7 @@ namespace YNL.Checkotel
             _label.EnableClass(_isSelected, _selected);
         }
 
-        private void OnClicked_Button(PointerDownEvent evt)
+        private void OnClicked_Button(PointerUpEvent evt)
         {
             _isSelected = true;
             UpdateUI();

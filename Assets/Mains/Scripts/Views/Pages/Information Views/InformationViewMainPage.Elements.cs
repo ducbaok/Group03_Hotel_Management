@@ -25,7 +25,7 @@ namespace YNL.Checkotel
                 var bottomBar = root.Q("BottomBar");
 
                 _timeField = bottomBar.Q("TimeField");
-                _timeField.RegisterCallback<PointerDownEvent>(OnClicked_TimeField);
+                _timeField.RegisterCallback<PointerUpEvent>(OnClicked_TimeField);
 
                 _timeIcon = _timeField.Q("Icon");
 
@@ -55,7 +55,7 @@ namespace YNL.Checkotel
                 _timeText.SetText($"{timeText.Duration} | {timeText.In} → {timeText.Out}");
             }
 
-            private void OnClicked_TimeField(PointerDownEvent evt)
+            private void OnClicked_TimeField(PointerUpEvent evt)
             {
                 OnOpenTimeRangePage?.Invoke();
             }
@@ -145,7 +145,7 @@ namespace YNL.Checkotel
                 _ratingText = scoreField.Q("Rating") as Label;
                 _reviewAmount = scoreField.Q("Amount") as Label;
                 _seeMoreButton = scoreField.Q("SeeMore") as Label;
-                _seeMoreButton.RegisterCallback<PointerDownEvent>(OnClicked_SeeMoreButton);
+                _seeMoreButton.RegisterCallback<PointerUpEvent>(OnClicked_SeeMoreButton);
 
                 _emptyLabel = reviewView.Q("EmptyLabel") as Label;
 
@@ -194,7 +194,7 @@ namespace YNL.Checkotel
                 }
             }
 
-            private void OnClicked_SeeMoreButton(PointerDownEvent evt)
+            private void OnClicked_SeeMoreButton(PointerUpEvent evt)
             {
                 Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewReviewPage, true, false);
             }
@@ -267,7 +267,7 @@ namespace YNL.Checkotel
             public DescriptionField(VisualElement contentContainer)
             {
                 _descriptionText = contentContainer.Q("DescriptionField").Q("DescriptionText") as Label;
-                _descriptionText.RegisterCallback<PointerDownEvent>(OnClicked_DescriptionText);
+                _descriptionText.RegisterCallback<PointerUpEvent>(OnClicked_DescriptionText);
             }
 
             public void Apply(string description)
@@ -275,7 +275,7 @@ namespace YNL.Checkotel
                 _descriptionText.SetText(description == string.Empty ? "<color=#808080>No description!</color>" : description);
             }
 
-            private void OnClicked_DescriptionText(PointerDownEvent evt)
+            private void OnClicked_DescriptionText(PointerUpEvent evt)
             {
                 _isExpanded = !_isExpanded;
 
@@ -334,7 +334,7 @@ namespace YNL.Checkotel
             public PolicyField(VisualElement field)
             {
                 _policyText = field.Q("Label") as Label;
-                _policyText.RegisterCallback<PointerDownEvent>(OnClicked_DescriptionText);
+                _policyText.RegisterCallback<PointerUpEvent>(OnClicked_DescriptionText);
             }
 
             public void Apply(HotelUnit unit)
@@ -343,7 +343,7 @@ namespace YNL.Checkotel
                 _policyText.SetText(policy == string.Empty ? "<color=#808080>No hotel policy!</color>" : policy);
             }
 
-            private void OnClicked_DescriptionText(PointerDownEvent evt)
+            private void OnClicked_DescriptionText(PointerUpEvent evt)
             {
                 _isExpanded = !_isExpanded;
 
@@ -367,7 +367,7 @@ namespace YNL.Checkotel
             public CancellationField(VisualElement field)
             {
                 _cancellationText = field.Q("Label") as Label;
-                _cancellationText.RegisterCallback<PointerDownEvent>(OnClicked_DescriptionText);
+                _cancellationText.RegisterCallback<PointerUpEvent>(OnClicked_DescriptionText);
             }
 
             public void Apply(HotelUnit unit)
@@ -376,7 +376,7 @@ namespace YNL.Checkotel
                 _cancellationText.SetText(cancellation == string.Empty ? "<color=#808080>No cancellation policy!</color>" : cancellation);
             }
 
-            private void OnClicked_DescriptionText(PointerDownEvent evt)
+            private void OnClicked_DescriptionText(PointerUpEvent evt)
             {
                 _isExpanded = !_isExpanded;
 

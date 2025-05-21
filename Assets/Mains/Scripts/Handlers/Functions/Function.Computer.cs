@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using YNL.Utilities.Extensions;
-using static Codice.Client.Common.EventTracking.TrackFeatureUseEvent.Features.DesktopGUI.Filters;
-using static log4net.Appender.RollingFileAppender;
 
 namespace YNL.Checkotel
 {
@@ -27,6 +25,7 @@ namespace YNL.Checkotel
                 Room.StayType.Hourly => $"{duration} {(duration > 1 ? "hours" : "hour")}",
                 Room.StayType.Overnight => $"{duration} night",
                 Room.StayType.Daily => $"{duration} {(duration > 1 ? "days" : "day")}",
+                _ => ""
             };
 
             string checkInText = checkInTime.ToString("dd/MM, HH:mm");

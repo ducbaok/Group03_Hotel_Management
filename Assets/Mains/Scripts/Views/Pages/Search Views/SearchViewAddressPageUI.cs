@@ -24,18 +24,18 @@ namespace YNL.Checkotel
         protected override void Collect()
         {
             _background = Root.Q("ScreenBackground");
-            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _background.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
             _page = Root.Q("AddressPage");
 
             _closeButton = Root.Q("LabelField");
-            _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _closeButton.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
 
             _addressInput = Root.Q("SearchField").Q("SearchInput") as TextField;
             _addressInput.RegisterValueChangedCallback(OnValueChanged_AddressInput);
             _addressInput.RegisterCallback<FocusOutEvent>(OnFocusOut_AddressInput);
 
             _nearMeButton = Root.Q("NearMeButton");
-            _nearMeButton.RegisterCallback<PointerDownEvent>(OnClicked_NearMeButton);
+            _nearMeButton.RegisterCallback<PointerUpEvent>(OnClicked_NearMeButton);
 
             var historyScroll = Root.Q("SearchingHistory").Q("HistoryScroll");
             historyScroll.SetDisplay(DisplayStyle.None);
@@ -80,7 +80,7 @@ namespace YNL.Checkotel
             if (isOpen && needRefresh) Refresh();
         }
 
-        private void OnClicked_CloseButton(PointerDownEvent evt)
+        private void OnClicked_CloseButton(PointerUpEvent evt)
         {
             OnPageOpened(false);
         }
@@ -121,7 +121,7 @@ namespace YNL.Checkotel
             if (!emptyResult) RebuildHistoryList();
         }
 
-        private void OnClicked_NearMeButton(PointerDownEvent evt)
+        private void OnClicked_NearMeButton(PointerUpEvent evt)
         {
             ApplyAddressResult("Ha Noi");
         }

@@ -31,16 +31,16 @@ namespace YNL.Checkotel
             _passwordMessage = signingInputField.Q("PasswordField").Q("Message") as Label;
 
             _signInWithFacebookButton = Root.Q("SigningMethod").Q("FacebookSigning");
-            _signInWithFacebookButton.RegisterCallback<PointerDownEvent>(SigningWithFacebook);
+            _signInWithFacebookButton.RegisterCallback<PointerUpEvent>(SigningWithFacebook);
 
             _signInWithGoogleButton = Root.Q("SigningMethod").Q("GoogleSigning");
-            _signInWithGoogleButton.RegisterCallback<PointerDownEvent>(SignInWithGoogle);
+            _signInWithGoogleButton.RegisterCallback<PointerUpEvent>(SignInWithGoogle);
 
             _signingButton = signingInputField.Q("SigningButton").Q("Button") as Button;
             _signingButton.clicked += SigningAccount;
 
             _recoveryButton = signingInputField.Q("RecoveryButton");
-            _recoveryButton.RegisterCallback<PointerDownEvent>(RecoveryAccount);
+            _recoveryButton.RegisterCallback<PointerUpEvent>(RecoveryAccount);
         }
 
         private void OnValueChanged_AccountInputField(ChangeEvent<string> evt)
@@ -53,12 +53,12 @@ namespace YNL.Checkotel
 
         }
 
-        private void SigningWithFacebook(PointerDownEvent evt)
+        private void SigningWithFacebook(PointerUpEvent evt)
         {
 
         }
 
-        private void SignInWithGoogle(PointerDownEvent evt)
+        private void SignInWithGoogle(PointerUpEvent evt)
         {
 
         }
@@ -68,7 +68,7 @@ namespace YNL.Checkotel
 
         }
 
-        private void RecoveryAccount(PointerDownEvent evt)
+        private void RecoveryAccount(PointerUpEvent evt)
         {
 
         }

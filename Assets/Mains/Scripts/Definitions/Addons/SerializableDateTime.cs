@@ -18,6 +18,10 @@ namespace YNL.Checkotel
         {
             DateTime = dateTime;
         }
+        public SerializableDateTime(string dateTime)
+        {
+            _dateTimeString = dateTime;
+        }
 
         public override string ToString() => DateTime.ToString();
 

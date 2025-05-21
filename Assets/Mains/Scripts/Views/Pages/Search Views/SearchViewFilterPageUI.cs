@@ -30,19 +30,19 @@ namespace YNL.Checkotel
         protected override void Collect()
         {
             _background = Root.Q("ScreenBackground");
-            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _background.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
             _page = Root.Q("FilteringPage");
 
             _filteringPage = Root.Q("FilteringPage");
 
             _closeButton = _filteringPage.Q("LabelField");
-            _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _closeButton.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
 
             _resetButton = _filteringPage.Q("LabelField").Q("ResetButton") as Button;
             _resetButton.clicked += OnClicked_ResetButton;
 
             _applyButton = _filteringPage.Q("Toolbar").Q("ApplyButton");
-            _applyButton.RegisterCallback<PointerDownEvent>(OnClicked_ApplyButton);
+            _applyButton.RegisterCallback<PointerUpEvent>(OnClicked_ApplyButton);
 
             var priceRangeView = Root.Q("FilterScroll").Q("PriceRangeView");
 
@@ -125,7 +125,7 @@ namespace YNL.Checkotel
             _maxLabel.text = maxPrice == PriceRange.Max ? $"<size=100>∞</size>" : $"<b>{maxPrice.ToString("N0")}$</b>";
         }
 
-        private void OnClicked_CloseButton(PointerDownEvent evt)
+        private void OnClicked_CloseButton(PointerUpEvent evt)
         {
             OnPageOpened(false);
         }
@@ -134,7 +134,7 @@ namespace YNL.Checkotel
         {
         }
 
-        private void OnClicked_ApplyButton(PointerDownEvent evt)
+        private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
         }
     }

@@ -43,10 +43,10 @@ namespace YNL.Checkotel
             this.AddElements(_label);
 
 
-            this.RegisterCallback<PointerDownEvent>(OnClicked_Button);
+            this.RegisterCallback<PointerUpEvent>(OnClicked_Button);
         }
 
-        private void OnClicked_Button(PointerDownEvent evt)
+        private void OnClicked_Button(PointerUpEvent evt)
         {
             Marker.OnSuggestFilterSelected?.Invoke(_type);
         }

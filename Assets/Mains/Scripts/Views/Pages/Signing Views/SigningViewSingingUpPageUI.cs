@@ -53,10 +53,10 @@ namespace YNL.Checkotel
             _confirmMessage = signingInputField.Q("ConfirmField").Q("Message") as Label;
 
             _signInWithFacebookButton = Root.Q("SigningMethod").Q("FacebookSigning");
-            _signInWithFacebookButton.RegisterCallback<PointerDownEvent>(SigningWithFacebook);
+            _signInWithFacebookButton.RegisterCallback<PointerUpEvent>(SigningWithFacebook);
 
             _signInWithGoogleButton = Root.Q("SigningMethod").Q("GoogleSigning");
-            _signInWithGoogleButton.RegisterCallback<PointerDownEvent>(SignInWithGoogle);
+            _signInWithGoogleButton.RegisterCallback<PointerUpEvent>(SignInWithGoogle);
 
             _signingButton = signingInputField.Q("SigningButton").Q("Button") as Button;
             _signingButton.clicked += SigningAccount;
@@ -149,12 +149,12 @@ namespace YNL.Checkotel
             _validConfirmInput = true;
         }
 
-        private void SigningWithFacebook(PointerDownEvent evt)
+        private void SigningWithFacebook(PointerUpEvent evt)
         {
             
         }
 
-        private void SignInWithGoogle(PointerDownEvent evt)
+        private void SignInWithGoogle(PointerUpEvent evt)
         {
 
         }
@@ -170,7 +170,7 @@ namespace YNL.Checkotel
             Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, true);
         }
 
-        private void RecoveryAccount(PointerDownEvent evt)
+        private void RecoveryAccount(PointerUpEvent evt)
         {
 
         }

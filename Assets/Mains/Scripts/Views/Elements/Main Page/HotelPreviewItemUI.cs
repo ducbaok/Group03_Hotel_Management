@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -61,7 +62,7 @@ namespace YNL.Checkotel
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["HotelPreviewItemUI"]);
             this.AddClass(_rootClass).EnableClass(isMini, _miniClass);
-            this.RegisterCallback<PointerDownEvent>(OnClicked_PreviewItem);
+            this.RegisterCallback<PointerUpEvent>(OnClicked_PreviewItem);
 
             _previewImage = new VisualElement().AddClass(_imageClass);
             this.AddElements(_previewImage);
@@ -119,11 +120,11 @@ namespace YNL.Checkotel
 
             int discountPercentage = Random.Range(0, 50);
 
-            Extension.Function.ApplyClouldImageAsync(_previewImage, unit.Description.ImageURL);
+            Extension.Function.ApplyCloudImageAsync(_previewImage, unit.Description.ImageURL);
 
             _nameLabel.text = unit.Description.Name;
             _locationText.text = unit.Description.Address;
-            var price = unit.Rooms[0].Price.BasePrice;
+            var price = unit.Rooms.IsEmpty() ? 0 : unit.Rooms[0].Price.BasePrice;
             _priceText.text = $"<b><color=#FED1A7>${price * (1 - (discountPercentage / 100f))}</color></b> <s>${price}</s> <b><size=30>/ 2 days</size></b>";
             _ratingText.text = $"<b>{Random.Range(3.0f, 5.0f).ToString("F1")}</b> ({Random.Range(100, 100)})";
 
@@ -153,7 +154,7 @@ namespace YNL.Checkotel
             return this;
         }
 
-        private void OnClicked_PreviewItem(PointerDownEvent evt)
+        private void OnClicked_PreviewItem(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
             Marker.OnHotelInformationDisplayed?.Invoke(_id, false);

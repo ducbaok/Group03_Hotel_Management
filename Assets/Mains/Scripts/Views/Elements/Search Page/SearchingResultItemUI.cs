@@ -170,7 +170,7 @@ namespace YNL.Checkotel
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["SearchingResultItemUI"]);
             this.AddClass(_rootClass).SetMarginBottom(50);
-            this.RegisterCallback<PointerDownEvent>(OnSelected_ResultItem);
+            this.RegisterCallback<PointerUpEvent>(OnSelected_ResultItem);
 
             _previewArea = new VisualElement().AddClass(_previewAreaClass);
             _infoArea = new VisualElement().AddClass(_infoAreaClass);
@@ -203,7 +203,7 @@ namespace YNL.Checkotel
 
             var unit = Main.Database.Hotels[id];
 
-            Extension.Function.ApplyClouldImageAsync(_previewArea, unit.Description.ImageURL);
+            Extension.Function.ApplyCloudImageAsync(_previewArea, unit.Description.ImageURL);
 
             _nameField.Apply(unit.Description.Name, (unit.Review.AverageRating, unit.Review.Feedbacks.Count));
             _addressField.Apply(unit.Description.Address);
@@ -213,7 +213,7 @@ namespace YNL.Checkotel
             _priceField.Apply(lowestPrice, type, 0, 1, 5);
         }
 
-        private void OnSelected_ResultItem(PointerDownEvent evt)
+        private void OnSelected_ResultItem(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
             Marker.OnHotelInformationDisplayed?.Invoke(_hotelID, true);

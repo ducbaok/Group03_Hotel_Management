@@ -34,11 +34,11 @@ namespace YNL.Checkotel
         protected override void Collect()
         {
             _background = Root.Q("ScreenBackground");
-            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _background.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
             _page = Root.Q("TimePickingPage");
 
             _closeButton = Root.Q("LabelField");
-            _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _closeButton.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
 
             var resultField = Root.Q("ResultField");
 
@@ -47,10 +47,10 @@ namespace YNL.Checkotel
             _durationTime = resultField.Q("DurationField").Q("Time") as Label;
 
             _cancelButton = Root.Q("ToolBar").Q("CancelButton");
-            _cancelButton.RegisterCallback<PointerDownEvent>(OnClicked_CancelButton);
+            _cancelButton.RegisterCallback<PointerUpEvent>(OnClicked_CancelButton);
 
             _applyButton = Root.Q("ToolBar").Q("ApplyButton");
-            _applyButton.RegisterCallback<PointerDownEvent>(OnClicked_ApplyButton);
+            _applyButton.RegisterCallback<PointerUpEvent>(OnClicked_ApplyButton);
 
             _hourlyPage = new HourlyPage(Root);
         }
@@ -73,17 +73,17 @@ namespace YNL.Checkotel
             if (isOpen && needRefresh) Refresh();
         }
 
-        private void OnClicked_CloseButton(PointerDownEvent evt)
+        private void OnClicked_CloseButton(PointerUpEvent evt)
         {
             OnPageOpened(false);
         }
 
-        private void OnClicked_CancelButton(PointerDownEvent evt)
+        private void OnClicked_CancelButton(PointerUpEvent evt)
         {
             OnPageOpened(false);
         }
 
-        private void OnClicked_ApplyButton(PointerDownEvent evt)
+        private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
             Marker.OnTimeRangeSubmitted?.Invoke(TimeRange.CheckInTime, TimeRange.Duration);
 

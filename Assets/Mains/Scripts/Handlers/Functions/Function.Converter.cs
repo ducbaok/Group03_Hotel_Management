@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
-using YNL.Utilities.Extensions;
 
 namespace YNL.Checkotel
 {
@@ -82,6 +81,22 @@ namespace YNL.Checkotel
 
                     return DownloadHandlerTexture.GetContent(uwr);
                 }
+            }
+        }
+
+        public static async UniTask<string> GetRawDatabaseAsync(this string url)
+        {
+            using UnityWebRequest request = UnityWebRequest.Get(url);
+            await request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                Debug.LogError("Error: " + request.error);
+                return null;
             }
         }
     }

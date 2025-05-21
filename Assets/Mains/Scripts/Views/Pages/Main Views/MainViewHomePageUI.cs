@@ -17,10 +17,10 @@ namespace YNL.Checkotel
         protected override void Collect()
         {
             _searchField = Root.Q("TopBar").Q("SearchField");
-            _searchField.RegisterCallback<PointerDownEvent>(OnClicked__SearchField);
+            _searchField.RegisterCallback<PointerUpEvent>(OnClicked__SearchField);
 
             _notificationButton = Root.Q("TopBar").Q("NotificationButton");
-            _notificationButton.RegisterCallback<PointerDownEvent>(OnClicked__NotificationButton);
+            _notificationButton.RegisterCallback<PointerUpEvent>(OnClicked__NotificationButton);
 
             _pageScroll = Root.Q("ScrollView") as ScrollView;
 
@@ -55,12 +55,12 @@ namespace YNL.Checkotel
             foreach (var list in _previewLists) list.Refresh();
         }
 
-        private void OnClicked__SearchField(PointerDownEvent evt)
+        private void OnClicked__SearchField(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.SearchViewMainPage, true, false);
         }
 
-        private void OnClicked__NotificationButton(PointerDownEvent evt)
+        private void OnClicked__NotificationButton(PointerUpEvent evt)
         {
             Marker.OnNotificationViewOpened?.Invoke();
         }

@@ -45,7 +45,7 @@ namespace YNL.Checkotel
             var resultPage = Root.Q("SearchingResultPage");
 
             _searchBar = resultPage.Q("SearchBar");
-            _searchBar.RegisterCallback<PointerDownEvent>(OnClicked_SearchBar);
+            _searchBar.RegisterCallback<PointerUpEvent>(OnClicked_SearchBar);
 
             _searchText = _searchBar.Q("SearchField").Q("SearchText") as Label;
 
@@ -66,10 +66,10 @@ namespace YNL.Checkotel
             resultPage.Add(_resultList);
 
             _sortButton = resultPage.Q("ResultField").Q("SortingButton");
-            _sortButton.RegisterCallback<PointerDownEvent>(OnClicked_SortButton);
+            _sortButton.RegisterCallback<PointerUpEvent>(OnClicked_SortButton);
 
             _filterButton = resultPage.Q("ResultField").Q("FilteringButton");
-            _filterButton.RegisterCallback<PointerDownEvent>(OnClicked_FilterButton);
+            _filterButton.RegisterCallback<PointerUpEvent>(OnClicked_FilterButton);
 
             _emptyResultLabel = resultPage.Q("EmptyResultLabel") as Label;
         }
@@ -79,17 +79,17 @@ namespace YNL.Checkotel
             RebuildHistoryList();
         }
 
-        private void OnClicked_SearchBar(PointerDownEvent evt)
+        private void OnClicked_SearchBar(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.SearchViewMainPage, true, false);
         }
 
-        private void OnClicked_SortButton(PointerDownEvent evt)
+        private void OnClicked_SortButton(PointerUpEvent evt)
         {
             _sortPage.OnPageOpened(true, true);
         }
 
-        private void OnClicked_FilterButton(PointerDownEvent evt)
+        private void OnClicked_FilterButton(PointerUpEvent evt)
         {
             _filterPage.OnPageOpened(true, true);
         }

@@ -35,7 +35,7 @@ namespace YNL.Checkotel
             _removeButton = new VisualElement().AddClass(_removeButtonClass);
             this.AddElements(_removeButton);
 
-            this.RegisterCallback<PointerDownEvent>(OnSelected_HistoryItem);
+            this.RegisterCallback<PointerUpEvent>(OnSelected_HistoryItem);
         }
 
         public void Apply(string value, bool isBuilding = false)
@@ -46,7 +46,7 @@ namespace YNL.Checkotel
             _icon.EnableClass(isBuilding, _buildingClass);
         }
 
-        private void OnSelected_HistoryItem(PointerDownEvent evt)
+        private void OnSelected_HistoryItem(PointerUpEvent evt)
         {
             OnSelected?.Invoke(_value);
         }

@@ -40,10 +40,10 @@ namespace YNL.Checkotel
         protected override void Collect()
         { 
             _backButton = Root.Q("TopBar").Q("BackButton");
-            _backButton.RegisterCallback<PointerDownEvent>(OnClicked_BackButton);
+            _backButton.RegisterCallback<PointerUpEvent>(OnClicked_BackButton);
 
             _favoriteButton = Root.Q("TopBar").Q("FavoriteButton");
-            _favoriteButton.RegisterCallback<PointerDownEvent>(OnClicked_FavoriteButton);
+            _favoriteButton.RegisterCallback<PointerUpEvent>(OnClicked_FavoriteButton);
 
             _shareButton = Root.Q("TopBar").Q("ShareButton");
 
@@ -68,12 +68,12 @@ namespace YNL.Checkotel
             _cancellationPolicy = new(contentContainer.Q("CancellationPolicy"));
         }
 
-        private void OnClicked_BackButton(PointerDownEvent evt)
+        private void OnClicked_BackButton(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, false);
         }
 
-        private void OnClicked_FavoriteButton(PointerDownEvent evt)
+        private void OnClicked_FavoriteButton(PointerUpEvent evt)
         {
             bool isFavorited = Main.Runtime.FavoriteHotels.Contains(_hotelID);
 

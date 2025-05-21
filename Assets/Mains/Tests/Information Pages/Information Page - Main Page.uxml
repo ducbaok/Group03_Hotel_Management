@@ -115,7 +115,7 @@
             <engine:VisualElement name="LabelField" style="height: 75px; flex-direction: row; margin-bottom: 10px;">
                 <engine:Label text="Hotel Policy" name="Label" class="label-field" style="-unity-font-style: bold; font-size: 45px; flex-grow: 1; -unity-text-align: middle-left;" />
             </engine:VisualElement>
-            <engine:Label text="📄Guests can check in from 3:00 PM and must check out by 12:00 PM. Free cancellation is available up to 24 hours before arrival, with potential charges for late cancellations. We accept credit cards, cash, and digital payments." name="Label" class="label-field" style="font-size: 40px; flex-grow: 1; -unity-text-align: middle-left; white-space: normal; max-height: 175px; text-overflow: ellipsis; overflow: hidden;" />
+            <engine:Label text="Guests can check in from 3:00 PM and must check out by 12:00 PM. Free cancellation is available up to 24 hours before arrival, with potential charges for late cancellations. We accept credit cards, cash, and digital payments." name="Label" class="label-field" style="font-size: 40px; flex-grow: 1; -unity-text-align: middle-left; white-space: normal; max-height: 175px; text-overflow: ellipsis; overflow: hidden;" />
         </engine:VisualElement>
         <engine:VisualElement name="CancellationPolicy" style="padding-left: 50px; padding-right: 50px; background-color: rgb(44, 44, 44); padding-top: 25px; padding-bottom: 25px; margin-bottom: 25px;">
             <engine:VisualElement name="LabelField" style="height: 75px; flex-direction: row; margin-bottom: 10px;">

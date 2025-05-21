@@ -33,16 +33,16 @@ namespace YNL.Checkotel
         protected override void Collect()
         {
             _background = Root.Q("ScreenBackground");
-            _background.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _background.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
             _page = Root.Q("SortingPage");
 
             _sortingPage = Root.Q("SortingPage");
 
             _closeButton = _sortingPage.Q("LabelField");
-            _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _closeButton.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
 
             _applyButton = _sortingPage.Q("Toolbar").Q("ApplyButton");
-            _applyButton.RegisterCallback<PointerDownEvent>(OnClicked_ApplyButton);
+            _applyButton.RegisterCallback<PointerUpEvent>(OnClicked_ApplyButton);
 
             _sortSelectionArea = _sortingPage.Q("SortSelectionArea");
             _sortSelectionArea.Clear();
@@ -85,12 +85,12 @@ namespace YNL.Checkotel
             if (isOpen && needRefresh) Refresh();
         }
 
-        private void OnClicked_CloseButton(PointerDownEvent evt)
+        private void OnClicked_CloseButton(PointerUpEvent evt)
         {
             OnPageOpened(false);
         }
 
-        private void OnClicked_ApplyButton(PointerDownEvent evt)
+        private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
         }
 

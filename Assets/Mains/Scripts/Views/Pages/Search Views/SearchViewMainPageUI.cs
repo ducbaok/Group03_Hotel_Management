@@ -40,10 +40,10 @@ namespace YNL.Checkotel
         protected override void Collect()
         {
             _closeButton = Root.Q("LabelField");
-            _closeButton.RegisterCallback<PointerDownEvent>(OnClicked_CloseButton);
+            _closeButton.RegisterCallback<PointerUpEvent>(OnClicked_CloseButton);
 
             _addressButton = Root.Q("SearchField");
-            _addressButton.RegisterCallback<PointerDownEvent>(OnClicked_AddressButton);
+            _addressButton.RegisterCallback<PointerUpEvent>(OnClicked_AddressButton);
 
             _addressText = _addressButton.Q("Label") as Label;
 
@@ -54,13 +54,13 @@ namespace YNL.Checkotel
             var timeRangeField = Root.Q("TimeRangeField");
 
             _timeRangeButton = timeRangeField.Q("TimeField");
-            _timeRangeButton.RegisterCallback<PointerDownEvent>(OnClicked_TimeRangeButton);
+            _timeRangeButton.RegisterCallback<PointerUpEvent>(OnClicked_TimeRangeButton);
 
             _checkInTime = _timeRangeButton.Q("CheckInField").Q("Time") as Label;
             _checkOutTime = _timeRangeButton.Q("CheckOutField").Q("Time") as Label;
 
             _searchButton = Root.Q("SearchButton");
-            _searchButton.RegisterCallback<PointerDownEvent>(OnClicked_SearchButton);
+            _searchButton.RegisterCallback<PointerUpEvent>(OnClicked_SearchButton);
         }
 
         protected override void Initialize()
@@ -76,22 +76,22 @@ namespace YNL.Checkotel
             _roomTypeField.Add(new SearchingSelectTypeUI("Business", OnSearchingTypeSelected, false).SetRoomType(Room.RoomType.Business));
         }
 
-        private void OnClicked_CloseButton(PointerDownEvent evt)
+        private void OnClicked_CloseButton(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, true);
         }
 
-        private void OnClicked_AddressButton(PointerDownEvent evt)
+        private void OnClicked_AddressButton(PointerUpEvent evt)
         {
             _addressPageUI.OnPageOpened(true, false);
         }
 
-        private void OnClicked_TimeRangeButton(PointerDownEvent evt)
+        private void OnClicked_TimeRangeButton(PointerUpEvent evt)
         {
             _timeRangePageUI.OnPageOpened(true, false);
         }
 
-        private void OnClicked_SearchButton(PointerDownEvent evt)
+        private void OnClicked_SearchButton(PointerUpEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.SearchViewResultPage, true, true);
 

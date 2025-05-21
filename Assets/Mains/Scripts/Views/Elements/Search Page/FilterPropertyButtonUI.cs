@@ -38,7 +38,7 @@ namespace YNL.Checkotel
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["FilterPropertyButtonUI"]);
             this.AddClass(_rootClass);
-            this.RegisterCallback<PointerDownEvent>(OnClicked__Button);
+            this.RegisterCallback<PointerUpEvent>(OnClicked__Button);
 
             _label = new(label);
             _label.AddClass(_labelClass);
@@ -58,7 +58,7 @@ namespace YNL.Checkotel
             OnSelected -= UpdateUI;
         }
 
-        public void OnClicked__Button(PointerDownEvent evt = null)
+        public void OnClicked__Button(PointerUpEvent evt = null)
         {
             if (_isSelected) return;
 

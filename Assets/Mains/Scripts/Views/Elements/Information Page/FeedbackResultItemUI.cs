@@ -66,7 +66,7 @@ namespace YNL.Checkotel
             toolField.AddElements(_timeStamp);
 
             var likeField = new VisualElement().AddClass(_likeFieldClass);
-            likeField.RegisterCallback<PointerDownEvent>(OnClicked_LikeField);
+            likeField.RegisterCallback<PointerUpEvent>(OnClicked_LikeField);
             toolField.AddElements(likeField);
 
             _likeAmount = new Label().AddClass(_likeAmountClass);
@@ -113,7 +113,7 @@ namespace YNL.Checkotel
             UpdateStarField(feedback.AverageRating);
         }
 
-        private void OnClicked_LikeField(PointerDownEvent evt)
+        private void OnClicked_LikeField(PointerUpEvent evt)
         {
             bool isLiked = false;
             var status = Main.Database.Hotels[_hotelID].Review.Feedbacks[_feedbackID];

@@ -30,7 +30,7 @@ namespace YNL.Checkotel
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["TogglePropertyItemUI"]);
             this.AddClass(_rootClass);
-            this.RegisterCallback<PointerDownEvent>(OnClicked__Toggle);
+            this.RegisterCallback<PointerUpEvent>(OnClicked__Toggle);
 
             _label = new(type.ToSentenceCase());
             _label.AddClass(_labelClass);
@@ -50,7 +50,7 @@ namespace YNL.Checkotel
             this.style.borderBottomWidth = 0;
         }
 
-        public void OnClicked__Toggle(PointerDownEvent evt = null)
+        public void OnClicked__Toggle(PointerUpEvent evt = null)
         {
             _isSelected = !_isSelected;
             _toggle.EnableClass(_isSelected, _selected);

@@ -974,6 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hideOnAwake: 1
   _isPopupPage: 1
+  StayType: 0
 --- !u!1 &1267176883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
   Resources: {fileID: 11400000, guid: b20276ab1d1295c4b8951d429160e194, type: 2}
-  Database: {fileID: 11400000, guid: 2ec674616a7292541ae5152fe9022406, type: 2}
+  Database: {fileID: 11400000, guid: 35cb7b5861055cc4fa036e8e5eb34ea5, type: 2}
   Runtime: {fileID: 11400000, guid: f26486526ea4dff418024e4d5e2698cb, type: 2}
   ViewManager: {fileID: 1289038838}
 --- !u!4 &1289038837
@@ -1431,6 +1432,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1752374919}
   - component: {fileID: 1752374918}
+  - component: {fileID: 1752374920}
+  - component: {fileID: 1752374921}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -1467,6 +1470,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1752374920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752374917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4727e4e14e32c0b45996e4e2ed75781f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  URL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Hotel.csv
+--- !u!114 &1752374921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752374917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b3457df8282ca47989f105ac27e8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _url: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Hotel.csv
+  _database: {fileID: 11400000, guid: 35cb7b5861055cc4fa036e8e5eb34ea5, type: 2}
 --- !u!1 &2020904536
 GameObject:
   m_ObjectHideFlags: 0
