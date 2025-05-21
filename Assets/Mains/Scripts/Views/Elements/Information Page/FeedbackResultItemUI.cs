@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using YNL.Utilities.Addons;
@@ -6,9 +5,8 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class ReviewResultItemUI : VisualElement
+    public class FeedbackResultItemUI : VisualElement
     {
-        private static SerializableDictionary<UID, ReviewFeedback> _feedbacks => Main.Database.Feedbacks;
         private static SerializableDictionary<UID, LikedFeedback> _likedFeedbacks => Main.Runtime.LikedFeedbacks;
 
         private const string _rootClass = "review-result-item";
@@ -37,10 +35,10 @@ namespace YNL.Checkotel
         private UID _hotelID;
         private UID _feedbackID;
 
-        public ReviewResultItemUI()
+        public FeedbackResultItemUI()
         {
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
-            this.AddStyle(Main.Resources.Styles["ReviewResultItemUI"]);
+            this.AddStyle(Main.Resources.Styles["FeedbackResultItemUI"]);
             this.AddClass(_rootClass);
 
             var background = new VisualElement().AddClass(_backgroundClass);

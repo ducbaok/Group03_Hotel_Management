@@ -1,16 +1,13 @@
+using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UIElements;
-using YNL.Utilities.Addons;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
     public partial class InformationViewMainPage
     {
-        public enum PriceFieldType : byte
-        {
-            HourlyTime, OvernightTime, DailyTime
-        }
-
         public class PriceField : ICollectible
         {
             private VisualElement _root;
@@ -49,6 +46,51 @@ namespace YNL.Checkotel
             }
         }
 
+        public class ImageView
+        {
+            private List<VisualElement> _roomImages = new();
+            private VisualElement _fadeItem;
+            private Label _amountText;
+
+            public ImageView(VisualElement imageView)
+            {
+                for (byte i = 0; i < 4; i++) _roomImages.Add(imageView.Q($"Image{i}"));
+
+                _fadeItem = imageView.Q("Image3").Q("Fade");
+                _amountText = imageView.Q("Image3").Q("Text") as Label;
+            }
+
+            public async UniTaskVoid Apply(HotelUnit unit)
+            {
+                var images = await unit.GetRoomImageAsync();
+
+                for (byte i = 0; i < 4; i++)
+                {
+                    if (i < images.Length)
+                    {
+                        _roomImages[i].SetDisplay(DisplayStyle.Flex);
+                        _roomImages[i].SetBackgroundImage(images[i]);
+
+                        if (images.Length > 4)
+                        {
+                            _fadeItem.SetDisplay(DisplayStyle.Flex);
+                            _amountText.SetDisplay(DisplayStyle.Flex);
+                            _amountText.SetText($"+{images.Length - 4}");
+                        }
+                        else
+                        {
+                            _fadeItem.SetDisplay(DisplayStyle.None);
+                            _amountText.SetDisplay(DisplayStyle.None);
+                        }
+                    }
+                    else
+                    {
+                        _roomImages[i].SetDisplay(DisplayStyle.None);
+                    }
+                }
+            }
+        }
+
         public class NameView
         {
             private VisualElement _badgeField;
@@ -76,10 +118,13 @@ namespace YNL.Checkotel
             private Label _seeMoreButton;
             private ScrollView _reviewScroll;
             private Label _emptyLabel;
+            private VisualElement _ellipsis;
+
+            private List<FeedbackPreviewItemUI> _feedbackItems = new();
 
             public ReviewView(VisualElement contentContainer)
             {
-                var reviewView = contentContainer.Q("ReviewView");
+                var reviewView = contentContainer.Q("ReviewView").AddStyle(Main.Resources.Styles["GlobalStyleUI"]);
                 var scoreField = reviewView.Q("ScoreField");
 
                 _ratingText = scoreField.Q("Rating") as Label;
@@ -87,14 +132,27 @@ namespace YNL.Checkotel
                 _seeMoreButton = scoreField.Q("SeeMore") as Label;
                 _seeMoreButton.RegisterCallback<PointerDownEvent>(OnClicked_SeeMoreButton);
 
-                _reviewScroll = reviewView.Q("ReviewScroll") as ScrollView;
-
                 _emptyLabel = reviewView.Q("EmptyLabel") as Label;
+
+                _reviewScroll = reviewView.Q("ReviewScroll") as ScrollView;
+                _reviewScroll.Clear();
+
+                for (byte i = 0; i < 5; i++)
+                {
+                    var feedbackItem = new FeedbackPreviewItemUI();
+                    _feedbackItems.Add(feedbackItem);
+                    _reviewScroll.AddElements(feedbackItem);
+                }
+
+                _ellipsis = new VisualElement().AddClass("review-view-ellipsis").SetBackgroundImage(Main.Resources.Icons["Ellipsis"]);
+                _reviewScroll.AddElements(_ellipsis);
             }
 
             public void Apply(UID id)
             {
-                var review = Main.Database.Hotels[id].Review;
+                var unit = Main.Database.Hotels[id];
+                var review = unit.Review;
+                var feedbacks = unit.Review.Feedbacks.Keys.ToArray();
 
                 _ratingText.SetText(review.AverageRating.ToString("0.0"));
                 _reviewAmount.SetText($"({review.FeebackAmount} reviews)");
@@ -106,11 +164,17 @@ namespace YNL.Checkotel
 
                 if (!emptyFeedback)
                 {
-                    _reviewScroll.Clear();
-                    for (byte i = 0; i < review.Feedbacks.Count; i++)
+                    for (byte i = 0; i < 5; i++)
                     {
-                        if (i >= 5) break;
-
+                        if (i < feedbacks.Length)
+                        {
+                            _feedbackItems[i].SetDisplay(DisplayStyle.Flex);
+                            _feedbackItems[i].Apply(id, feedbacks[i]);
+                        }
+                        else
+                        {
+                            _feedbackItems[i].SetDisplay(DisplayStyle.None);
+                        }
                     }
                 }
             }
@@ -213,7 +277,36 @@ namespace YNL.Checkotel
 
         public class TimeField
         {
+            private Label _hourlyTime;
+            private Label _overnightTime;
+            private Label _dailyTime;
 
+            public TimeField(VisualElement field)
+            {
+                var tableView = field.Q("TableView");
+
+                _hourlyTime = tableView.Q("HourlyTime").Q("Time") as Label;
+                _overnightTime = tableView.Q("OvernightTime").Q("Time") as Label;
+                _dailyTime = tableView.Q("DailyTime").Q("Time") as Label;
+            }
+
+            public void Apply(HotelUnit unit)
+            {
+                var timeRange = unit.GetFirstTimeRange();
+                var hourly = timeRange.Hourly;
+                var overnight = timeRange.Overnight;
+                var daily = timeRange.Daily;
+
+                var hourlyText = hourly == TimeRange.Zero ? "-" : $"From {StyleText($"{hourly.TimeIn.ToString("D2")}:00")} to {StyleText($"{hourly.TimeOut.ToString("D2")}:00")} everyday";
+                var overnightText = overnight == TimeRange.Zero ? "-" : $"From {StyleText($"{overnight.TimeIn.ToString("D2")}:00")} to {StyleText($"{overnight.TimeIn.ToString("D2")}:00")} the day after";
+                var dailyText = daily == TimeRange.Zero ? "-" : $"From day {StyleText(daily.TimeIn.ToDateFormat())} to day {StyleText(daily.TimeOut.ToDateFormat())}";
+
+                _hourlyTime.SetText(hourlyText);
+                _overnightTime.SetText(overnightText);
+                _dailyTime.SetText(dailyText);
+
+                string StyleText(string input) => $"<color=#FED1A7><b>{input}</b></color>";
+            }
         }
     }
 }

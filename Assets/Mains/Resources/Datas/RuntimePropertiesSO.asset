@@ -18,12 +18,12 @@ MonoBehaviour:
   - Sydney
   - Boudi
   LikedFeedbacks:
-    _keys: []
-  TestLikedFeedbacks:
     _keys:
-    - _id: 0
+    - _id: 10000000
     _values:
     - Feedbacks:
       - _id: 0
-      - _id: 0
-      - _id: 0
+      - _id: 2
+      - _id: 1
+  FavoriteHotels:
+  - _id: 10000000

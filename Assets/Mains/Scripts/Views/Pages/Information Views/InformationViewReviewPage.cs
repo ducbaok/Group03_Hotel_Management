@@ -40,10 +40,10 @@ namespace YNL.Checkotel
             _reviewList.Q<ScrollView>().verticalScrollerVisibility = ScrollerVisibility.Hidden;
             _reviewList.virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight;
             _reviewList.itemsSource = _feedbackIDs;
-            _reviewList.makeItem = () => new ReviewResultItemUI();
+            _reviewList.makeItem = () => new FeedbackResultItemUI();
             _reviewList.bindItem = (element, index) =>
             {
-                var item = element as ReviewResultItemUI;
+                var item = element as FeedbackResultItemUI;
                 item.Apply(_hotelID, _feedbackIDs[index]);
             };
         }

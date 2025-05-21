@@ -9,12 +9,12 @@ namespace YNL.Checkotel
         private VisualElement _favoriteButton;
         private VisualElement _shareButton;
         private PriceField _priceField;
-        private VisualElement _imageView;
+        private ImageView _imageView;
         private NameView _nameView;
         private ReviewView _reviewView;
         private FacilityView _facilityView;
         private DescriptionField _descriptionField;
-        private VisualElement _timeField;
+        private TimeField _timeField;
         private VisualElement _hotelPolicy;
         private VisualElement _cancellationPolicy;
 
@@ -44,7 +44,7 @@ namespace YNL.Checkotel
 
             var contentContainer = Root.Q("ContentScroll").Q("unity-content-container");
 
-            _imageView = contentContainer.Q("ImageView");
+            _imageView = new(contentContainer.Q("ImageView"));
 
             _nameView = new(contentContainer.Q("NameView"));
 
@@ -54,7 +54,7 @@ namespace YNL.Checkotel
 
             _descriptionField = new(contentContainer);
 
-            _timeField = contentContainer.Q("TimeField");
+            _timeField = new(contentContainer.Q("TimeField"));
 
             _hotelPolicy = contentContainer.Q("HotelPolicy");
 
@@ -92,6 +92,8 @@ namespace YNL.Checkotel
             _reviewView.Apply(id);
             _facilityView.Apply(unit);
             _descriptionField.Apply(unit.Description.Description);
+            _imageView.Apply(unit).Forget();
+            _timeField.Apply(unit);
 
             bool isFavorited = Main.Runtime.FavoriteHotels.Contains(id);
 

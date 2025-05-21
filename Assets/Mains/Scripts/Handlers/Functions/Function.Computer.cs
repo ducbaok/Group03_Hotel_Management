@@ -96,5 +96,23 @@ namespace YNL.Checkotel
 
             return string.Join(" ", words);
         }
+
+        public static string ToDateFormat(this byte number)
+        {
+            if (number <= 0) return number.ToString();
+
+            int lastDigit = number % 10;
+            int lastTwoDigits = number % 100;
+
+            string suffix = (lastTwoDigits >= 11 && lastTwoDigits <= 13) ? "th"
+                          : (lastDigit == 1) ? "st"
+                          : (lastDigit == 2) ? "nd"
+                          : (lastDigit == 3) ? "rd"
+                          : "th";
+
+            return number + suffix;
+        }
+
+
     }
 }

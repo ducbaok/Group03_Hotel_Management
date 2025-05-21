@@ -833,48 +833,6 @@ MonoBehaviour:
         ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000000.jpg
         Facilities: 553
       Review:
-        FeedbackIDs:
-        - _id: 0
-        - _id: 1
-        - _id: 2
-        - _id: 3
-        - _id: 4
-        - _id: 5
-        - _id: 6
-        - _id: 7
-        - _id: 8
-        - _id: 9
-        FeedbackAs:
-        - FeedbackID:
-            _id: 0
-          Like: 278
-        - FeedbackID:
-            _id: 1
-          Like: 176
-        - FeedbackID:
-            _id: 2
-          Like: 433
-        - FeedbackID:
-            _id: 3
-          Like: 271
-        - FeedbackID:
-            _id: 4
-          Like: 546
-        - FeedbackID:
-            _id: 5
-          Like: 786
-        - FeedbackID:
-            _id: 6
-          Like: 323
-        - FeedbackID:
-            _id: 7
-          Like: 624
-        - FeedbackID:
-            _id: 8
-          Like: 107
-        - FeedbackID:
-            _id: 9
-          Like: 819
         Feedbacks:
           _keys:
           - _id: 0
@@ -947,7 +905,7 @@ MonoBehaviour:
               TimeIn: 1
               TimeOut: 10
             Refundable: 0
-          ImageURL: 
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_0.jpg
         Price:
           BasePrice: 150
           Discount: 0
@@ -981,7 +939,7 @@ MonoBehaviour:
               TimeIn: 1
               TimeOut: 30
             Refundable: 0
-          ImageURL: 
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_1.jpg
         Price:
           BasePrice: 250
           Discount: 0
@@ -1010,7 +968,7 @@ MonoBehaviour:
               TimeIn: 1
               TimeOut: 30
             Refundable: 0
-          ImageURL: 
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_2.jpg
         Price:
           BasePrice: 280
           Discount: 0
@@ -1043,7 +1001,7 @@ MonoBehaviour:
               TimeIn: 0
               TimeOut: 0
             Refundable: 0
-          ImageURL: 
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_3.jpg
         Price:
           BasePrice: 150
           Discount: 0
@@ -1077,7 +1035,7 @@ MonoBehaviour:
               TimeIn: 0
               TimeOut: 0
             Refundable: 0
-          ImageURL: 
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_4.jpg
         Price:
           BasePrice: 250
           Discount: 0
@@ -1106,7 +1064,7 @@ MonoBehaviour:
               TimeIn: 0
               TimeOut: 0
             Refundable: 0
-          ImageURL: 
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_5.jpg
         Price:
           BasePrice: 280
           Discount: 0
@@ -1130,8 +1088,6 @@ MonoBehaviour:
         ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000001.jpg
         Facilities: 792
       Review:
-        FeedbackIDs: []
-        FeedbackAs: []
         Feedbacks:
           _keys: []
           _values: []
@@ -1184,7 +1140,6 @@ MonoBehaviour:
     _values:
     - CustomerID:
         _id: 0
-      Like: 345
       Cleanliness:
         _rating: 4
       Facilities:
@@ -1195,7 +1150,6 @@ MonoBehaviour:
         improved.
     - CustomerID:
         _id: 1
-      Like: 462
       Cleanliness:
         _rating: 5
       Facilities:
@@ -1205,7 +1159,6 @@ MonoBehaviour:
       Comment: Exceptional service and very clean rooms. Would definitely stay again!
     - CustomerID:
         _id: 2
-      Like: 2313
       Cleanliness:
         _rating: 3.5
       Facilities:
@@ -1216,7 +1169,6 @@ MonoBehaviour:
         was nice.
     - CustomerID:
         _id: 3
-      Like: 456
       Cleanliness:
         _rating: 4.5
       Facilities:
@@ -1226,7 +1178,6 @@ MonoBehaviour:
       Comment: Good balance of cleanliness, service, and facilities. Enjoyed my stay!
     - CustomerID:
         _id: 4
-      Like: 1231
       Cleanliness:
         _rating: 3
       Facilities:
@@ -1236,7 +1187,6 @@ MonoBehaviour:
       Comment: The hotel was okay, but could use some improvements in maintenance.
     - CustomerID:
         _id: 5
-      Like: 678
       Cleanliness:
         _rating: 4
       Facilities:
@@ -1246,7 +1196,6 @@ MonoBehaviour:
       Comment: Great stay! The service was top-notch, and the facilities were well-maintained.
     - CustomerID:
         _id: 6
-      Like: 556
       Cleanliness:
         _rating: 3.5
       Facilities:
@@ -1256,7 +1205,6 @@ MonoBehaviour:
       Comment: It was decent, but nothing extraordinary. Good for a budget stay.
     - CustomerID:
         _id: 7
-      Like: 909
       Cleanliness:
         _rating: 5
       Facilities:
@@ -1266,7 +1214,6 @@ MonoBehaviour:
       Comment: Perfect experience! Everything was flawless.
     - CustomerID:
         _id: 8
-      Like: 212
       Cleanliness:
         _rating: 4.5
       Facilities:
@@ -1276,7 +1223,6 @@ MonoBehaviour:
       Comment: Very good experience overall. Would recommend this hotel!
     - CustomerID:
         _id: 9
-      Like: 1912
       Cleanliness:
         _rating: 3
       Facilities:

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine;
 using YNL.Utilities.Addons;
+using YNL.Utilities.Extensions;
 
 namespace YNL.Checkotel
 {
@@ -76,6 +78,46 @@ namespace YNL.Checkotel
             };
 
             return duration <= 1 ? unit : $"{unit}s";
+        }
+        public static (string Name, Texture2D Icon) GetHotelFacilitiesField(this HotelFacility facility)
+        {
+            var name = facility.ToString().RemoveWord("Has").RemoveWord("Is").ToSentenceCase();
+            var icon = Main.Resources.Icons["Settings"];
+
+            if (Main.Resources.Icons.TryGetValue(name, out Texture2D validIcon))
+            {
+                icon = validIcon;
+            }
+
+            return (name, icon);
+        }
+    
+        public static (TimeRange Hourly, TimeRange Overnight, TimeRange Daily) GetFirstTimeRange(this HotelUnit unit)
+        {
+            var hourlyTime = new TimeRange();
+            var overnightTime = new TimeRange();
+            var dailyTime = new TimeRange();
+
+            foreach (var room in unit.Rooms)
+            {
+                if (room.Description.Restriction.StayType == Room.StayType.Hourly)
+                {
+                    if (hourlyTime != TimeRange.Zero) continue;
+                    hourlyTime = room.Description.Restriction.ValidTime;
+                }
+                else if (room.Description.Restriction.StayType == Room.StayType.Overnight)
+                {
+                    if (overnightTime != TimeRange.Zero) continue;
+                    overnightTime = room.Description.Restriction.ValidTime;
+                }
+                else if (room.Description.Restriction.StayType == Room.StayType.Daily)
+                {
+                    if (dailyTime != TimeRange.Zero) continue;
+                    dailyTime = room.Description.Restriction.ValidTime;
+                }
+            }
+
+            return (hourlyTime, overnightTime, dailyTime);
         }
     }
 }

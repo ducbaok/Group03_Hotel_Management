@@ -3,15 +3,14 @@
     <Style src="project://database/Assets/Mains/Resources/Style%20Sheets/MainPage.uss?fileID=7433441132597879392&amp;guid=1edcbd6233be03248a6afc0041aeffad&amp;type=3#MainPage" />
     <engine:VisualElement name="ScreenBackground" style="flex-grow: 1; background-color: rgb(41, 41, 41); position: absolute; width: 100%; height: 100%;" />
     <engine:ScrollView name="ContentScroll" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" style="flex-grow: 1;">
-        <engine:VisualElement name="ImageView" style="flex-grow: 1; height: 800px; flex-wrap: wrap-reverse; flex-direction: row-reverse; background-color: rgb(44, 44, 44); margin-bottom: 25px; align-content: stretch; display: none;">
-            <engine:VisualElement style="flex-grow: 1; min-width: 30%; background-image: resource(&apos;Images/Samples/Coastal Twin Room&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-height: 400px;">
-                <engine:VisualElement style="background-color: rgba(34, 34, 34, 0.76); position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
-                <engine:Label text="+ 10" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 100%; height: 100%; -unity-font-definition: resource(&apos;Fonts/SDFs/Nunito/Nunito-Regular SDF&apos;); -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 40px;" />
+        <engine:VisualElement name="ImageView" style="flex-grow: 1; height: 800px; flex-wrap: wrap-reverse; flex-direction: row-reverse; background-color: rgb(44, 44, 44); margin-bottom: 25px; align-content: stretch;">
+            <engine:VisualElement name="Image3" style="flex-grow: 1; background-image: resource(&apos;Images/Samples/Coastal Twin Room&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-width: 45%; min-height: 45%;">
+                <engine:VisualElement name="Fade" style="background-color: rgba(34, 34, 34, 0.76); position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
+                <engine:Label text="+ 10" name="Text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 100%; height: 100%; -unity-font-definition: resource(&apos;Fonts/SDFs/Nunito/Nunito-Regular SDF&apos;); -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 40px;" />
             </engine:VisualElement>
-            <engine:VisualElement style="flex-grow: 1; min-width: 30%; background-image: resource(&apos;Images/Samples/Coastal Twin Room&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-height: 400px;" />
-            <engine:VisualElement style="flex-grow: 1; min-width: 30%; background-image: resource(&apos;Images/Samples/Sunset Retreat Suite&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-height: 400px;" />
-            <engine:VisualElement style="flex-grow: 1; min-width: 30%; background-image: resource(&apos;Images/Samples/Oceanview Deluxe Suite&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-height: 400px;" />
-            <engine:VisualElement style="flex-grow: 1; min-width: 30%; background-image: resource(&apos;Images/Samples/Ocean Breeze Resort&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-height: 400px;" />
+            <engine:VisualElement name="Image2" style="flex-grow: 1; background-image: resource(&apos;Images/Samples/Coastal Twin Room&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-width: 45%; min-height: 45%;" />
+            <engine:VisualElement name="Image1" style="flex-grow: 1; background-image: resource(&apos;Images/Samples/Coastal Twin Room&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-width: 45%; min-height: 45%;" />
+            <engine:VisualElement name="Image0" style="flex-grow: 1; background-image: resource(&apos;Images/Samples/Coastal Twin Room&apos;); -unity-background-scale-mode: scale-and-crop; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; min-width: 45%; min-height: 45%;" />
         </engine:VisualElement>
         <engine:VisualElement name="NameView" style="padding-left: 50px; padding-right: 50px; background-color: rgb(44, 44, 44); padding-top: 25px; padding-bottom: 25px; margin-bottom: 25px;">
             <engine:VisualElement name="BadgeField" style="margin-bottom: 15px; flex-direction: row; display: none;">
@@ -40,7 +39,8 @@
                 <engine:Label text="See more" name="SeeMore" class="label-field" style="font-size: 35px; -unity-text-align: middle-left; color: rgb(254, 209, 167); -unity-font-style: bold;" />
             </engine:VisualElement>
             <engine:ScrollView name="ReviewScroll" mode="Horizontal" vertical-scroller-visibility="Hidden" horizontal-scroller-visibility="Hidden" style="height: 225px;">
-                <engine:VisualElement name="ReviewItem" style="width: 700px; background-color: rgb(48, 48, 48); border-left-color: rgb(96, 96, 96); border-right-color: rgb(96, 96, 96); border-top-color: rgb(96, 96, 96); border-bottom-color: rgb(96, 96, 96); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; padding-top: 25px; padding-right: 25px; padding-left: 25px; padding-bottom: 15px; margin-right: 25px; height: 225px;">
+                <engine:VisualElement name="ReviewItem" style="width: 700px; padding-top: 25px; padding-right: 25px; padding-left: 25px; padding-bottom: 15px; margin-right: 25px; height: 225px;">
+                    <engine:VisualElement name="Background" style="background-color: rgb(48, 48, 48); border-left-color: rgb(96, 96, 96); border-right-color: rgb(96, 96, 96); border-top-color: rgb(96, 96, 96); border-bottom-color: rgb(96, 96, 96); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
                     <engine:VisualElement name="InfoField" style="height: 75px; flex-direction: row; min-height: 75px;">
                         <engine:VisualElement name="AccountPicture" style="height: 75px; width: 75px; background-image: resource(&apos;Icons/Account&apos;); align-self: center; background-color: rgb(63, 63, 63); border-top-left-radius: 37.5px; border-top-right-radius: 37.5px; border-bottom-right-radius: 37.5px; border-bottom-left-radius: 37.5px; background-size: 60% 60%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(96, 96, 96); border-right-color: rgb(96, 96, 96); border-top-color: rgb(96, 96, 96); border-bottom-color: rgb(96, 96, 96);" />
                         <engine:Label text="Sam Winchester&#10;&lt;size=35&gt;&lt;color=#808080&gt;Room 302&lt;/color&gt;&lt;/size&gt;" name="AccountText" class="label-field" style="font-size: 40px; margin-left: 15px; flex-grow: 1; -unity-paragraph-spacing: -15px; -unity-text-align: middle-left; height: 100%;" />
@@ -54,20 +54,7 @@
                     </engine:VisualElement>
                     <engine:Label text="Don&apos;t get any EMF signal as the report; may be it&apos;s not a ghost or spirit but a demon, " name="Comment" class="label-field" style="font-size: 35px; margin-top: 15px; -unity-text-align: upper-left; text-overflow: ellipsis; height: 100px; white-space: normal; overflow: hidden;" />
                 </engine:VisualElement>
-                <engine:VisualElement name="ReviewItem" style="width: 700px; background-color: rgb(48, 48, 48); border-left-color: rgb(96, 96, 96); border-right-color: rgb(96, 96, 96); border-top-color: rgb(96, 96, 96); border-bottom-color: rgb(96, 96, 96); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; padding-top: 25px; padding-right: 25px; padding-left: 25px; padding-bottom: 15px; margin-right: 25px; height: 225px;">
-                    <engine:VisualElement name="InfoField" style="height: 75px; flex-direction: row; min-height: 75px;">
-                        <engine:VisualElement name="AccountPicture" style="height: 75px; width: 75px; background-image: resource(&apos;Icons/Account&apos;); align-self: center; background-color: rgb(63, 63, 63); border-top-left-radius: 37.5px; border-top-right-radius: 37.5px; border-bottom-right-radius: 37.5px; border-bottom-left-radius: 37.5px; background-size: 60% 60%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(96, 96, 96); border-right-color: rgb(96, 96, 96); border-top-color: rgb(96, 96, 96); border-bottom-color: rgb(96, 96, 96);" />
-                        <engine:Label text="Sam Winchester&#10;&lt;size=35&gt;&lt;color=#808080&gt;Room 302&lt;/color&gt;&lt;/size&gt;" name="AccountText" class="label-field" style="font-size: 40px; margin-left: 15px; flex-grow: 1; -unity-paragraph-spacing: -15px; -unity-text-align: middle-left; height: 100%;" />
-                        <engine:VisualElement name="StarField" style="height: 100%; flex-direction: row; padding-top: 5px;">
-                            <engine:VisualElement name="Star" style="background-image: resource(&apos;Icons/Star (Filled)&apos;); height: 35px; width: 35px; -unity-background-image-tint-color: rgb(251, 194, 60); margin-left: 5px;" />
-                            <engine:VisualElement name="Star" style="background-image: resource(&apos;Icons/Star (Filled)&apos;); height: 35px; width: 35px; -unity-background-image-tint-color: rgb(251, 194, 60); margin-left: 5px;" />
-                            <engine:VisualElement name="Star" style="background-image: resource(&apos;Icons/Star (Filled)&apos;); height: 35px; width: 35px; -unity-background-image-tint-color: rgb(251, 194, 60); margin-left: 5px;" />
-                            <engine:VisualElement name="Star" style="background-image: resource(&apos;Icons/Star (Half)&apos;); height: 35px; width: 35px; -unity-background-image-tint-color: rgb(251, 194, 60); margin-left: 5px;" />
-                            <engine:VisualElement name="Star" style="background-image: resource(&apos;Icons/Star&apos;); height: 35px; width: 35px; -unity-background-image-tint-color: rgb(251, 194, 60); margin-left: 5px;" />
-                        </engine:VisualElement>
-                    </engine:VisualElement>
-                    <engine:Label text="Don&apos;t get any EMF signal as the report; may be it&apos;s not a ghost or spirit but a demon, " name="Comment" class="label-field" style="font-size: 35px; margin-top: 15px; -unity-text-align: upper-left; text-overflow: ellipsis; height: 100px; white-space: normal; overflow: hidden;" />
-                </engine:VisualElement>
+                <engine:VisualElement name="Elipsis" style="height: 225px; width: 75px; background-image: resource(&apos;Icons/Ellipsis&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(96, 96, 96); margin-left: 25px;" />
             </engine:ScrollView>
             <engine:Label text="No reviews yet! Be the first to share your thoughts." name="EmptyLabel" class="label-field" style="font-size: 35px; color: rgb(147, 147, 147); display: none;" />
         </engine:VisualElement>
@@ -106,21 +93,21 @@
                 <engine:Label text="Check in | Check out" name="Label" class="label-field" style="-unity-font-style: bold; font-size: 45px; flex-grow: 1; -unity-text-align: middle-left;" />
             </engine:VisualElement>
             <engine:VisualElement name="TableView" style="flex-grow: 1;">
-                <engine:VisualElement name="TableLabelField" style="flex-direction: row; height: 50px;">
+                <engine:VisualElement name="TableLabel" style="flex-direction: row; height: 50px;">
                     <engine:Label text="Booking Type" name="Label" class="label-field" style="font-size: 35px; flex-grow: 1; -unity-text-align: middle-left; max-height: 150px; overflow: hidden; color: rgb(130, 130, 130);" />
                     <engine:Label text="Time" name="Label" class="label-field" style="font-size: 35px; -unity-text-align: middle-left; max-height: 150px; overflow: hidden; color: rgb(130, 130, 130);" />
                 </engine:VisualElement>
-                <engine:VisualElement name="TableLabelField" style="flex-direction: row; height: 75px;">
+                <engine:VisualElement name="HourlyTime" style="flex-direction: row; height: 75px;">
                     <engine:Label text="Hourly" name="Label" class="label-field" style="font-size: 40px; flex-grow: 1; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
-                    <engine:Label text="From &lt;color=#FED1A7&gt;&lt;b&gt;09:00&lt;/b&gt;&lt;/color&gt; to &lt;color=#FED1A7&gt;&lt;b&gt;22:00&lt;/b&gt;&lt;/color&gt;" name="Label" class="label-field" style="font-size: 40px; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
+                    <engine:Label text="From &lt;color=#FED1A7&gt;&lt;b&gt;09:00&lt;/b&gt;&lt;/color&gt; to &lt;color=#FED1A7&gt;&lt;b&gt;22:00&lt;/b&gt;&lt;/color&gt; everyday" name="Time" class="label-field" style="font-size: 40px; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
                 </engine:VisualElement>
-                <engine:VisualElement name="TableLabelField" style="flex-direction: row; height: 75px;">
+                <engine:VisualElement name="OvernightTime" style="flex-direction: row; height: 75px;">
                     <engine:Label text="Overnight" name="Label" class="label-field" style="font-size: 40px; flex-grow: 1; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
-                    <engine:Label text="From &lt;color=#FED1A7&gt;&lt;b&gt;22:00&lt;/b&gt;&lt;/color&gt; to &lt;color=#FED1A7&gt;&lt;b&gt;10:00&lt;/b&gt;&lt;/color&gt;" name="Label" class="label-field" style="font-size: 40px; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
+                    <engine:Label text="From &lt;color=#FED1A7&gt;&lt;b&gt;22:00&lt;/b&gt;&lt;/color&gt; to &lt;color=#FED1A7&gt;&lt;b&gt;10:00&lt;/b&gt;&lt;/color&gt; the day after" name="Time" class="label-field" style="font-size: 40px; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
                 </engine:VisualElement>
-                <engine:VisualElement name="TableLabelField" style="flex-direction: row; height: 75px;">
+                <engine:VisualElement name="DailyTime" style="flex-direction: row; height: 75px;">
                     <engine:Label text="Daily" name="Label" class="label-field" style="font-size: 40px; flex-grow: 1; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
-                    <engine:Label text="From &lt;color=#FED1A7&gt;&lt;b&gt;14:00&lt;/b&gt;&lt;/color&gt; to &lt;color=#FED1A7&gt;&lt;b&gt;11:00&lt;/b&gt;&lt;/color&gt;" name="Label" class="label-field" style="font-size: 40px; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
+                    <engine:Label text="From day &lt;color=#FED1A7&gt;&lt;b&gt;8th&lt;/b&gt;&lt;/color&gt; to day &lt;color=#FED1A7&gt;&lt;b&gt;22th&lt;/b&gt;&lt;/color&gt;" name="Time" class="label-field" style="font-size: 40px; max-height: 150px; overflow: hidden; -unity-text-align: middle-left;" />
                 </engine:VisualElement>
             </engine:VisualElement>
         </engine:VisualElement>
@@ -136,6 +123,7 @@
             </engine:VisualElement>
             <engine:Label text="Guests can cancel their reservations free of charge up to 24 hours before arrival. Late cancellations or no-shows may incur a fee equivalent to one night&apos;s stay. Refunds, if applicable, will be processed within seven business days." name="Label" class="label-field" style="font-size: 40px; flex-grow: 1; -unity-text-align: middle-left; white-space: normal; max-height: 175px; text-overflow: ellipsis; overflow: hidden;" />
         </engine:VisualElement>
+        <engine:VisualElement name="Space" style="height: 400px;" />
     </engine:ScrollView>
     <engine:VisualElement name="TopBar" style="top: 0; height: 250px; left: 0; right: 0; position: absolute;">
         <engine:VisualElement name="BackButton" style="height: 100px; width: 100px; position: absolute; top: 100px; left: 50px; background-color: rgb(32, 32, 32); border-top-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; border-bottom-left-radius: 50px; background-image: resource(&apos;Icons/Back&apos;); background-size: 50% 50%; border-left-color: rgb(95, 95, 95); border-right-color: rgb(95, 95, 95); border-top-color: rgb(95, 95, 95); border-bottom-color: rgb(95, 95, 95); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; background-position-x: left 22px;" />
