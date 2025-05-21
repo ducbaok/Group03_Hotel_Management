@@ -821,16 +821,18 @@ MonoBehaviour:
     - _id: 10000001
     _values:
     - Description:
-        Name: Ocean Breeze Resort Noosa
+        Name: Ocean Breeze Resort Noosa asadasd
         Address: 456 Seaside Avenue, Sydney, Australia
         Phone: 61 2 9876 5432
         Email: info@oceanbreeze.com.au
+        ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000000.jpg
         Description: Overlooking the stunning coastline of Sydney, Ocean Breeze Resort
           offers a tranquil escape with luxurious beachfront accommodations. Guests
           can enjoy world-class dining, a rejuvenating spa, and breathtaking ocean
           views from their private balconies. Whether you're here for relaxation
           or adventure, this resort promises an unforgettable stay.
-        ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000000.jpg
+        Policy: 
+        Cancellation: 
         Facilities: 553
       Review:
         Feedbacks:
@@ -1078,6 +1080,7 @@ MonoBehaviour:
         Address: 144 Bayshore Dr, Belongil Beach, Byron Bay, Australia
         Phone: 
         Email: 
+        ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000001.jpg
         Description: In addition to the standard of ALLSAFE, all guests get free
           Wi-Fi in all rooms and free parking if arriving by car. Conveniently situated
           in the Belongil Beach part of Byron Bay, this property puts you close to
@@ -1085,7 +1088,8 @@ MonoBehaviour:
           to visit Cape Byron Lighthouse as well as Belongil Beach nearby. Rated
           with 5 stars, this high-quality property provides guests with access to
           massage, restaurant and hot tub on-site.
-        ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Hotels/10000001.jpg
+        Policy: 
+        Cancellation: 
         Facilities: 792
       Review:
         Feedbacks:

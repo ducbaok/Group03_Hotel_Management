@@ -25,7 +25,7 @@ namespace YNL.Checkotel
             }
             public static UID[] GetLuxuryStaysList()
             {
-                return _hotels.OrderByDescending(u => u.Key.GetHighestPrice()).Take(10).Select(p => p.Key).ToArray();
+                return _hotels.OrderByDescending(u => u.Key.GetHighestPriceAllType()).Take(10).Select(p => p.Key).ToArray();
             }
             public static UID[] GetExceptionalChoicesList()
             {

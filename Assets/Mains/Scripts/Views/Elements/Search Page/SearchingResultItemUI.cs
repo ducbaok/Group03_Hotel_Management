@@ -60,7 +60,7 @@ namespace YNL.Checkotel
             {
                 _nameText.SetText(name);
 
-                string ratingScoreText = rating.score == -1 ? "-" : rating.score.ToString();
+                string ratingScoreText = rating.score == -1 ? "-" : rating.score.ToString("0.00");
 
                 _ratingText.SetText($"<b>{ratingScoreText}</b> ({rating.amount})");
             }
@@ -130,16 +130,16 @@ namespace YNL.Checkotel
                 this.AddElements(_lastPrice);
             }
 
-            public void Apply((float price, Room.StayType type) price, int discount, byte duration, byte roomAmount)
+            public void Apply(float price, Room.StayType type, int discount, byte duration, byte roomAmount)
             {
                 _originalPrice.SetDisplay(discount > 0 ? DisplayStyle.Flex : DisplayStyle.None);
                 _discountField.SetDisplay(discount > 0 ? DisplayStyle.Flex : DisplayStyle.None);
 
-                _originalPrice.SetText($"Only <s>{price.price}$</s>");
+                _originalPrice.SetText($"Only <s>{price}$</s>");
                 _discountText.SetText($"Discount {discount}%");
 
-                var lastPrice = price.price * (1 - discount / 100f);
-                string priceText = $"<b><color=#FED1A7>{lastPrice}$</color></b> <size=35>/ {duration} {price.type.GetStayTypeUnit(duration)} • <color=#75caff>Only {roomAmount} room left</color></size>";
+                var lastPrice = price * (1 - discount / 100f);
+                string priceText = $"<b><color=#FED1A7>{lastPrice}$</color></b> <size=35>/ {duration} {type.GetStayTypeUnit(duration)} • <color=#75caff>Only {roomAmount} room left</color></size>";
 
                 _lastPrice.SetText(priceText);
             }
@@ -197,7 +197,7 @@ namespace YNL.Checkotel
 
         }
 
-        public void Apply(UID id)
+        public void Apply(UID id, Room.StayType type)
         {
             _hotelID = id;
 
@@ -208,15 +208,15 @@ namespace YNL.Checkotel
             _nameField.Apply(unit.Description.Name, (unit.Review.AverageRating, unit.Review.Feedbacks.Count));
             _addressField.Apply(unit.Description.Address);
 
-            var lowestPrice = id.GetLowestPrice();
+            var lowestPrice = id.GetLowestPrice(type);
 
-            _priceField.Apply(lowestPrice, 0, 1, 5);
+            _priceField.Apply(lowestPrice, type, 0, 1, 5);
         }
 
         private void OnSelected_ResultItem(PointerDownEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
-            Marker.OnHotelInformationDisplayed?.Invoke(_hotelID);
+            Marker.OnHotelInformationDisplayed?.Invoke(_hotelID, true);
         }
     }
 }

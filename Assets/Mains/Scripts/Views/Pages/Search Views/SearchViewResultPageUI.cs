@@ -9,6 +9,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
+    using static YNL.Checkotel.Room;
     using HotelList = SerializableDictionary<UID, HotelUnit>;
 
     public class SearchViewResultPageUI : ViewPageUI
@@ -27,6 +28,7 @@ namespace YNL.Checkotel
         private Label _emptyResultLabel;
 
         private List<UID> _resultIDs = new();
+        private Room.StayType _stayType;
 
         protected override void VirtualAwake()
         {
@@ -59,7 +61,7 @@ namespace YNL.Checkotel
             _resultList.bindItem = (element, index) =>
             {
                 var item = element as SearchingResultItemUI;
-                item.Apply(_resultIDs[index]);
+                item.Apply(_resultIDs[index], _stayType);
             };
             resultPage.Add(_resultList);
 
@@ -101,6 +103,8 @@ namespace YNL.Checkotel
 
         private void OnSearchingResultRequested(string address, Room.StayType stayType, Room.RoomType roomType, DateTime checkInTime, byte duration)
         {
+            _stayType = stayType;
+
             var timeRangeText = checkInTime.GetCheckingTimeText(duration);
             var addressText = string.IsNullOrEmpty(address) ? "Anywhere" : address;
             _searchText.SetText($"<b>{addressText}</b>\r\n<size=35>{stayType} • {timeRangeText.In} - {timeRangeText.Out}</size>");

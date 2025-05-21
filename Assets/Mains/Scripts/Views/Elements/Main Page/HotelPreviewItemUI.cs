@@ -156,7 +156,7 @@ namespace YNL.Checkotel
         private void OnClicked_PreviewItem(PointerDownEvent evt)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
-            Marker.OnHotelInformationDisplayed?.Invoke(_id);
+            Marker.OnHotelInformationDisplayed?.Invoke(_id, false);
         }
     }
 }

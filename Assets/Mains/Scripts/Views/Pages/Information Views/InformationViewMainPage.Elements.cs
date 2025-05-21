@@ -1,4 +1,5 @@
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UIElements;
@@ -8,9 +9,9 @@ namespace YNL.Checkotel
 {
     public partial class InformationViewMainPage
     {
-        public class PriceField : ICollectible
+        public class PriceField
         {
-            private VisualElement _root;
+            public Action OnOpenTimeRangePage;
 
             private VisualElement _timeField;
             private VisualElement _timeIcon;
@@ -21,16 +22,10 @@ namespace YNL.Checkotel
 
             public PriceField(VisualElement root)
             {
-                _root = root;
-
-                Collect();
-            }
-
-            public void Collect()
-            {
-                var bottomBar = _root.Q("BottomBar");
+                var bottomBar = root.Q("BottomBar");
 
                 _timeField = bottomBar.Q("TimeField");
+                _timeField.RegisterCallback<PointerDownEvent>(OnClicked_TimeField);
 
                 _timeIcon = _timeField.Q("Icon");
 
@@ -42,7 +37,27 @@ namespace YNL.Checkotel
 
                 _lastPrice = priceArea.Q("PriceField").Q("LastPrice") as Label;
 
-                _chooseButton = _lastPrice.Q("ChooseButton") as Button;
+                _chooseButton = priceArea.Q("ChooseButton") as Button;
+            }
+
+            public void Apply(HotelUnit unit, Room.StayType type, DateTime checkInTime, byte duration)
+            {
+                var style = type.GetInformationTimeFieldStyle();
+
+                _timeField.SetBackgroundColor(style.Backbround);
+                _timeField.SetBorderColor(style.Border);
+                _timeIcon.SetBackgroundImage(style.Icon);
+                _lastPrice.SetColor(style.Border);
+                _chooseButton.SetBackgroundColor(style.Border);
+
+                var timeText = type.GetTimeRangeText(checkInTime, duration);
+
+                _timeText.SetText($"{timeText.Duration} | {timeText.In} → {timeText.Out}");
+            }
+
+            private void OnClicked_TimeField(PointerDownEvent evt)
+            {
+                OnOpenTimeRangePage?.Invoke();
             }
         }
 
@@ -305,7 +320,74 @@ namespace YNL.Checkotel
                 _overnightTime.SetText(overnightText);
                 _dailyTime.SetText(dailyText);
 
-                string StyleText(string input) => $"<color=#FED1A7><b>{input}</b></color>";
+                string StyleText(string input) => $"<color=#FED1A7>{input}</color>";
+                //string StyleText(string input) => $"<color=#FED1A7><b>{input}</b></color>";
+            }
+        }
+    
+        public class PolicyField
+        {
+            private Label _policyText;
+
+            private bool _isExpanded = false;
+
+            public PolicyField(VisualElement field)
+            {
+                _policyText = field.Q("Label") as Label;
+                _policyText.RegisterCallback<PointerDownEvent>(OnClicked_DescriptionText);
+            }
+
+            public void Apply(HotelUnit unit)
+            {
+                string policy = unit.Description.Policy;
+                _policyText.SetText(policy == string.Empty ? "<color=#808080>No hotel policy!</color>" : policy);
+            }
+
+            private void OnClicked_DescriptionText(PointerDownEvent evt)
+            {
+                _isExpanded = !_isExpanded;
+
+                if (_isExpanded)
+                {
+                    _policyText.SetMaxHeight(StyleKeyword.Auto);
+                }
+                else
+                {
+                    _policyText.SetMaxHeight(175);
+                }
+            }
+        }
+
+        public class CancellationField
+        {
+            private Label _cancellationText;
+
+            private bool _isExpanded = false;
+
+            public CancellationField(VisualElement field)
+            {
+                _cancellationText = field.Q("Label") as Label;
+                _cancellationText.RegisterCallback<PointerDownEvent>(OnClicked_DescriptionText);
+            }
+
+            public void Apply(HotelUnit unit)
+            {
+                string cancellation = unit.Description.Cancellation;
+                _cancellationText.SetText(cancellation == string.Empty ? "<color=#808080>No cancellation policy!</color>" : cancellation);
+            }
+
+            private void OnClicked_DescriptionText(PointerDownEvent evt)
+            {
+                _isExpanded = !_isExpanded;
+
+                if (_isExpanded)
+                {
+                    _cancellationText.SetMaxHeight(StyleKeyword.Auto);
+                }
+                else
+                {
+                    _cancellationText.SetMaxHeight(175);
+                }
             }
         }
     }

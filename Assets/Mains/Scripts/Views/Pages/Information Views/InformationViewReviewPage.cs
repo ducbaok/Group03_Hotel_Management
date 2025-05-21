@@ -60,7 +60,7 @@ namespace YNL.Checkotel
             _reviewList.Rebuild();
         }
 
-        private void OnHotelInformationDisplayed(UID id)
+        private void OnHotelInformationDisplayed(UID id, bool isSearchResult)
         {
             _hotelID = id;
             var unit = Main.Database.Hotels[id];

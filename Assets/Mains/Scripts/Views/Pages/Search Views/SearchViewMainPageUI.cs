@@ -103,6 +103,7 @@ namespace YNL.Checkotel
             if (isStayType)
             {
                 _searchingType.stayType = stayType;
+                _timeRangePageUI.StayType = stayType;
             }
             else
             {

@@ -20,8 +20,8 @@ namespace YNL.Checkotel
         public List<RoomUnit> Rooms = new();
         public HotelStatus Status = new();
 
-        public (float Price, Room.StayType Type) HighestPrice = (0, Room.StayType.Hourly);
-        public (float Price, Room.StayType Type) LowestPrice = (0, Room.StayType.Hourly);
+        public Dictionary<Room.StayType, float> HighestPrices = new();
+        public Dictionary<Room.StayType, float> LowestPrices = new();
     }
 
     [System.Serializable]
@@ -31,8 +31,10 @@ namespace YNL.Checkotel
         public string Address = string.Empty;
         public string Phone = string.Empty;
         public string Email = string.Empty;
-        public string Description = string.Empty;
         public string ImageURL;
+        public string Description = string.Empty;
+        public string Policy = string.Empty;
+        public string Cancellation = string.Empty;
 
         public HotelFacility Facilities = HotelFacility.None;
     }

@@ -8,6 +8,7 @@ namespace YNL.Checkotel
     public partial class SearchViewTimeRangePageUI : ViewPageUI
     {
         public (DateTime CheckInTime, byte Duration) TimeRange;
+        public Room.StayType StayType;
 
         private VisualElement _background;
         private VisualElement _page;
@@ -91,9 +92,11 @@ namespace YNL.Checkotel
 
         private void OnTimeRangeChanged(DateTime checkInTime, byte duration)
         {
-            _checkInTime.text = checkInTime.ToString("dd/MM, HH:mm");
-            _checkOutTime.text = checkInTime.AddHours(duration).ToString("dd/MM, HH:mm");
-            _durationTime.text = duration == 1 ? "1 hour" : $"{duration} hours";
+            var timeRangeText = StayType.GetTimeRangeText(checkInTime, duration);
+
+            _checkInTime.SetText(timeRangeText.In);
+            _checkOutTime.SetText(timeRangeText.Out);
+            _durationTime.SetText(timeRangeText.Duration);
 
             TimeRange = (checkInTime, duration);
         }

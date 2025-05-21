@@ -2,6 +2,9 @@ using System;
 
 namespace YNL.Checkotel
 {
+    public delegate void OnHotelInformationDisplayed(UID hotelID, bool isSearchingResult);
+    public delegate void OnSearchingResultRequested(string address, Room.StayType stay, Room.RoomType room, DateTime checInTime, byte duration);
+
     public static partial class Marker
     {
         public static Action<ViewType, bool, bool> OnViewPageSwitched { get; set; }
@@ -13,7 +16,7 @@ namespace YNL.Checkotel
         public static Action<string> OnAddressSearchSubmitted { get; set; }
         public static Action<DateTime, byte> OnTimeRangeSubmitted { get; set; }
 
-        public static Action<string, Room.StayType, Room.RoomType, DateTime, byte> OnSearchingResultRequested { get; set; }
-        public static Action<UID> OnHotelInformationDisplayed{ get; set; }
+        public static OnSearchingResultRequested OnSearchingResultRequested { get; set; }
+        public static OnHotelInformationDisplayed OnHotelInformationDisplayed{ get; set; }
     }
 }

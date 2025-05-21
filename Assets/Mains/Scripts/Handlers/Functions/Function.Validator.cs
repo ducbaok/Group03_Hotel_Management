@@ -10,6 +10,48 @@ namespace YNL.Checkotel
     {
         private static SerializableDictionary<UID, HotelUnit> _hotels => Main.Database.Hotels;
 
+        public static bool FuzzyContains(this string source, string target, int maxDistance = 1)
+        {
+            if (string.IsNullOrEmpty(target)) return true;
+
+            int targetLength = target.Length;
+
+            for (int i = 0; i <= source.Length - targetLength; i++)
+            {
+                string substring = source.Substring(i, targetLength);
+
+                if (LevenshteinDistance(substring, target) <= maxDistance)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+            int LevenshteinDistance(string s, string t)
+            {
+                if (s == t) return 0;
+                if (s.Length == 0) return t.Length;
+                if (t.Length == 0) return s.Length;
+
+                int[,] distance = new int[s.Length + 1, t.Length + 1];
+
+                for (int i = 0; i <= s.Length; i++) distance[i, 0] = i;
+                for (int j = 0; j <= t.Length; j++) distance[0, j] = j;
+
+                for (int i = 1; i <= s.Length; i++)
+                {
+                    for (int j = 1; j <= t.Length; j++)
+                    {
+                        int cost = (s[i - 1] == t[j - 1]) ? 0 : 1;
+                        distance[i, j] = Math.Min(Math.Min(distance[i - 1, j] + 1, distance[i, j - 1] + 1), distance[i - 1, j - 1] + cost);
+                    }
+                }
+
+                return distance[s.Length, t.Length];
+            }
+        }
+
         public static bool IsValidTimeRange(this UID id, Room.StayType type, DateTime checkInTime, byte duration)
         {
             if (checkInTime == DateTime.MinValue) return true;
@@ -19,6 +61,9 @@ namespace YNL.Checkotel
             foreach (var room in unit.Rooms)
             {
                 var restriction = room.Description.Restriction;
+
+                if (restriction.StayType != type) continue;
+
                 var (validTime, validStay) = (restriction.ValidTime, restriction.ValidStay);
 
                 bool isValid = type switch
@@ -40,84 +85,6 @@ namespace YNL.Checkotel
             }
 
             return false;
-        }
-
-        public static (float, Room.StayType) GetHighestPrice(this UID id)
-        {
-            var unit = _hotels[id];
-
-            if (unit.HighestPrice.Price != 0) return unit.HighestPrice;
-
-            var orderedRooms = unit.Rooms.OrderByDescending(r => r.Price.BasePrice).ToArray();
-            unit.HighestPrice.Price = orderedRooms[0].Price.BasePrice;
-            unit.HighestPrice.Type = orderedRooms[0].Description.Restriction.StayType;
-
-            return unit.HighestPrice;
-        }
-        public static (float, Room.StayType) GetLowestPrice(this UID id)
-        {
-            var unit = _hotels[id];
-
-            if (unit.LowestPrice.Price != 0) return unit.LowestPrice;
-
-            var orderedRooms = unit.Rooms.OrderBy(r => r.Price.BasePrice).ToArray();
-            unit.LowestPrice.Price = orderedRooms[0].Price.BasePrice;
-            unit.LowestPrice.Type = orderedRooms[0].Description.Restriction.StayType;
-
-            return unit.LowestPrice;
-        }
-
-        public static string GetStayTypeUnit(this Room.StayType type, int duration, bool isCapital = false)
-        {
-            string unit = type switch
-            {
-                Room.StayType.Hourly => isCapital ? "Hour" : "hour",
-                Room.StayType.Overnight => isCapital ? "Night" : "night",
-                Room.StayType.Daily => isCapital ? "Day" : "day",
-                _ => ""
-            };
-
-            return duration <= 1 ? unit : $"{unit}s";
-        }
-        public static (string Name, Texture2D Icon) GetHotelFacilitiesField(this HotelFacility facility)
-        {
-            var name = facility.ToString().RemoveWord("Has").RemoveWord("Is").ToSentenceCase();
-            var icon = Main.Resources.Icons["Settings"];
-
-            if (Main.Resources.Icons.TryGetValue(name, out Texture2D validIcon))
-            {
-                icon = validIcon;
-            }
-
-            return (name, icon);
-        }
-    
-        public static (TimeRange Hourly, TimeRange Overnight, TimeRange Daily) GetFirstTimeRange(this HotelUnit unit)
-        {
-            var hourlyTime = new TimeRange();
-            var overnightTime = new TimeRange();
-            var dailyTime = new TimeRange();
-
-            foreach (var room in unit.Rooms)
-            {
-                if (room.Description.Restriction.StayType == Room.StayType.Hourly)
-                {
-                    if (hourlyTime != TimeRange.Zero) continue;
-                    hourlyTime = room.Description.Restriction.ValidTime;
-                }
-                else if (room.Description.Restriction.StayType == Room.StayType.Overnight)
-                {
-                    if (overnightTime != TimeRange.Zero) continue;
-                    overnightTime = room.Description.Restriction.ValidTime;
-                }
-                else if (room.Description.Restriction.StayType == Room.StayType.Daily)
-                {
-                    if (dailyTime != TimeRange.Zero) continue;
-                    dailyTime = room.Description.Restriction.ValidTime;
-                }
-            }
-
-            return (hourlyTime, overnightTime, dailyTime);
         }
     }
 }
