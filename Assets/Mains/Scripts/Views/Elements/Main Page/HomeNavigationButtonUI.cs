@@ -44,10 +44,12 @@ namespace YNL.Checkotel
             this.RegisterCallback<PointerUpEvent>(OnClicked_Button);
 
             _onNavigated += RecheckUI;
+            Marker.OnViewPageSwitched += OnViewPageSwitched;
         }
         ~HomeNavigationButton()
         {
             _onNavigated -= RecheckUI;
+            Marker.OnViewPageSwitched -= OnViewPageSwitched;
         }
 
         private void UpdateUI()
@@ -64,8 +66,12 @@ namespace YNL.Checkotel
 
             _onNavigated?.Invoke(_type);
             Marker.OnViewPageSwitched?.Invoke(_type, true, true);
+        }
 
-            evt.StopPropagation();
+        private void OnViewPageSwitched(ViewType type, bool a, bool b)
+        {
+            _isSelected = type == _type;
+            UpdateUI();
         }
 
         private void RecheckUI(ViewType type)

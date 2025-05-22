@@ -7,6 +7,8 @@ namespace YNL.Checkotel
 {
     public partial class SearchViewTimeRangePageUI : ViewPageUI
     {
+        public Action<DateTime, byte> OnTimeRangeSubmitted { get; set; }
+
         public (DateTime CheckInTime, byte Duration) TimeRange;
         public Room.StayType StayType;
 
@@ -20,16 +22,6 @@ namespace YNL.Checkotel
         private VisualElement _applyButton;
 
         private HourlyPage _hourlyPage;
-
-        protected override void VirtualAwake()
-        {
-            Marker.OnTimeRangeChanged += OnTimeRangeChanged;
-        }
-
-        private void OnDestroy()
-        {
-            Marker.OnTimeRangeChanged -= OnTimeRangeChanged;
-        }
 
         protected override void Collect()
         {
@@ -53,6 +45,7 @@ namespace YNL.Checkotel
             _applyButton.RegisterCallback<PointerUpEvent>(OnClicked_ApplyButton);
 
             _hourlyPage = new HourlyPage(Root);
+            _hourlyPage.OnTimeRangeChanged = OnTimeRangeChanged;
         }
 
         public override void OnPageOpened(bool isOpen, bool needRefresh = true)
@@ -85,7 +78,7 @@ namespace YNL.Checkotel
 
         private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
-            Marker.OnTimeRangeSubmitted?.Invoke(TimeRange.CheckInTime, TimeRange.Duration);
+            OnTimeRangeSubmitted?.Invoke(TimeRange.CheckInTime, TimeRange.Duration);
 
             OnPageOpened(false);
         }

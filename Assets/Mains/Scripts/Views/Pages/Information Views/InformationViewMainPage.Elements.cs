@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UIElements;
+using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -231,6 +232,8 @@ namespace YNL.Checkotel
                 var facilityView = contentContainer.Q("FacilityView");
 
                 _seeMoreButton = facilityView.Q("LabelField").Q("SeeMore") as Label;
+                _seeMoreButton.RegisterCallback<PointerUpEvent>(OnClicked_SeeMoreButton);
+
                 _facilityField = facilityView.Q("FacilityField");
 
                 for (byte i = 0; i < _facilityItems.Length; i++)
@@ -255,6 +258,11 @@ namespace YNL.Checkotel
                         _facilityItems[i].SetDisplay(DisplayStyle.None);
                     }
                 }
+            }
+
+            private void OnClicked_SeeMoreButton(PointerUpEvent evt)
+            {
+                Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewFacilitiesPage, true, false);
             }
         }
 
@@ -333,7 +341,7 @@ namespace YNL.Checkotel
 
             public PolicyField(VisualElement field)
             {
-                _policyText = field.Q("Label") as Label;
+                _policyText = field.Q("Text") as Label;
                 _policyText.RegisterCallback<PointerUpEvent>(OnClicked_DescriptionText);
             }
 
@@ -366,7 +374,7 @@ namespace YNL.Checkotel
 
             public CancellationField(VisualElement field)
             {
-                _cancellationText = field.Q("Label") as Label;
+                _cancellationText = field.Q("Text") as Label;
                 _cancellationText.RegisterCallback<PointerUpEvent>(OnClicked_DescriptionText);
             }
 

@@ -135,11 +135,11 @@ namespace YNL.Checkotel
                 _originalPrice.SetDisplay(discount > 0 ? DisplayStyle.Flex : DisplayStyle.None);
                 _discountField.SetDisplay(discount > 0 ? DisplayStyle.Flex : DisplayStyle.None);
 
-                _originalPrice.SetText($"Only <s>{price}$</s>");
+                _originalPrice.SetText($"Only <s>{price.ToString("0.00")}$</s>");
                 _discountText.SetText($"Discount {discount}%");
 
                 var lastPrice = price * (1 - discount / 100f);
-                string priceText = $"<b><color=#FED1A7>{lastPrice}$</color></b> <size=35>/ {duration} {type.GetStayTypeUnit(duration)} • <color=#75caff>Only {roomAmount} room left</color></size>";
+                string priceText = $"<b><color=#FED1A7>{lastPrice.ToString("0.00")}$</color></b> <size=35>/ {duration} {type.GetStayTypeUnit(duration)} • <color=#75caff>Only {roomAmount} room left</color></size>";
 
                 _lastPrice.SetText(priceText);
             }
@@ -177,7 +177,7 @@ namespace YNL.Checkotel
             this.AddElements(_previewArea, _infoArea);
 
             _hotTag = new();
-            _previewArea.AddElements(_hotTag);
+            //_previewArea.AddElements(_hotTag);
 
             _nameField = new();
             _infoArea.AddElements(_nameField);

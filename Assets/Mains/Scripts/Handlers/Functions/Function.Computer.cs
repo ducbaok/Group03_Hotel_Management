@@ -90,7 +90,7 @@ namespace YNL.Checkotel
             var validRooms = unit.Rooms.Where(i => i.Description.Restriction.StayType == type).ToArray();
 
             var orderedRooms = validRooms.OrderBy(r => r.Price.BasePrice).ToArray();
-            var lowestPrice = orderedRooms.IsEmpty() ? float.MaxValue : orderedRooms[0].Price.BasePrice;
+            var lowestPrice = orderedRooms.IsEmpty() ? 0 : orderedRooms[0].Price.BasePrice;
 
             unit.LowestPrices[type] = lowestPrice;
 

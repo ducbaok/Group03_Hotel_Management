@@ -158,6 +158,7 @@ namespace YNL.Checkotel
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewMainPage, true, false);
             Marker.OnHotelInformationDisplayed?.Invoke(_id, false);
+            Marker.OnHotelFacilitiesDisplayed?.Invoke(_id);
         }
     }
 }

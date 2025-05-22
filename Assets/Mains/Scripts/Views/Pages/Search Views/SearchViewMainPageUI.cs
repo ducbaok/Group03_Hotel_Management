@@ -28,13 +28,11 @@ namespace YNL.Checkotel
         protected override void VirtualAwake()
         {
             Marker.OnAddressSearchSubmitted += OnAddressSearchSubmitted;
-            Marker.OnTimeRangeSubmitted += OnTimeRangeSubmitted;
         }
 
         private void OnDestroy()
         {
             Marker.OnAddressSearchSubmitted -= OnAddressSearchSubmitted;
-            Marker.OnTimeRangeSubmitted -= OnTimeRangeSubmitted;
         }
 
         protected override void Collect()
@@ -61,6 +59,8 @@ namespace YNL.Checkotel
 
             _searchButton = Root.Q("SearchButton");
             _searchButton.RegisterCallback<PointerUpEvent>(OnClicked_SearchButton);
+
+            _timeRangePageUI.OnTimeRangeSubmitted = OnTimeRangeSubmitted;
         }
 
         protected override void Initialize()

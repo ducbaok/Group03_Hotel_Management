@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -55,49 +56,39 @@ namespace YNL.Checkotel
             return number + suffix;
         }
 
-        public static async UniTask<Texture2D[]> GetRoomImageAsync(this HotelUnit unit)
+        public static HotelFacility ToFacilities(this string input)
         {
-            var urls = unit.Rooms?.Where(i => i.Description != null && !string.IsNullOrEmpty(i.Description.ImageURL)).Select(i => i.Description.ImageURL).ToArray();
-            var tasks = new List<UniTask<Texture2D>>();
+            HotelFacility result = HotelFacility.None;
 
-            foreach (string url in urls)
+            foreach (string part in input.Split(';'))
             {
-                tasks.Add(DownloadImageAsync(url));
-            }
-
-            return await UniTask.WhenAll(tasks);
-
-            async UniTask<Texture2D> DownloadImageAsync(string url)
-            {
-                using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
+                string trimmed = part.Trim();
+                if (Enum.TryParse<HotelFacility>(trimmed, ignoreCase: true, out var facility))
                 {
-                    await uwr.SendWebRequest();
-
-                    if (uwr.result != UnityWebRequest.Result.Success)
-                    {
-                        Debug.LogError($"Failed to download image: {url}, Error: {uwr.error}");
-                        return null;
-                    }
-
-                    return DownloadHandlerTexture.GetContent(uwr);
+                    result |= facility;
+                }
+                else
+                {
+                    Console.WriteLine($"Warning: Unknown facility '{trimmed}'");
                 }
             }
+
+            return result;
         }
-
-        public static async UniTask<string> GetRawDatabaseAsync(this string url)
+        
+        public static HotelFacility[] ToArray(this HotelFacility facilities)
         {
-            using UnityWebRequest request = UnityWebRequest.Get(url);
-            await request.SendWebRequest();
+            List<HotelFacility> facilityArray = new List<HotelFacility>();
 
-            if (request.result == UnityWebRequest.Result.Success)
+            foreach (HotelFacility facility in Enum.GetValues(typeof(HotelFacility)))
             {
-                return request.downloadHandler.text;
+                if (facility != HotelFacility.None && facilities.HasFlag(facility))
+                {
+                    facilityArray.Add(facility);
+                }
             }
-            else
-            {
-                Debug.LogError("Error: " + request.error);
-                return null;
-            }
+
+            return facilityArray.ToArray();
         }
     }
 }

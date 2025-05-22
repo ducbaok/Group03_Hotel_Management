@@ -9,11 +9,13 @@ namespace YNL.Checkotel
     {
         public class HourlyPage : ICollectible, IRefreshable
         {
-            public int TestMaxDuration = 15;
+            public int MaxDuration = 15;
 
             public DateTime SelectedDate = DateTime.Now.AddHours(1);
             public byte CheckInTime;
             public byte Duration;
+
+            public Action<DateTime, byte> OnTimeRangeChanged { get; set; }
 
             public DateTime CheckInDate => SelectedDate.AddHours(CheckInTime);
 
@@ -92,7 +94,7 @@ namespace YNL.Checkotel
 
                 for (byte i = 0; i < _durationButtons.Count; i++)
                 {
-                    bool validDuration = i < TestMaxDuration;
+                    bool validDuration = i < MaxDuration;
 
                     _durationButtons[i].SetDisplay(validDuration ? DisplayStyle.Flex : DisplayStyle.None);
 
@@ -114,7 +116,7 @@ namespace YNL.Checkotel
                     _checkInTimeButtons[i].SetDisplay(validButton ? DisplayStyle.Flex : DisplayStyle.None);
                 }
 
-                Marker.OnTimeRangeChanged?.Invoke(CheckInDate, Duration);
+                OnTimeRangeChanged?.Invoke(CheckInDate, Duration);
             }
 
             private void OnSelected_TimePointButton(bool isCheckInTime, string value)
@@ -128,7 +130,7 @@ namespace YNL.Checkotel
                     Duration = byte.Parse(value.Split(' ')[0]);
                 }
 
-                Marker.OnTimeRangeChanged?.Invoke(CheckInDate, Duration);
+                OnTimeRangeChanged?.Invoke(CheckInDate, Duration);
             }
         }
     }

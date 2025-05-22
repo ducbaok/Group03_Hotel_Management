@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 using YNL.Utilities.UIToolkits;
 
@@ -6,6 +7,8 @@ namespace YNL.Checkotel
 {
     public partial class InformationViewMainPage : ViewPageUI
     {
+        [SerializeField] private InformationViewTimeRangePageUI _timeRangePageUI;
+
         private VisualElement _backButton;
         private VisualElement _favoriteButton;
         private VisualElement _shareButton;
@@ -48,6 +51,7 @@ namespace YNL.Checkotel
             _shareButton = Root.Q("TopBar").Q("ShareButton");
 
             _priceField = new(Root);
+            _priceField.OnOpenTimeRangePage = OnOpenTimeRangePage;
 
             var contentContainer = Root.Q("ContentScroll").Q("unity-content-container");
 
@@ -66,6 +70,8 @@ namespace YNL.Checkotel
             _policyField = new(contentContainer.Q("PolicyField"));
 
             _cancellationPolicy = new(contentContainer.Q("CancellationPolicy"));
+
+            _timeRangePageUI.OnTimeRangeSubmitted = OnTimeRangeSubmitted;
         }
 
         private void OnClicked_BackButton(PointerUpEvent evt)
@@ -87,6 +93,18 @@ namespace YNL.Checkotel
                 Main.Runtime.FavoriteHotels.Add(_hotelID);
                 _favoriteButton.SetBackgroundImage(Main.Resources.Icons["Heart (Filled)"]);
             }
+        }
+
+        private void OnOpenTimeRangePage()
+        {
+            _timeRangePageUI.OnPageOpened(true, false);
+        }
+
+        private void OnTimeRangeSubmitted(Room.StayType type, DateTime checkInTime, byte duration)
+        {
+            var unit = Main.Database.Hotels[_hotelID];
+
+            _priceField.Apply(unit, type, checkInTime, duration);
         }
 
         private void OnHotelInformationDisplayed(UID id, bool isSearchResult)

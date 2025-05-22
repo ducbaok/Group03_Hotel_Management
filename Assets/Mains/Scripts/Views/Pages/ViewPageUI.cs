@@ -34,12 +34,13 @@ namespace YNL.Checkotel
             }
 
             _isDisplayThisTime = _hideOnAwake;
+
+            Marker.OnDatabaseSerializationDone += OnDatabaseSerializationDone;
         }
 
-        private void Start()
+        private void OnDestroy()
         {
-            Initialize();
-            Refresh();
+            Marker.OnDatabaseSerializationDone -= OnDatabaseSerializationDone;
         }
 
         protected virtual void VirtualAwake() { }
@@ -71,6 +72,12 @@ namespace YNL.Checkotel
             {
                 Refresh();
             }
+        }
+
+        private void OnDatabaseSerializationDone()
+        {
+            Initialize();
+            Refresh();
         }
 
         private void OnTransitionEnded(TransitionEndEvent evt)
