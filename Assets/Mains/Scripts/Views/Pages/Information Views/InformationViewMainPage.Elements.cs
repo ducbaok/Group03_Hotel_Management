@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -20,6 +19,11 @@ namespace YNL.Checkotel
             private Label _originalPrice;
             private Label _lastPrice;
             private Button _chooseButton;
+
+            private UID _hotelID;
+            private Room.StayType _stayType;
+            private DateTime _checkInTime;
+            private byte _duration;
 
             public PriceField(VisualElement root)
             {
@@ -39,10 +43,16 @@ namespace YNL.Checkotel
                 _lastPrice = priceArea.Q("PriceField").Q("LastPrice") as Label;
 
                 _chooseButton = priceArea.Q("ChooseButton") as Button;
+                _chooseButton.RegisterCallback<PointerUpEvent>(OnClicked_ChooseButton);
             }
 
-            public void Apply(HotelUnit unit, Room.StayType type, DateTime checkInTime, byte duration)
+            public void Apply(UID hotelID, Room.StayType type, DateTime checkInTime, byte duration)
             {
+                _hotelID = hotelID;
+                _stayType = type;
+                _checkInTime = checkInTime;
+                _duration = duration;
+
                 var style = type.GetInformationTimeFieldStyle();
 
                 _timeField.SetBackgroundColor(style.Backbround);
@@ -59,6 +69,12 @@ namespace YNL.Checkotel
             private void OnClicked_TimeField(PointerUpEvent evt)
             {
                 OnOpenTimeRangePage?.Invoke();
+            }
+
+            private void OnClicked_ChooseButton(PointerUpEvent evt)
+            {
+                Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewRoomPage, true, false);
+                Marker.OnHotelRoomsDisplayed?.Invoke(_hotelID, _stayType, _checkInTime, _duration);
             }
         }
 

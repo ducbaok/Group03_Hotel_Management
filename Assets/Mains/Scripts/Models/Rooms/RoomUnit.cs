@@ -8,7 +8,7 @@ namespace YNL.Checkotel
         public string Name = string.Empty;
         public RoomDescription Description = new();
         public RoomPrice Price = new();
-        public ushort RoomAmount = new();
+        public byte RoomAmount = new();
     }
 
     [System.Serializable]

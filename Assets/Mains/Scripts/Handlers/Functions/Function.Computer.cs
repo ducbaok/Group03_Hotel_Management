@@ -18,7 +18,7 @@ namespace YNL.Checkotel
             return (checkInText, checkOutText);
         }
 
-        public static (string In, string Out, string Duration) GetTimeRangeText(this Room.StayType type, DateTime checkInTime, byte duration)
+        public static (string In, string Out, string Duration) GetTimeRangeText(this Room.StayType type, DateTime checkInTime, byte duration, string format = null)
         {
             string durationText = type switch
             {
@@ -28,8 +28,10 @@ namespace YNL.Checkotel
                 _ => ""
             };
 
-            string checkInText = checkInTime.ToString("dd/MM, HH:mm");
-            string checkOutText = checkInTime.AddHours(duration).ToString("dd/MM, HH:mm");
+            format = format == null ? "dd/MM, HH:mm" : format;
+
+            string checkInText = checkInTime.ToString(format);
+            string checkOutText = checkInTime.AddHours(duration).ToString(format);
 
             return (checkInText, checkOutText, durationText);
         }

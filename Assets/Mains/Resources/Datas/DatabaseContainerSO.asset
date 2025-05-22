@@ -1037,7 +1037,7 @@ MonoBehaviour:
               TimeIn: 0
               TimeOut: 0
             Refundable: 0
-          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Rooms/10000000_4.jpg
+          ImageURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Images/Rooms/10000000_4.jpg
         Price:
           BasePrice: 250
           Discount: 0

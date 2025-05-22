@@ -2,11 +2,12 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using YNL.Utilities.Extensions;
-
 namespace YNL.Checkotel
 {
     public class DataManager : MonoBehaviour
     {
+        public bool EnableInitializeDatabase = true;
+
         private DatabaseContainerSO _database => Main.Database;
 
         [SerializeField] private string _hotelDatabaseURL;
@@ -18,9 +19,15 @@ namespace YNL.Checkotel
 
         private async UniTaskVoid InitializeDatabases()
         {
-            await InitializeHotelDatabase();
-            await InitializeRoomDatabase();
+            if (EnableInitializeDatabase)
+            {
+                await InitializeHotelDatabase();
+                await InitializeRoomDatabase();
+            }
 
+            await UniTask.Delay(100);
+
+            MDebug.Log("HHHEHEH");
             Marker.OnDatabaseSerializationDone?.Invoke();
         }
 

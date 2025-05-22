@@ -22,7 +22,6 @@ namespace YNL.Checkotel
             {
                 var item = element as SearchingResultItemUI;
                 item.Apply(_favorites[index], Room.StayType.Hourly);
-                //item.SetMarginBottom
             };
         }
 

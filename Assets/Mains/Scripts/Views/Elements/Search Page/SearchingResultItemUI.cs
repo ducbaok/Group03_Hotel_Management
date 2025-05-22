@@ -201,7 +201,7 @@ namespace YNL.Checkotel
         {
             _hotelID = id;
 
-            var unit = Main.Database.Hotels[id];
+            if (!Main.Database.Hotels.TryGetValue(id, out var unit)) return;
 
             Extension.Function.ApplyCloudImageAsync(_previewArea, unit.Description.ImageURL);
 

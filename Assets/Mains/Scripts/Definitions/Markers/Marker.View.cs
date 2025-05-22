@@ -5,6 +5,8 @@ namespace YNL.Checkotel
     public delegate void OnSearchingResultRequested(string address, Room.StayType stay, Room.RoomType room, DateTime checInTime, byte duration);
     public delegate void OnHotelInformationDisplayed(UID hotelID, bool isSearchingResult);
     public delegate void OnHotelFacilitiesDisplayed(UID hotelID);
+    public delegate void OnHotelRoomsDisplayed(UID hotelID, Room.StayType stayType, DateTime checkInTime, byte duration);
+    public delegate void OnPaymentRequested(UID hotelID, RoomUnit roomUnit, Room.StayType stayType, DateTime checkInTime, byte duration);
 
     public static partial class Marker
     {
@@ -20,5 +22,7 @@ namespace YNL.Checkotel
         public static OnSearchingResultRequested OnSearchingResultRequested { get; set; }
         public static OnHotelInformationDisplayed OnHotelInformationDisplayed{ get; set; }
         public static OnHotelFacilitiesDisplayed OnHotelFacilitiesDisplayed { get; set; }
+        public static OnHotelRoomsDisplayed OnHotelRoomsDisplayed { get; set; }
+        public static OnPaymentRequested OnPaymentRequested { get; set; }
     }
 }

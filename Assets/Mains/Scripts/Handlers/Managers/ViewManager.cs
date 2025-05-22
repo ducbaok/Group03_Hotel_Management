@@ -51,5 +51,7 @@ namespace YNL.Checkotel
         InformationViewMainPage,
         InformationViewReviewPage,
         InformationViewFacilitiesPage,
+        InformationViewRoomPage,
+        InformationViewPaymentPage
     }
 }

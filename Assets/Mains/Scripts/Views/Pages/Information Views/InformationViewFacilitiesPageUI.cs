@@ -33,10 +33,10 @@ namespace YNL.Checkotel
             _itemList.Q<ScrollView>().verticalScrollerVisibility = ScrollerVisibility.Hidden;
             _itemList.virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight;
             _itemList.itemsSource = _facilities;
-            _itemList.makeItem = () => new FacilityListItem();
+            _itemList.makeItem = () => new FacilityListItemUI();
             _itemList.bindItem = (element, index) =>
             {
-                var item = element as FacilityListItem;
+                var item = element as FacilityListItemUI;
                 item.Apply(_facilities[index]);
             };
         }

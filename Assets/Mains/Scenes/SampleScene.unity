@@ -586,6 +586,72 @@ MonoBehaviour:
   _isPopupPage: 0
   _addressPageUI: {fileID: 2063912293}
   _timeRangePageUI: {fileID: 1040390893}
+--- !u!1 &399122356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399122357}
+  - component: {fileID: 399122359}
+  - component: {fileID: 399122358}
+  m_Layer: 0
+  m_Name: Room Page
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399122357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399122356}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 677393419}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399122358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399122356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc97556c2d901384ba81dd3af2dc5bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hideOnAwake: 1
+  _isPopupPage: 0
+--- !u!114 &399122359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399122356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 5140d5e01a4cc404cb3de4231c230c5b, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: ed9540c9596748946b24e121b61b3500, type: 3}
+  m_SortingOrder: 1
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1 &512424990
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +888,8 @@ Transform:
   - {fileID: 1367958480}
   - {fileID: 326430289}
   - {fileID: 196649517}
+  - {fileID: 399122357}
+  - {fileID: 2000165958}
   m_Father: {fileID: 1267176884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &731950899
@@ -1160,7 +1228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
   Resources: {fileID: 11400000, guid: b20276ab1d1295c4b8951d429160e194, type: 2}
-  Database: {fileID: 11400000, guid: 35cb7b5861055cc4fa036e8e5eb34ea5, type: 2}
+  Database: {fileID: 11400000, guid: 2ec674616a7292541ae5152fe9022406, type: 2}
   Runtime: {fileID: 11400000, guid: f26486526ea4dff418024e4d5e2698cb, type: 2}
   ViewManager: {fileID: 1289038838}
 --- !u!4 &1289038837
@@ -1193,7 +1261,7 @@ MonoBehaviour:
   CurrentViewType: 2
   IsAbleToMovePage: 1
   Pages:
-    _keys: 000102030405060708090a
+    _keys: 000102030405060708090a0b0c
     _values:
     - {fileID: 1401361675}
     - {fileID: 307309654}
@@ -1206,6 +1274,8 @@ MonoBehaviour:
     - {fileID: 121488326}
     - {fileID: 1367958482}
     - {fileID: 326430291}
+    - {fileID: 399122358}
+    - {fileID: 2000165959}
 --- !u!114 &1289038839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,6 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96521ec00377a7b45895757b66268b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnableInitializeDatabase: 0
   _hotelDatabaseURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Hotel.csv
 --- !u!1 &1367958479
 GameObject:
@@ -1660,6 +1731,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hideOnAwake: 1
   _isPopupPage: 0
+--- !u!1 &2000165957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2000165958}
+  - component: {fileID: 2000165960}
+  - component: {fileID: 2000165959}
+  m_Layer: 0
+  m_Name: Payment Page
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2000165958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000165957}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 677393419}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2000165959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000165957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c1eb4d556a3db4cb83ae3fa440936c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hideOnAwake: 1
+  _isPopupPage: 0
+--- !u!114 &2000165960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000165957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 5140d5e01a4cc404cb3de4231c230c5b, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: a405c1d3a6ee9974b803f1c6310e5a5d, type: 3}
+  m_SortingOrder: 1
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1 &2020904536
 GameObject:
   m_ObjectHideFlags: 0

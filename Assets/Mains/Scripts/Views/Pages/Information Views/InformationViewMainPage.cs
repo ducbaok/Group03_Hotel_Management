@@ -102,9 +102,11 @@ namespace YNL.Checkotel
 
         private void OnTimeRangeSubmitted(Room.StayType type, DateTime checkInTime, byte duration)
         {
-            var unit = Main.Database.Hotels[_hotelID];
-
-            _priceField.Apply(unit, type, checkInTime, duration);
+            _stayType = type;
+            _timeRange.checkInTime = checkInTime;
+            _timeRange.duration = duration;
+            
+            _priceField.Apply(_hotelID, type, checkInTime, duration);
         }
 
         private void OnHotelInformationDisplayed(UID id, bool isSearchResult)
@@ -120,7 +122,7 @@ namespace YNL.Checkotel
                 _timeRange.duration = 1;
             }
 
-            _priceField.Apply(unit, _stayType, _timeRange.checkInTime, _timeRange.duration);
+            _priceField.Apply(id, _stayType, _timeRange.checkInTime, _timeRange.duration);
 
             _nameView.Apply(unit.Description.Name, unit.Description.Address);
             _reviewView.Apply(id);

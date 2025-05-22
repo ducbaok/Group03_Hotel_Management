@@ -3,7 +3,7 @@ using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
 {
-    public class FacilityListItem : VisualElement
+    public class FacilityListItemUI : VisualElement
     {
         private const string _rootClass = "facility-list-item";
         private const string _labelClass = _rootClass + "__label";
@@ -12,7 +12,7 @@ namespace YNL.Checkotel
         private VisualElement _icon;
         private Label _label;
 
-        public FacilityListItem()
+        public FacilityListItemUI()
         {
             this.AddStyle(Main.Resources.Styles["StyleVariableUI"]);
             this.AddStyle(Main.Resources.Styles["FacilityListItemUI"]);
