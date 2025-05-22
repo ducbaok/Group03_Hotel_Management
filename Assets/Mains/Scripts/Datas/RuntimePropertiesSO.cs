@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using YNL.Utilities.Addons;
@@ -17,5 +18,14 @@ namespace YNL.Checkotel
         public List<string> SearchingAddressHistory = new();
         public SerializableDictionary<UID, LikedFeedback> LikedFeedbacks = new();
         public List<UID> FavoriteHotels = new();
+
+        public Room.StayType StayType = Room.StayType.Hourly;
+        public DateTime CheckInTime;
+        public byte Duration = 1;
+
+        public void Reset()
+        {
+            CheckInTime = CheckInTime.GetNextNearestTime();
+        }
     }
 }

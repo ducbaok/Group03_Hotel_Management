@@ -23,7 +23,6 @@ namespace YNL.Checkotel
 
         private string _addressValue;
         private (Room.StayType stayType, Room.RoomType roomType) _searchingType = (Room.StayType.Hourly, Room.RoomType.Standard);
-        private (DateTime checkInTime, byte duration) _timeRange = (DateTime.MinValue, 1);
 
         protected override void VirtualAwake()
         {
@@ -95,7 +94,7 @@ namespace YNL.Checkotel
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.SearchViewResultPage, true, true);
 
-            Marker.OnSearchingResultRequested?.Invoke(_addressValue, _searchingType.stayType, _searchingType.roomType, _timeRange.checkInTime, _timeRange.duration);
+            Marker.OnSearchingResultRequested?.Invoke(_addressValue, _searchingType.roomType);
         }
 
         private void OnSearchingTypeSelected(bool isStayType, Room.StayType stayType, Room.RoomType roomType)
@@ -103,7 +102,7 @@ namespace YNL.Checkotel
             if (isStayType)
             {
                 _searchingType.stayType = stayType;
-                _timeRangePageUI.StayType = stayType;
+                Main.Runtime.StayType = stayType;
             }
             else
             {
@@ -120,8 +119,7 @@ namespace YNL.Checkotel
         private void OnTimeRangeSubmitted(DateTime checkInTime, byte duration)
         {
             _checkInTime.text = checkInTime.ToString("dd/MM, HH:mm");
-            _checkOutTime.text = checkInTime.AddHours(duration).ToString("dd/MM, HH:mm");
-            _timeRange = (checkInTime, duration);
+            _checkOutTime.text = checkInTime.AddHours(duration).ToString("dd/MM, HH:mm");;
         }
     }
 }

@@ -15,9 +15,6 @@ namespace YNL.Checkotel
 
         private List<RoomUnit> _rooms = new();
         private UID _hotelID;
-        private Room.StayType _stayType;
-        private DateTime _checkInTime;
-        private byte _duration;
 
         protected override void VirtualAwake()
         {
@@ -67,13 +64,10 @@ namespace YNL.Checkotel
             _itemList.Rebuild();
         }
 
-        private void OnHotelRoomsDisplayed(UID hotelID, Room.StayType stayType, DateTime checkInTime, byte duration)
+        private void OnHotelRoomsDisplayed(UID hotelID)
         {
             var unit = Main.Database.Hotels[_hotelID = hotelID];
             _rooms = unit.Rooms;
-            _stayType = stayType;
-            _checkInTime = checkInTime;
-            _duration = duration;
 
             RebuildHistoryList();
         }
@@ -81,7 +75,7 @@ namespace YNL.Checkotel
         private void OnRoomBooked(RoomUnit unit)
         {
             Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewPaymentPage, true, false);
-            Marker.OnPaymentRequested?.Invoke(_hotelID, unit, _stayType, _checkInTime, _duration);
+            Marker.OnPaymentRequested?.Invoke(_hotelID, unit);
         }
     }
 }

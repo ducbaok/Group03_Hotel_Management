@@ -25,19 +25,15 @@ namespace YNL.Checkotel
         private CancellationField _cancellationPolicy;
 
         private UID _hotelID;
-        private Room.StayType _stayType = Room.StayType.Hourly;
-        private (DateTime checkInTime, byte duration) _timeRange = (DateTime.MinValue, 1);
 
         protected override void VirtualAwake()
         {
             Marker.OnHotelInformationDisplayed += OnHotelInformationDisplayed;
-            Marker.OnSearchingResultRequested += OnSearchingResultRequested;
         }
 
         private void OnDestroy()
         {
             Marker.OnHotelInformationDisplayed -= OnHotelInformationDisplayed;
-            Marker.OnSearchingResultRequested -= OnSearchingResultRequested;
         }
 
         protected override void Collect()
@@ -100,13 +96,9 @@ namespace YNL.Checkotel
             _timeRangePageUI.OnPageOpened(true, false);
         }
 
-        private void OnTimeRangeSubmitted(Room.StayType type, DateTime checkInTime, byte duration)
-        {
-            _stayType = type;
-            _timeRange.checkInTime = checkInTime;
-            _timeRange.duration = duration;
-            
-            _priceField.Apply(_hotelID, type, checkInTime, duration);
+        private void OnTimeRangeSubmitted()
+        {      
+            _priceField.Apply(_hotelID);
         }
 
         private void OnHotelInformationDisplayed(UID id, bool isSearchResult)
@@ -117,12 +109,12 @@ namespace YNL.Checkotel
 
             if (!isSearchResult)
             {
-                var nearestTime = _timeRange.checkInTime.GetNextNearestTime();
-                _timeRange.checkInTime = nearestTime;
-                _timeRange.duration = 1;
+                var nearestTime = Main.Runtime.CheckInTime.GetNextNearestTime();
+                Main.Runtime.CheckInTime = nearestTime;
+                Main.Runtime.Duration = 1;
             }
 
-            _priceField.Apply(id, _stayType, _timeRange.checkInTime, _timeRange.duration);
+            _priceField.Apply(id);
 
             _nameView.Apply(unit.Description.Name, unit.Description.Address);
             _reviewView.Apply(id);
@@ -136,13 +128,6 @@ namespace YNL.Checkotel
             bool isFavorited = Main.Runtime.FavoriteHotels.Contains(id);
 
             _favoriteButton.SetBackgroundImage(Main.Resources.Icons[isFavorited ? "Heart (Filled)" : "Heart"]);
-        }
-
-        private void OnSearchingResultRequested(string address, Room.StayType stay, Room.RoomType room, DateTime checInTime, byte duration)
-        {
-            _stayType = stay;
-            _timeRange.checkInTime = checInTime;
-            _timeRange.duration = duration;
         }
     }
 }

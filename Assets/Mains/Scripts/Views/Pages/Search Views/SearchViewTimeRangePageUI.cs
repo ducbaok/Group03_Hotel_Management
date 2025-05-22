@@ -9,9 +9,6 @@ namespace YNL.Checkotel
     {
         public Action<DateTime, byte> OnTimeRangeSubmitted { get; set; }
 
-        public (DateTime CheckInTime, byte Duration) TimeRange;
-        public Room.StayType StayType;
-
         private VisualElement _background;
         private VisualElement _page;
         private VisualElement _closeButton;
@@ -78,20 +75,21 @@ namespace YNL.Checkotel
 
         private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
-            OnTimeRangeSubmitted?.Invoke(TimeRange.CheckInTime, TimeRange.Duration);
+            OnTimeRangeSubmitted?.Invoke(Main.Runtime.CheckInTime, Main.Runtime.Duration);
 
             OnPageOpened(false);
         }
 
         private void OnTimeRangeChanged(DateTime checkInTime, byte duration)
         {
-            var timeRangeText = StayType.GetTimeRangeText(checkInTime, duration);
+            var timeRangeText = Main.Runtime.StayType.GetTimeRangeText(checkInTime, duration);
 
             _checkInTime.SetText(timeRangeText.In);
             _checkOutTime.SetText(timeRangeText.Out);
             _durationTime.SetText(timeRangeText.Duration);
 
-            TimeRange = (checkInTime, duration);
+            Main.Runtime.CheckInTime = checkInTime;
+            Main.Runtime.Duration = duration;
         }
     }
 }

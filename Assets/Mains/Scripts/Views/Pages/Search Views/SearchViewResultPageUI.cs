@@ -28,7 +28,6 @@ namespace YNL.Checkotel
         private Label _emptyResultLabel;
 
         private List<UID> _resultIDs = new();
-        private Room.StayType _stayType;
 
         protected override void VirtualAwake()
         {
@@ -61,7 +60,7 @@ namespace YNL.Checkotel
             _resultList.bindItem = (element, index) =>
             {
                 var item = element as SearchingResultItemUI;
-                item.Apply(_resultIDs[index], _stayType);
+                item.Apply(_resultIDs[index], Main.Runtime.StayType);
             };
             resultPage.Add(_resultList);
 
@@ -101,13 +100,11 @@ namespace YNL.Checkotel
             _resultList.Rebuild();
         }
 
-        private void OnSearchingResultRequested(string address, Room.StayType stayType, Room.RoomType roomType, DateTime checkInTime, byte duration)
+        private void OnSearchingResultRequested(string address, Room.RoomType roomType)
         {
-            _stayType = stayType;
-
-            var timeRangeText = checkInTime.GetCheckingTimeText(duration);
+            var timeRangeText = Main.Runtime.CheckInTime.GetCheckingTimeText(Main.Runtime.Duration);
             var addressText = string.IsNullOrEmpty(address) ? "Anywhere" : address;
-            _searchText.SetText($"<b>{addressText}</b>\r\n<size=35>{stayType} • {timeRangeText.In} - {timeRangeText.Out}</size>");
+            _searchText.SetText($"<b>{addressText}</b>\r\n<size=35>{Main.Runtime.StayType} • {timeRangeText.In} - {timeRangeText.Out}</size>");
 
             _resultIDs.Clear();
 
@@ -117,9 +114,9 @@ namespace YNL.Checkotel
                 var matchingArray = new bool[]
                 {
                     unit.Description.Address.FuzzyContains(address) || unit.Description.Name.FuzzyContains(address),
-                    unit.Rooms.Any(i => i.Description.Restriction.StayType == stayType),
+                    unit.Rooms.Any(i => i.Description.Restriction.StayType == Main.Runtime.StayType),
                     unit.Rooms.Any(i => i.Description.Restriction.RoomType == roomType),
-                    pair.Key.IsValidTimeRange(stayType, checkInTime, duration)
+                    pair.Key.IsValidTimeRange(Main.Runtime.StayType, Main.Runtime.CheckInTime, Main.Runtime.Duration)
                 };  
 
                 if (matchingArray.All(i => i == true))

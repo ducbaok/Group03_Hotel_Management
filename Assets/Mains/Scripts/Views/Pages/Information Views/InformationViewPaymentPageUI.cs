@@ -99,7 +99,7 @@ namespace YNL.Checkotel
             }
         }
 
-        private void OnPaymentRequested(UID hotelID, RoomUnit roomUnit, Room.StayType stayType, DateTime checkInTime, byte duration)
+        private void OnPaymentRequested(UID hotelID, RoomUnit roomUnit)
         {
             _hotelID = hotelID;
             _roomUnit = roomUnit;
@@ -111,7 +111,7 @@ namespace YNL.Checkotel
             _roomName.SetText(roomUnit.Name);
             _addressText.SetText(unit.Description.Address);
 
-            var timeRangeText = stayType.GetTimeRangeText(checkInTime, duration, "HH:mm • dd/MM/yyyy");
+            var timeRangeText = Main.Runtime.StayType.GetTimeRangeText(Main.Runtime.CheckInTime, Main.Runtime.Duration, "HH:mm • dd/MM/yyyy");
 
             _durationText.SetText(timeRangeText.Duration);
             _checkInTime.SetText(timeRangeText.In);
@@ -119,6 +119,8 @@ namespace YNL.Checkotel
 
             _phoneNumber.SetText(account.PhoneNumber);
             _userName.SetText(account.Name);
+
+            _priceText.SetText($"${roomUnit.Price.FinalPrice:0.00}");
         }
     }
 }

@@ -21,9 +21,6 @@ namespace YNL.Checkotel
             private Button _chooseButton;
 
             private UID _hotelID;
-            private Room.StayType _stayType;
-            private DateTime _checkInTime;
-            private byte _duration;
 
             public PriceField(VisualElement root)
             {
@@ -46,14 +43,11 @@ namespace YNL.Checkotel
                 _chooseButton.RegisterCallback<PointerUpEvent>(OnClicked_ChooseButton);
             }
 
-            public void Apply(UID hotelID, Room.StayType type, DateTime checkInTime, byte duration)
+            public void Apply(UID hotelID)
             {
                 _hotelID = hotelID;
-                _stayType = type;
-                _checkInTime = checkInTime;
-                _duration = duration;
 
-                var style = type.GetInformationTimeFieldStyle();
+                var style = Main.Runtime.StayType.GetInformationTimeFieldStyle();
 
                 _timeField.SetBackgroundColor(style.Backbround);
                 _timeField.SetBorderColor(style.Border);
@@ -61,7 +55,7 @@ namespace YNL.Checkotel
                 _lastPrice.SetColor(style.Border);
                 _chooseButton.SetBackgroundColor(style.Border);
 
-                var timeText = type.GetTimeRangeText(checkInTime, duration);
+                var timeText = Main.Runtime.StayType.GetTimeRangeText(Main.Runtime.CheckInTime, Main.Runtime.Duration);
 
                 _timeText.SetText($"{timeText.Duration} | {timeText.In} → {timeText.Out}");
             }
@@ -74,7 +68,7 @@ namespace YNL.Checkotel
             private void OnClicked_ChooseButton(PointerUpEvent evt)
             {
                 Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewRoomPage, true, false);
-                Marker.OnHotelRoomsDisplayed?.Invoke(_hotelID, _stayType, _checkInTime, _duration);
+                Marker.OnHotelRoomsDisplayed?.Invoke(_hotelID);
             }
         }
 

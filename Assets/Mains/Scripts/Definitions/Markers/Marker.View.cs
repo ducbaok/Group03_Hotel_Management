@@ -2,11 +2,11 @@ using System;
 
 namespace YNL.Checkotel
 {
-    public delegate void OnSearchingResultRequested(string address, Room.StayType stay, Room.RoomType room, DateTime checInTime, byte duration);
+    public delegate void OnSearchingResultRequested(string address, Room.RoomType room);
     public delegate void OnHotelInformationDisplayed(UID hotelID, bool isSearchingResult);
     public delegate void OnHotelFacilitiesDisplayed(UID hotelID);
-    public delegate void OnHotelRoomsDisplayed(UID hotelID, Room.StayType stayType, DateTime checkInTime, byte duration);
-    public delegate void OnPaymentRequested(UID hotelID, RoomUnit roomUnit, Room.StayType stayType, DateTime checkInTime, byte duration);
+    public delegate void OnHotelRoomsDisplayed(UID hotelID);
+    public delegate void OnPaymentRequested(UID hotelID, RoomUnit roomUnit);
 
     public static partial class Marker
     {

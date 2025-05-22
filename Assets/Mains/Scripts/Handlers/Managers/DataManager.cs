@@ -14,6 +14,8 @@ namespace YNL.Checkotel
 
         private void Start()
         {
+            Main.Runtime.Reset();
+
             InitializeDatabases().Forget();
         }
 

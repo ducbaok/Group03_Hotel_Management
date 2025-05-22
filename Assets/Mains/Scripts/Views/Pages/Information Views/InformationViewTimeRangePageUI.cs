@@ -8,10 +8,7 @@ namespace YNL.Checkotel
 {
     public partial class InformationViewTimeRangePageUI : ViewPageUI
     {
-        public Action<Room.StayType, DateTime, byte> OnTimeRangeSubmitted { get; set; }
-
-        public (DateTime CheckInTime, byte Duration) TimeRange;
-        public Room.StayType StayType;
+        public Action OnTimeRangeSubmitted { get; set; }
 
         private VisualElement _background;
         private VisualElement _page;
@@ -68,18 +65,16 @@ namespace YNL.Checkotel
 
         private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
-            OnTimeRangeSubmitted?.Invoke(StayType, TimeRange.CheckInTime, TimeRange.Duration);
-
             OnPageOpened(false);
         }
 
         private void OnSelected_StayTypeButton(Room.StayType type)
         {
-            StayType = type;
+            Main.Runtime.StayType = type;
 
             foreach (var pair in _stayTypeButtons)
             {
-                if (pair.Key == StayType)
+                if (pair.Key == Main.Runtime.StayType)
                 {
                     pair.Value.SetColor("#FED1A7");
                     pair.Value.SetBorderColor("#FED1A7");
@@ -94,13 +89,14 @@ namespace YNL.Checkotel
 
         private void OnTimeRangeChanged(DateTime checkInTime, byte duration)
         {
-            var timeRangeText = StayType.GetTimeRangeText(checkInTime, duration);
+            var timeRangeText = Main.Runtime.StayType.GetTimeRangeText(checkInTime, duration);
 
             _checkInTime.SetText(timeRangeText.In);
             _checkOutTime.SetText(timeRangeText.Out);
             _durationTime.SetText(timeRangeText.Duration);
 
-            TimeRange = (checkInTime, duration);
+            Main.Runtime.CheckInTime = checkInTime;
+            Main.Runtime.Duration = duration;
         }
     }
 }
