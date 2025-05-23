@@ -7,7 +7,7 @@ namespace YNL.Checkotel
 {
     public class FeedbackPreviewItemUI : VisualElement
     {
-        private static SerializableDictionary<UID, LikedFeedback> _likedFeedbacks => Main.Runtime.LikedFeedbacks;
+        private static SerializableDictionary<UID, LikedFeedback> _likedFeedbacks => Main.Runtime.Data.LikedFeedbacks;
 
         private const string _rootClass = "review-result-item";
         private const string _backgroundClass = _rootClass + "__background";

@@ -75,21 +75,21 @@ namespace YNL.Checkotel
 
         private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
-            OnTimeRangeSubmitted?.Invoke(Main.Runtime.CheckInTime, Main.Runtime.Duration);
+            OnTimeRangeSubmitted?.Invoke(Main.Runtime.Data.CheckInTime, Main.Runtime.Data.Duration);
 
             OnPageOpened(false);
         }
 
         private void OnTimeRangeChanged(DateTime checkInTime, byte duration)
         {
-            var timeRangeText = Main.Runtime.StayType.GetTimeRangeText(checkInTime, duration);
+            var timeRangeText = Main.Runtime.Data.StayType.GetTimeRangeText(checkInTime, duration);
 
             _checkInTime.SetText(timeRangeText.In);
             _checkOutTime.SetText(timeRangeText.Out);
             _durationTime.SetText(timeRangeText.Duration);
 
-            Main.Runtime.CheckInTime = checkInTime;
-            Main.Runtime.Duration = duration;
+            Main.Runtime.Data.CheckInTime = checkInTime;
+            Main.Runtime.Data.Duration = duration;
         }
     }
 }

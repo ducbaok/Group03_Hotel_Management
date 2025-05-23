@@ -6,7 +6,7 @@ namespace YNL.Checkotel
 {
     public class MainViewFavoritePageUI : ViewPageUI
     {
-        private List<UID> _favorites => Main.Runtime.FavoriteHotels;
+        private List<UID> _favorites => Main.Runtime.Data.FavoriteHotels;
 
         public ListView _itemList;
 
@@ -21,7 +21,10 @@ namespace YNL.Checkotel
             _itemList.bindItem = (element, index) =>
             {
                 var item = element as SearchingResultItemUI;
-                item.Apply(_favorites[index], Room.StayType.Hourly);
+                if (index < _favorites.Count)
+                {
+                    item.Apply(_favorites[index], Room.StayType.Hourly);
+                }
             };
         }
 

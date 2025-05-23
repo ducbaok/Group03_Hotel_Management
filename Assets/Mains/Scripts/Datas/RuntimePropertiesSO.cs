@@ -17,8 +17,8 @@ namespace YNL.Checkotel
         public List<UID> Rooms = new();
     }
 
-    [CreateAssetMenu(fileName = "RuntimePropertiesSO", menuName = "YNL - Checkotel/RuntimePropertiesSO")]
-    public class RuntimePropertiesSO : ScriptableObject
+    [Serializable]
+    public class RuntimeData
     {
         public UID AccountID;
         public List<string> SearchingAddressHistory = new();
@@ -29,11 +29,22 @@ namespace YNL.Checkotel
         public DateTime CheckInTime;
         public byte Duration = 1;
 
-        public SerializableDictionary<UID, BookedRoom> BookedRooms = new();
+        public SerializableDictionary<uint, BookedRoom> BookedRooms = new();
+
+        public RuntimeData()
+        {
+            CheckInTime = CheckInTime.GetNextNearestTime();
+        }
+    }
+
+    [CreateAssetMenu(fileName = "RuntimePropertiesSO", menuName = "YNL - Checkotel/RuntimePropertiesSO")]
+    public class RuntimePropertiesSO : ScriptableObject
+    {
+        public RuntimeData Data = new();
 
         public void Reset()
         {
-            CheckInTime = CheckInTime.GetNextNearestTime();
+            Data = new();
         }
     }
 }

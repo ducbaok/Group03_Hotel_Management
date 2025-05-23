@@ -7,7 +7,7 @@ namespace YNL.Checkotel
 {
     public class MainViewBookingPageUI : ViewPageUI
     {
-        private List<UID> _favorites => Main.Runtime.BookedRooms.Keys.ToList();
+        private List<uint> _favorites => Main.Runtime.Data.BookedRooms.Keys.ToList();
 
         public ListView _itemList;
 

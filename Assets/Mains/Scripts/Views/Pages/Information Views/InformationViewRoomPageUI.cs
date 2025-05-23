@@ -76,7 +76,7 @@ namespace YNL.Checkotel
         {
             if (isBook)
             {
-                Main.Runtime.BookedRooms[_hotelID].Rooms.Remove(roomID);
+                Main.Runtime.Data.BookedRooms[_hotelID].Rooms.Remove(roomID);
             }
             else
             {

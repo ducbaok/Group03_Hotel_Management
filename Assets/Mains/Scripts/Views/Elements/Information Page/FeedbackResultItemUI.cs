@@ -7,7 +7,7 @@ namespace YNL.Checkotel
 {
     public class FeedbackResultItemUI : VisualElement
     {
-        private static SerializableDictionary<UID, LikedFeedback> _likedFeedbacks => Main.Runtime.LikedFeedbacks;
+        private static SerializableDictionary<UID, LikedFeedback> _likedFeedbacks => Main.Runtime.Data.LikedFeedbacks;
 
         private const string _rootClass = "review-result-item";
         private const string _backgroundClass = _rootClass + "__background";
@@ -138,6 +138,8 @@ namespace YNL.Checkotel
                 _likedFeedbacks.Add(_hotelID, new() { Feedbacks = new() { _feedbackID } });
                 status.Like++;
                 isLiked = true;
+
+                Marker.OnRuntimeSavingRequested?.Invoke();
             }
 
             _likeAmount.SetText(status.Like.ToString());

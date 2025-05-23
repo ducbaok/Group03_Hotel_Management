@@ -136,7 +136,7 @@ namespace YNL.Checkotel
 
             bool isBooked = false;
 
-            if (Main.Runtime.BookedRooms.TryGetValue(hotelID, out var rooms))
+            if (Main.Runtime.Data.BookedRooms.TryGetValue(hotelID, out var rooms))
             {
                 if (rooms.Rooms.Contains(roomID)) isBooked = true;
             }

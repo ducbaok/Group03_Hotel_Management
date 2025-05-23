@@ -1,6 +1,11 @@
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
 using UnityEngine;
+using YNL.Utilities.Extensions;
 namespace YNL.Checkotel
 {
     public class DataManager : MonoBehaviour
@@ -17,11 +22,30 @@ namespace YNL.Checkotel
         [SerializeField] private string _feedbackDatabaseURL;
         [SerializeField] private string _configDatabaseURL;
 
+        private string _savingPath => $"{Application.persistentDataPath}/Save.ysf";
+
+        private void Awake()
+        {
+            Marker.OnRuntimeSavingRequested += SaveRuntimeData;
+        }
+
+        private void OnDestroy()
+        {
+            Marker.OnRuntimeSavingRequested -= SaveRuntimeData;
+        }
+
         private void Start()
         {
             Main.Runtime.Reset();
 
+            LoadSavedData();
+
             InitializeDatabases().Forget();
+        }
+
+        public void SaveRuntimeData()
+        {
+            SaveNewtonJson(Main.Runtime.Data, _savingPath);
         }
 
         private async UniTaskVoid InitializeDatabases()
@@ -38,6 +62,19 @@ namespace YNL.Checkotel
 
             Marker.OnDatabaseSerializationDone?.Invoke();
             Main.IsSystemStarted = true;
+        }
+
+        public void LoadSavedData()
+        {
+            Main.Runtime.Data = MJson.LoadNewtonJson<RuntimeData>(_savingPath, null, ResaveData);
+
+            if (Main.Runtime.Data == null) ResaveData(null);
+
+            void ResaveData(string message)
+            {
+                Main.Runtime.Data = new();
+                SaveNewtonJson(Main.Runtime.Data, _savingPath);
+            }
         }
 
         private async UniTask InitializeConfigDatabase()
@@ -102,6 +139,30 @@ namespace YNL.Checkotel
 
                 _database.SerializeFeedbackDatabase(fields);
             }
+        }
+
+        public static bool SaveNewtonJson<T>(T data, string path, Action saveDone = null)
+        {
+            if (!File.Exists(path))
+            {
+                using (FileStream fs = File.Create(path)) { } // Properly closes the file
+                Debug.LogWarning("Target json file doesn't exist! Created a new file.");
+            }
+
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            // Open file with proper read/write permissions
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.Write(json);
+            }
+
+#if UNITY_EDITOR
+            AssetDatabase.Refresh();
+#endif
+
+            return true;
         }
     }
 }

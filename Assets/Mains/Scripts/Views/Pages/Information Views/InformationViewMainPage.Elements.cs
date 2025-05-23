@@ -47,7 +47,7 @@ namespace YNL.Checkotel
             {
                 _hotelID = hotelID;
 
-                var style = Main.Runtime.StayType.GetInformationTimeFieldStyle();
+                var style = Main.Runtime.Data.StayType.GetInformationTimeFieldStyle();
 
                 _timeField.SetBackgroundColor(style.Backbround);
                 _timeField.SetBorderColor(style.Border);
@@ -55,7 +55,7 @@ namespace YNL.Checkotel
                 _lastPrice.SetColor(style.Border);
                 _chooseButton.SetBackgroundColor(style.Border);
 
-                var timeText = Main.Runtime.StayType.GetTimeRangeText(Main.Runtime.CheckInTime, Main.Runtime.Duration);
+                var timeText = Main.Runtime.Data.StayType.GetTimeRangeText(Main.Runtime.Data.CheckInTime, Main.Runtime.Data.Duration);
 
                 _timeText.SetText($"{timeText.Duration} | {timeText.In} → {timeText.Out}");
             }

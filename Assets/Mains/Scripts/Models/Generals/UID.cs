@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace YNL.Checkotel
 {
@@ -13,11 +13,16 @@ namespace YNL.Checkotel
     {
         public static uint SUID;
 
-        [SerializeField] private uint _id;
+        public uint _id;
 
+        [JsonConstructor]
         public UID(uint id)
         {
             _id = id;
+        }
+        public UID(string id)
+        {
+            _id = Parse(id);
         }
 
         public static implicit operator uint(UID id) => id._id;

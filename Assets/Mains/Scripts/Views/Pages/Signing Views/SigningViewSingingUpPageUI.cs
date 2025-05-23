@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -86,10 +87,16 @@ namespace YNL.Checkotel
                 return;
             }
 
+            var account = Main.Database.Accounts.Values.First(i => i.Email == _accountInput || i.PhoneNumber == _accountInput);
+
+            if (account != null)
+            {
+                _accountMessage.SetText("This email or phone number is registered by another account!");
+                return;
+            }
+
             _accountMessage.SetText(string.Empty);
             _validAccountInput = true;
-
-            // Validate if account is existed.
         }
 
         private void OnValueChanged_PasswordInputField(ChangeEvent<string> evt)

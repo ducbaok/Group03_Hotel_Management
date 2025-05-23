@@ -11,6 +11,7 @@ namespace YNL.Checkotel
     public static partial class Marker
     {
         public static Action OnDatabaseSerializationDone { get; set; }
+        public static Action OnRuntimeSavingRequested { get; set; }
 
         public static Action<ViewType, bool, bool> OnViewPageSwitched { get; set; }
 

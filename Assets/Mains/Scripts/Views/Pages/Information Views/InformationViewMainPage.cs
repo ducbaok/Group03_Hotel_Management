@@ -77,18 +77,20 @@ namespace YNL.Checkotel
 
         private void OnClicked_FavoriteButton(PointerUpEvent evt)
         {
-            bool isFavorited = Main.Runtime.FavoriteHotels.Contains(_hotelID);
+            bool isFavorited = Main.Runtime.Data.FavoriteHotels.Contains(_hotelID);
 
             if (isFavorited)
             {
-                Main.Runtime.FavoriteHotels.Remove(_hotelID);
+                Main.Runtime.Data.FavoriteHotels.Remove(_hotelID);
                 _favoriteButton.SetBackgroundImage(Main.Resources.Icons["Heart"]);
             }
             else
             {
-                Main.Runtime.FavoriteHotels.Add(_hotelID);
+                Main.Runtime.Data.FavoriteHotels.Add(_hotelID);
                 _favoriteButton.SetBackgroundImage(Main.Resources.Icons["Heart (Filled)"]);
-            }
+
+                Marker.OnRuntimeSavingRequested?.Invoke();
+			}
         }
 
         private void OnOpenTimeRangePage()
@@ -109,9 +111,9 @@ namespace YNL.Checkotel
 
             if (!isSearchResult)
             {
-                var nearestTime = Main.Runtime.CheckInTime.GetNextNearestTime();
-                Main.Runtime.CheckInTime = nearestTime;
-                Main.Runtime.Duration = 1;
+                var nearestTime = Main.Runtime.Data.CheckInTime.GetNextNearestTime();
+                Main.Runtime.Data.CheckInTime = nearestTime;
+                Main.Runtime.Data.Duration = 1;
             }
 
             _priceField.Apply(id);
@@ -125,7 +127,7 @@ namespace YNL.Checkotel
             _policyField.Apply(unit);
             _cancellationPolicy.Apply(unit);
 
-            bool isFavorited = Main.Runtime.FavoriteHotels.Contains(id);
+            bool isFavorited = Main.Runtime.Data.FavoriteHotels.Contains(id);
 
             _favoriteButton.SetBackgroundImage(Main.Resources.Icons[isFavorited ? "Heart (Filled)" : "Heart"]);
         }

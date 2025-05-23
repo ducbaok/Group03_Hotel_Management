@@ -58,7 +58,7 @@ namespace YNL.Checkotel
 
         protected override void Initialize()
         {
-            _resultLocations = Main.Runtime.SearchingAddressHistory.Select(i => (i, false)).ToList();
+            _resultLocations = Main.Runtime.Data.SearchingAddressHistory.Select(i => (i, false)).ToList();
             RebuildHistoryList();
         }
 
@@ -88,7 +88,10 @@ namespace YNL.Checkotel
         private void OnFocusOut_AddressInput(FocusOutEvent evt)
         {
             Marker.OnAddressSearchSubmitted?.Invoke(_addressInput.value);
-        }
+
+            Main.Runtime.Data.SearchingAddressHistory.Add(_addressInput.value);
+            Marker.OnRuntimeSavingRequested?.Invoke();
+		}
 
         private void OnValueChanged_AddressInput(ChangeEvent<string> evt)
         {
@@ -97,7 +100,7 @@ namespace YNL.Checkotel
             if (value == string.Empty)
             {
                 _suggestionLabel.SetText("Searching history");
-                _resultLocations = Main.Runtime.SearchingAddressHistory.Select(i => (i, false)).ToList();
+                _resultLocations = Main.Runtime.Data.SearchingAddressHistory.Select(i => (i, false)).ToList();
             }
             else
             {

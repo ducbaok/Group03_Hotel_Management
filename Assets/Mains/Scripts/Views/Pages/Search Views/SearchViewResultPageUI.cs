@@ -60,7 +60,7 @@ namespace YNL.Checkotel
             _resultList.bindItem = (element, index) =>
             {
                 var item = element as SearchingResultItemUI;
-                item.Apply(_resultIDs[index], Main.Runtime.StayType);
+                item.Apply(_resultIDs[index], Main.Runtime.Data.StayType);
             };
             resultPage.Add(_resultList);
 
@@ -102,9 +102,9 @@ namespace YNL.Checkotel
 
         private void OnSearchingResultRequested(string address, Room.RoomType roomType)
         {
-            var timeRangeText = Main.Runtime.CheckInTime.GetCheckingTimeText(Main.Runtime.Duration);
+            var timeRangeText = Main.Runtime.Data.CheckInTime.GetCheckingTimeText(Main.Runtime.Data.Duration);
             var addressText = string.IsNullOrEmpty(address) ? "Anywhere" : address;
-            _searchText.SetText($"<b>{addressText}</b>\r\n<size=35>{Main.Runtime.StayType} • {timeRangeText.In} - {timeRangeText.Out}</size>");
+            _searchText.SetText($"<b>{addressText}</b>\r\n<size=35>{Main.Runtime.Data.StayType} • {timeRangeText.In} - {timeRangeText.Out}</size>");
 
             _resultIDs.Clear();
 
@@ -114,9 +114,9 @@ namespace YNL.Checkotel
                 var matchingArray = new bool[]
                 {
                     unit.Description.Address.FuzzyContains(address) || unit.Description.Name.FuzzyContains(address),
-                    unit.Rooms.Any(i => Main.Database.Rooms[i].Description.Restriction.StayType == Main.Runtime.StayType),
+                    unit.Rooms.Any(i => Main.Database.Rooms[i].Description.Restriction.StayType == Main.Runtime.Data.StayType),
                     unit.Rooms.Any(i => Main.Database.Rooms[i].Description.Restriction.RoomType == roomType),
-                    pair.Key.IsValidTimeRange(Main.Runtime.StayType, Main.Runtime.CheckInTime, Main.Runtime.Duration)
+                    pair.Key.IsValidTimeRange(Main.Runtime.Data.StayType, Main.Runtime.Data.CheckInTime, Main.Runtime.Data.Duration)
                 };  
 
                 if (matchingArray.All(i => i == true))

@@ -102,7 +102,7 @@ namespace YNL.Checkotel
             if (isStayType)
             {
                 _searchingType.stayType = stayType;
-                Main.Runtime.StayType = stayType;
+                Main.Runtime.Data.StayType = stayType;
             }
             else
             {

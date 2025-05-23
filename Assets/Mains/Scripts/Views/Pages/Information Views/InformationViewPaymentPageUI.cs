@@ -102,14 +102,16 @@ namespace YNL.Checkotel
 
         private void OnClicked_BookButton(PointerUpEvent evt)
         {
-            if (Main.Runtime.BookedRooms.TryGetValue(_hotelID, out var rooms))
+            if (Main.Runtime.Data.BookedRooms.TryGetValue(_hotelID, out var rooms))
             {
                 rooms.Rooms.Add(_roomID);
             }
             else
             {
-                Main.Runtime.BookedRooms.Add(_hotelID, new() { Rooms = new() { _roomID } });
-            }
+                Main.Runtime.Data.BookedRooms.Add(_hotelID, new() { Rooms = new() { _roomID } });
+
+				Marker.OnRuntimeSavingRequested?.Invoke();
+			}
 
             Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, false);
         }
@@ -120,13 +122,13 @@ namespace YNL.Checkotel
             _roomID = roomID;
 
             var unit = Main.Database.Hotels[hotelID];
-            var account = Main.Database.Accounts[Main.Runtime.AccountID];
+            var account = Main.Database.Accounts[Main.Runtime.Data.AccountID];
 
             _hotelName.SetText(unit.Description.Name);
             _roomName.SetText(Main.Database.Rooms[roomID].Name);
             _addressText.SetText(unit.Description.Address);
 
-            var timeRangeText = Main.Runtime.StayType.GetTimeRangeText(Main.Runtime.CheckInTime, Main.Runtime.Duration, "HH:mm • dd/MM/yyyy");
+            var timeRangeText = Main.Runtime.Data.StayType.GetTimeRangeText(Main.Runtime.Data.CheckInTime, Main.Runtime.Data.Duration, "HH:mm • dd/MM/yyyy");
 
             _durationText.SetText(timeRangeText.Duration);
             _checkInTime.SetText(timeRangeText.In);
