@@ -124,7 +124,7 @@ namespace YNL.Checkotel
 
             _nameLabel.text = unit.Description.Name;
             _locationText.text = unit.Description.Address;
-            var price = unit.Rooms.IsEmpty() ? 0 : unit.Rooms[0].Price.BasePrice;
+            var price = unit.Rooms.IsEmpty() ? 0 : Main.Database.Rooms[unit.Rooms[0]].Price.BasePrice;
             _priceText.text = $"<b><color=#FED1A7>${price * (1 - (discountPercentage / 100f))}</color></b> <s>${price}</s> <b><size=30>/ 2 days</size></b>";
             _ratingText.text = $"<b>{Random.Range(3.0f, 5.0f).ToString("F1")}</b> ({Random.Range(100, 100)})";
 

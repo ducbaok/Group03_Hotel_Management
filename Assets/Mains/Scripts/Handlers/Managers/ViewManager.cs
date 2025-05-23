@@ -42,7 +42,7 @@ namespace YNL.Checkotel
         
         MainViewHomePage,
         MainViewFavoritePage,
-        MainViewRewardPage,
+        MainViewBookingPage,
         MainViewAccountPage,
         
         SearchViewMainPage, 

@@ -24,7 +24,7 @@ namespace YNL.Checkotel
 
         private SerializableDictionary<PaymentMethod, (VisualElement field, VisualElement check)> _methodButtons = new();
         private UID _hotelID;
-        private RoomUnit _roomUnit;
+        private UID _roomID;
         private PaymentMethod _selectedPayment = PaymentMethod.PayAtPlace;
 
         protected override void VirtualAwake()
@@ -61,6 +61,7 @@ namespace YNL.Checkotel
 
             _priceText = Root.Q("Footer").Q<Label>("LastPrice");
             _bookButton = Root.Q("Footer").Q("BookButton");
+            _bookButton.RegisterCallback<PointerUpEvent>(OnClicked_BookButton);
 
             var paymentArea = Root.Q("PaymentMethodField").Q("PaymentArea");
             _methodButtons.Clear();
@@ -99,16 +100,30 @@ namespace YNL.Checkotel
             }
         }
 
-        private void OnPaymentRequested(UID hotelID, RoomUnit roomUnit)
+        private void OnClicked_BookButton(PointerUpEvent evt)
+        {
+            if (Main.Runtime.BookedRooms.TryGetValue(_hotelID, out var rooms))
+            {
+                rooms.Rooms.Add(_roomID);
+            }
+            else
+            {
+                Main.Runtime.BookedRooms.Add(_hotelID, new() { Rooms = new() { _roomID } });
+            }
+
+            Marker.OnViewPageSwitched?.Invoke(ViewType.MainViewHomePage, true, false);
+        }
+
+        private void OnPaymentRequested(UID hotelID, UID roomID)
         {
             _hotelID = hotelID;
-            _roomUnit = roomUnit;
+            _roomID = roomID;
 
             var unit = Main.Database.Hotels[hotelID];
             var account = Main.Database.Accounts[Main.Runtime.AccountID];
 
             _hotelName.SetText(unit.Description.Name);
-            _roomName.SetText(roomUnit.Name);
+            _roomName.SetText(Main.Database.Rooms[roomID].Name);
             _addressText.SetText(unit.Description.Address);
 
             var timeRangeText = Main.Runtime.StayType.GetTimeRangeText(Main.Runtime.CheckInTime, Main.Runtime.Duration, "HH:mm • dd/MM/yyyy");
@@ -120,7 +135,7 @@ namespace YNL.Checkotel
             _phoneNumber.SetText(account.PhoneNumber);
             _userName.SetText(account.Name);
 
-            _priceText.SetText($"${roomUnit.Price.FinalPrice:0.00}");
+            _priceText.SetText($"<size=35>Total payment</size>\r\n<b><color=#FED1A7>${Main.Database.Rooms[roomID].Price.FinalPrice:0.00}</color></b>");
         }
     }
 }

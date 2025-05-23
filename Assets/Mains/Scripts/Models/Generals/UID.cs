@@ -25,6 +25,16 @@ namespace YNL.Checkotel
         public static implicit operator UID(int id) => (uint)id;
 
         public static UID Parse(string id) => new(uint.Parse(id));
+        public static bool TryParse(string id, out UID result)
+        {
+            if (uint.TryParse(id, out uint value))
+            {
+                result = value;
+                return true;
+            }
+
+            throw new FormatException($"Invalid UID format: {id}");
+        }
         public static UID Create(UIDType type) => new((uint)type * 10000000 + SUID++);
 
         public override string ToString() => $"{_id.ToString("D5")}";

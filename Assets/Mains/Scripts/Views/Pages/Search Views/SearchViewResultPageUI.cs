@@ -114,8 +114,8 @@ namespace YNL.Checkotel
                 var matchingArray = new bool[]
                 {
                     unit.Description.Address.FuzzyContains(address) || unit.Description.Name.FuzzyContains(address),
-                    unit.Rooms.Any(i => i.Description.Restriction.StayType == Main.Runtime.StayType),
-                    unit.Rooms.Any(i => i.Description.Restriction.RoomType == roomType),
+                    unit.Rooms.Any(i => Main.Database.Rooms[i].Description.Restriction.StayType == Main.Runtime.StayType),
+                    unit.Rooms.Any(i => Main.Database.Rooms[i].Description.Restriction.RoomType == roomType),
                     pair.Key.IsValidTimeRange(Main.Runtime.StayType, Main.Runtime.CheckInTime, Main.Runtime.Duration)
                 };  
 

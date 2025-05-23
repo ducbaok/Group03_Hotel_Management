@@ -199,6 +199,8 @@ namespace YNL.Checkotel
 
         public void Apply(UID id, Room.StayType type)
         {
+            if (!Main.IsSystemStarted) return;
+
             _hotelID = id;
 
             if (!Main.Database.Hotels.TryGetValue(id, out var unit)) return;

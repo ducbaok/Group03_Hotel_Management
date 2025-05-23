@@ -9,7 +9,7 @@ namespace YNL.Checkotel
     {
         public class PriceFieldUI : VisualElement
         {
-            public Action OnBooked { get; set; }
+            public Action<bool> OnBooked { get; set; }
 
             private const string _elementClass = _rootClass + "__price-field";
             private const string _priceAreaClass = _rootClass + "__price-area";
@@ -29,6 +29,8 @@ namespace YNL.Checkotel
             private Label _discountText;
             private Label _lastPrice;
             private Button _bookButton;
+
+            private bool _isBooked;
 
             public PriceFieldUI()
             {
@@ -60,8 +62,10 @@ namespace YNL.Checkotel
                 this.AddElements(_bookButton);
             }
 
-            public void Apply(float price, Room.StayType type, int discount, byte duration, byte roomAmount)
+            public void Apply(float price, Room.StayType type, int discount, byte duration, byte roomAmount, bool isBooked)
             {
+                _isBooked = isBooked;
+
                 _originalPrice.SetDisplay(discount > 0 ? DisplayStyle.Flex : DisplayStyle.None);
                 _discountField.SetDisplay(discount > 0 ? DisplayStyle.Flex : DisplayStyle.None);
 
@@ -72,18 +76,20 @@ namespace YNL.Checkotel
                 string priceText = $"<b><color=#FED1A7>{lastPrice.ToString("0.00")}$</color></b> <size=35>/ {duration} {type.GetStayTypeUnit(duration)} • <color=#75caff>Only {roomAmount} room left</color></size>";
 
                 _lastPrice.SetText(priceText);
+                _bookButton.SetText(isBooked ? "Cancel" : "Book");
+                _bookButton.SetBackgroundColor(isBooked ? "#FF6462" : "#FED1A7");
             }
 
             private void OnClicked_BookButton(PointerUpEvent evt)
             {
-                OnBooked?.Invoke();
+                OnBooked?.Invoke(_isBooked);
             }
         }
     }
 
     public partial class RoomSelectItemUI : VisualElement
     {
-        public Action<RoomUnit> OnBooked { get; set; }
+        public Action<UID, bool> OnBooked { get; set; }
 
         protected const string _rootClass = "room-select-item";
         protected const string _previewAreaClass = _rootClass + "__preview-area";
@@ -97,8 +103,7 @@ namespace YNL.Checkotel
         private VisualElement _spaceField;
         private PriceFieldUI _priceField;
 
-        private UID _hotelID;
-        private RoomUnit _roomUnit;
+        private UID _roomID;
 
         public RoomSelectItemUI()
         {
@@ -121,20 +126,27 @@ namespace YNL.Checkotel
             _infoArea.AddElements(_priceField);
         }
 
-        public void Apply(RoomUnit unit)
+        public void Apply(UID hotelID, UID roomID)
         {
-            _roomUnit = unit;
+            var unit = Main.Database.Rooms[_roomID = roomID];
 
             Extension.Function.ApplyCloudImageAsync(_previewArea, unit.Description.ImageURL);
 
             _nameText.SetText(unit.Name);
 
-            _priceField.Apply(unit.Price.BasePrice, unit.Description.Restriction.StayType, 0, 1, unit.RoomAmount);
+            bool isBooked = false;
+
+            if (Main.Runtime.BookedRooms.TryGetValue(hotelID, out var rooms))
+            {
+                if (rooms.Rooms.Contains(roomID)) isBooked = true;
+            }
+
+            _priceField.Apply(unit.Price.BasePrice, unit.Description.Restriction.StayType, 0, 1, unit.RoomAmount, isBooked);
         }
 
-        private void OnRoomBooked()
+        private void OnRoomBooked(bool isBook)
         {
-            OnBooked?.Invoke(_roomUnit);
+            OnBooked?.Invoke(_roomID, isBook);
         }
     }
 }

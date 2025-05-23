@@ -151,6 +151,7 @@ Transform:
   - {fileID: 512424991}
   - {fileID: 2020904537}
   - {fileID: 1818752438}
+  - {fileID: 1552780834}
   - {fileID: 1407744819}
   m_Father: {fileID: 1267176884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -366,7 +367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hideOnAwake: 1
   _isPopupPage: 1
-  StayType: 0
 --- !u!114 &196649519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hideOnAwake: 1
   _isPopupPage: 1
-  StayType: 0
 --- !u!1 &1267176883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
   Resources: {fileID: 11400000, guid: b20276ab1d1295c4b8951d429160e194, type: 2}
-  Database: {fileID: 11400000, guid: 2ec674616a7292541ae5152fe9022406, type: 2}
+  Database: {fileID: 11400000, guid: 35cb7b5861055cc4fa036e8e5eb34ea5, type: 2}
   Runtime: {fileID: 11400000, guid: f26486526ea4dff418024e4d5e2698cb, type: 2}
   ViewManager: {fileID: 1289038838}
 --- !u!4 &1289038837
@@ -1267,7 +1266,7 @@ MonoBehaviour:
     - {fileID: 307309654}
     - {fileID: 2020904538}
     - {fileID: 1818752441}
-    - {fileID: 0}
+    - {fileID: 1552780835}
     - {fileID: 1407744821}
     - {fileID: 342035978}
     - {fileID: 1652320341}
@@ -1288,8 +1287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96521ec00377a7b45895757b66268b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableInitializeDatabase: 0
+  EnableInitializeDatabase: 1
   _hotelDatabaseURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Hotel.csv
+  _roomDatabaseURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Room.csv
+  _feedbackDatabaseURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Feedback.csv
+  _configDatabaseURL: https://raw.githubusercontent.com/Yunasawa200/CHECKOTEL-Storage/refs/heads/main/CHECKOTEL/Databases/Config.txt
 --- !u!1 &1367958479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1490,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hideOnAwake: 1
   _isPopupPage: 0
+--- !u!1 &1552780833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552780834}
+  - component: {fileID: 1552780836}
+  - component: {fileID: 1552780835}
+  m_Layer: 0
+  m_Name: Booking Page
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1552780834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552780833}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 120343007}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1552780835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552780833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab19dc78525f974a85690fcfeb82e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hideOnAwake: 1
+  _isPopupPage: 0
+--- !u!114 &1552780836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552780833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 5140d5e01a4cc404cb3de4231c230c5b, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5862a1a4eb7c0854a9add6cd34f99e0e, type: 3}
+  m_SortingOrder: -1
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1 &1652320338
 GameObject:
   m_ObjectHideFlags: 0

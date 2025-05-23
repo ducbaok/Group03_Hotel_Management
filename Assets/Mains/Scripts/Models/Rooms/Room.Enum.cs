@@ -13,6 +13,8 @@
             Garden,
             Ocean,
             Mountain,
+            Lake,
+            Street
         }
     }
 }

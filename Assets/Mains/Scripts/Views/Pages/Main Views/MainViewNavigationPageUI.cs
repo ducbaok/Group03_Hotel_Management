@@ -15,8 +15,8 @@ namespace YNL.Checkotel
         {
             _navigationBar.Clear();
             _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Home"], "Home", true, ViewType.MainViewHomePage));
-            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Star"], "Favorite", false, ViewType.MainViewFavoritePage));
-            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Suggestion"], "Suggestion", false, ViewType.MainViewRewardPage));
+            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Heart"], "Favorite", false, ViewType.MainViewFavoritePage));
+            _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Building"], "Booking", false, ViewType.MainViewBookingPage));
             _navigationBar.Add(new HomeNavigationButton(Main.Resources.Icons["Account"], "Account", false, ViewType.MainViewAccountPage));
         }
     }

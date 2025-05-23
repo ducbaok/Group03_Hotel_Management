@@ -11,6 +11,12 @@ namespace YNL.Checkotel
         public List<UID> Feedbacks = new();
     }
 
+    [System.Serializable]
+    public class BookedRoom
+    {
+        public List<UID> Rooms = new();
+    }
+
     [CreateAssetMenu(fileName = "RuntimePropertiesSO", menuName = "YNL - Checkotel/RuntimePropertiesSO")]
     public class RuntimePropertiesSO : ScriptableObject
     {
@@ -22,6 +28,8 @@ namespace YNL.Checkotel
         public Room.StayType StayType = Room.StayType.Hourly;
         public DateTime CheckInTime;
         public byte Duration = 1;
+
+        public SerializableDictionary<UID, BookedRoom> BookedRooms = new();
 
         public void Reset()
         {

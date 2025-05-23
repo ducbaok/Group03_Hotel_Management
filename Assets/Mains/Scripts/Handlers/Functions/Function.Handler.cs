@@ -10,7 +10,9 @@ namespace YNL.Checkotel
     {
         public static async UniTask<Texture2D[]> GetRoomImageAsync(this HotelUnit unit)
         {
-            var urls = unit.Rooms?.Where(i => i.Description != null && !string.IsNullOrEmpty(i.Description.ImageURL)).Select(i => i.Description.ImageURL).ToArray();
+            var urls = unit.Rooms?
+                .Where(i => Main.Database.Rooms[i].Description != null && !string.IsNullOrEmpty(Main.Database.Rooms[i].Description.ImageURL))
+                .Select(i => Main.Database.Rooms[i].Description.ImageURL).ToArray();
             var tasks = new List<UniTask<Texture2D>>();
 
             foreach (string url in urls)

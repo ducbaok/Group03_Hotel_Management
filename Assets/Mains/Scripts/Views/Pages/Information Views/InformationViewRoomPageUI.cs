@@ -13,7 +13,7 @@ namespace YNL.Checkotel
         private Label _timeText;
         private ListView _itemList;
 
-        private List<RoomUnit> _rooms = new();
+        private List<UID> _rooms = new();
         private UID _hotelID;
 
         protected override void VirtualAwake()
@@ -48,7 +48,7 @@ namespace YNL.Checkotel
             {
                 var item = element as RoomSelectItemUI;
                 item.OnBooked = OnRoomBooked;
-                item.Apply(_rooms[index]);
+                item.Apply(_hotelID, _rooms[index]);
             };
         }
 
@@ -72,10 +72,17 @@ namespace YNL.Checkotel
             RebuildHistoryList();
         }
 
-        private void OnRoomBooked(RoomUnit unit)
+        private void OnRoomBooked(UID roomID, bool isBook)
         {
-            Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewPaymentPage, true, false);
-            Marker.OnPaymentRequested?.Invoke(_hotelID, unit);
+            if (isBook)
+            {
+                Main.Runtime.BookedRooms[_hotelID].Rooms.Remove(roomID);
+            }
+            else
+            {
+                Marker.OnViewPageSwitched?.Invoke(ViewType.InformationViewPaymentPage, true, false);
+                Marker.OnPaymentRequested?.Invoke(_hotelID, roomID);
+            }
         }
     }
 }

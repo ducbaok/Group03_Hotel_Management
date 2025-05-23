@@ -58,9 +58,9 @@ namespace YNL.Checkotel
 
             var unit = _hotels[id];
 
-            foreach (var room in unit.Rooms)
+            foreach (var roomID in unit.Rooms)
             {
-                var restriction = room.Description.Restriction;
+                var restriction = Main.Database.Rooms[roomID].Description.Restriction;
 
                 if (restriction.StayType != type) continue;
 

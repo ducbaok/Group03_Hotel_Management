@@ -17,7 +17,7 @@ namespace YNL.Checkotel
     {
         public HotelDescription Description = new();
         public HotelReview Review = new();
-        public List<RoomUnit> Rooms = new();
+        public List<UID> Rooms = new();
         public HotelStatus Status = new();
 
         public Dictionary<Room.StayType, float> HighestPrices = new();

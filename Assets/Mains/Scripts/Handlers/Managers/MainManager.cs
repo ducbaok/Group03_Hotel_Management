@@ -5,6 +5,8 @@ namespace YNL.Checkotel
 {
     public static class Main
     {
+        public static bool IsSystemStarted { get; set; }
+
         public static MainManager Manager => MainManager.Instance;
         public static ResourceContainerSO Resources => Manager.Resources;
         public static DatabaseContainerSO Database => Manager.Database;
@@ -25,11 +27,6 @@ namespace YNL.Checkotel
             base.Awake();
 
             Application.targetFrameRate = 120;
-        }
-
-        private void Start()
-        {
-            Marker.OnSystemStart?.Invoke();
         }
     }
 }

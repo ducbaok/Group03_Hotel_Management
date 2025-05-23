@@ -61,10 +61,10 @@ namespace YNL.Checkotel
 
             if (unit.HighestPrices.TryGetValue(type, out float price)) return price;
 
-            var validRooms = unit.Rooms.Where(i => i.Description.Restriction.StayType == type).ToArray();
+            var validRooms = unit.Rooms.Where(i => Main.Database.Rooms[i].Description.Restriction.StayType == type).ToArray();
 
-            var orderedRooms = validRooms.OrderByDescending(r => r.Price.BasePrice).ToArray();
-            var highestPrice = orderedRooms.IsEmpty() ? 0 : orderedRooms[0].Price.BasePrice;
+            var orderedRooms = validRooms.OrderByDescending(r => Main.Database.Rooms[r].Price.BasePrice).ToArray();
+            var highestPrice = orderedRooms.IsEmpty() ? 0 : Main.Database.Rooms[orderedRooms[0]].Price.BasePrice;
 
             unit.HighestPrices[type] = highestPrice;
 
@@ -89,10 +89,10 @@ namespace YNL.Checkotel
 
             if (unit.LowestPrices.TryGetValue(type, out float price)) return price;
 
-            var validRooms = unit.Rooms.Where(i => i.Description.Restriction.StayType == type).ToArray();
+            var validRooms = unit.Rooms.Where(i => Main.Database.Rooms[i].Description.Restriction.StayType == type).ToArray();
 
-            var orderedRooms = validRooms.OrderBy(r => r.Price.BasePrice).ToArray();
-            var lowestPrice = orderedRooms.IsEmpty() ? 0 : orderedRooms[0].Price.BasePrice;
+            var orderedRooms = validRooms.OrderBy(r => Main.Database.Rooms[r].Price.BasePrice).ToArray();
+            var lowestPrice = orderedRooms.IsEmpty() ? 0 : Main.Database.Rooms[orderedRooms[0]].Price.BasePrice;
 
             unit.LowestPrices[type] = lowestPrice;
 
@@ -143,8 +143,9 @@ namespace YNL.Checkotel
             var overnightTime = new TimeRange();
             var dailyTime = new TimeRange();
 
-            foreach (var room in unit.Rooms)
+            foreach (var id in unit.Rooms)
             {
+                var room = Main.Database.Rooms[id];
                 if (room.Description.Restriction.StayType == Room.StayType.Hourly)
                 {
                     if (hourlyTime != TimeRange.Zero) continue;

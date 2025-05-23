@@ -8,6 +8,12 @@ namespace YNL.Checkotel
 
         public static TimeRange Zero => new TimeRange();
 
+        public TimeRange(byte timeIn, byte timeOut)
+        {
+            TimeIn = timeIn;
+            TimeOut = timeOut;
+        }
+
         public static bool operator ==(TimeRange a, TimeRange b) => (a.TimeIn == b.TimeIn) && (a.TimeOut == b.TimeOut);
         public static bool operator !=(TimeRange a, TimeRange b) => (a.TimeIn != b.TimeIn) || (a.TimeOut != b.TimeOut);
     }

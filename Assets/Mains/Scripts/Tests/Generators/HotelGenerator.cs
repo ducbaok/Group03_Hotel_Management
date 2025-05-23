@@ -22,7 +22,7 @@ namespace YNL.Checkotel
 
             for (int l = 1; l < lines.Length; l++)
             {
-                _database.SerializeHotelDatabse(lines[l].SplitCSV());
+                _database.SerializeHotelDatabase(lines[l].SplitCSV());
             }
         }
     }
