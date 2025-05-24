@@ -54,7 +54,7 @@ namespace YNL.Checkotel
 
         public static bool IsValidTimeRange(this UID id, Room.StayType type, DateTime checkInTime, byte duration)
         {
-            if (checkInTime == DateTime.MinValue) return true;
+            if (checkInTime == DateTime.MinValue || Main.Runtime.IsSearchTimeApplied == false) return true;
 
             var unit = _hotels[id];
 
@@ -82,6 +82,36 @@ namespace YNL.Checkotel
                 };
 
                 if (isValid) return true;
+            }
+
+            return false;
+        }
+        
+        public static bool IsValidFilter(this HotelUnit unit, FilterSelectionType selection, FilterPropertyType property)
+        {
+            if (selection == FilterSelectionType.ReviewScore)
+            {
+                return property switch
+                {
+                    FilterPropertyType.ScoreG45 => unit.Review.AverageRating >= 4.5f,
+                    FilterPropertyType.ScoreG40 => unit.Review.AverageRating >= 4.0f,
+                    FilterPropertyType.ScoreG35 => unit.Review.AverageRating >= 3.5f,
+                    _ => false
+                };
+            }
+            else if (selection == FilterSelectionType.Cleanliness)
+            {
+                return property switch
+                {
+                    FilterPropertyType.CleanE45 => unit.Review.AverageCleanliness >= 4.5f,
+                    FilterPropertyType.CleanG40 => unit.Review.AverageCleanliness >= 4.0f,
+                    FilterPropertyType.CleanG35 => unit.Review.AverageCleanliness >= 3.5f,
+                    _ => false
+                };
+            }
+            else if (selection == FilterSelectionType.HotelType)
+            {
+                return true;
             }
 
             return false;

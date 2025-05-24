@@ -60,7 +60,7 @@ namespace YNL.Checkotel
             {
                 _nameText.SetText(name);
 
-                string ratingScoreText = rating.score == -1 ? "-" : rating.score.ToString("0.00");
+                string ratingScoreText = rating.score == -1 ? "-" : rating.score.ToString("0.0");
 
                 _ratingText.SetText($"<b>{ratingScoreText}</b> ({rating.amount})");
             }

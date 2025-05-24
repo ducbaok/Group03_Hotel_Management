@@ -90,6 +90,8 @@ namespace YNL.Checkotel
 
             Main.Runtime.Data.CheckInTime = checkInTime;
             Main.Runtime.Data.Duration = duration;
+
+            Main.Runtime.IsSearchTimeApplied = true;
         }
     }
 }

@@ -13,7 +13,7 @@
         </engine:VisualElement>
         <engine:VisualElement name="NearMeButton" style="height: 100px; flex-direction: row; margin-bottom: 30px;">
             <engine:VisualElement name="GPSIcon" style="height: 100%; width: 60px; background-image: url(&quot;project://database/Assets/Mains/Resources/Icons/GPS.png?fileID=2800000&amp;guid=154bf3dd887eb234f926f226b7ee5a57&amp;type=3#GPS&quot;); -unity-background-scale-mode: scale-to-fit;" />
-            <engine:Label text="Near me (Ha Noi)" name="Text" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 1; -unity-text-align: middle-left; -unity-font-definition: url(&quot;project://database/Assets/Mains/Resources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&amp;guid=999150e03acf5b941a2f08bde59b51ae&amp;type=2#Nunito-Regular SDF&quot;); color: rgb(255, 255, 255); font-size: 40px;" />
+            <engine:Label text="Anywhere" name="Text" enable-rich-text="false" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 1; -unity-text-align: middle-left; -unity-font-definition: url(&quot;project://database/Assets/Mains/Resources/Fonts/SDFs/Nunito/Nunito-Regular%20SDF.asset?fileID=11400000&amp;guid=999150e03acf5b941a2f08bde59b51ae&amp;type=2#Nunito-Regular SDF&quot;); color: rgb(255, 255, 255); font-size: 40px;" />
         </engine:VisualElement>
         <engine:VisualElement name="DividerLine" style="height: 2px; width: 100%; background-color: rgb(115, 115, 115);" />
         <engine:VisualElement name="SearchingHistory" style="flex-grow: 1; margin-top: 50px;">

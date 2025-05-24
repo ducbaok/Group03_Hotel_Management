@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
 namespace YNL.Checkotel
@@ -64,6 +63,8 @@ namespace YNL.Checkotel
 
         protected override void Refresh()
         {
+            return;
+
             _sortingItemUI[0].OnClicked__Toggle();
         }
 
@@ -92,6 +93,8 @@ namespace YNL.Checkotel
 
         private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
+            Marker.OnSearchResultSorted?.Invoke(SortingType);
+            OnPageOpened(false);
         }
 
         private void OnSortingTypeSelected(SortingSelectionType type)

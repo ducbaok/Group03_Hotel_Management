@@ -41,6 +41,7 @@ namespace YNL.Checkotel
     public class RuntimePropertiesSO : ScriptableObject
     {
         public RuntimeData Data = new();
+        public bool IsSearchTimeApplied = false;
 
         public void Reset()
         {

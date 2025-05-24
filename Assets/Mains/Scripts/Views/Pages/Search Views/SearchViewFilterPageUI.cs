@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using YNL.Utilities.Addons;
 using YNL.Utilities.Extensions;
 using YNL.Utilities.UIToolkits;
 
@@ -26,6 +27,9 @@ namespace YNL.Checkotel
         private VisualElement _cleanlinessField;
         private VisualElement _hotelTypeField;
         private VisualElement _hotelFacilitiesList;
+
+        private MRange _currentPriceRange;
+        private SerializableDictionary<FilterSelectionType, FilterPropertyType> _selectedTypes = new();
 
         protected override void Collect()
         {
@@ -62,33 +66,43 @@ namespace YNL.Checkotel
 
         protected override void Initialize()
         {
+            _selectedTypes.Add(FilterSelectionType.ReviewScore, FilterPropertyType.ScoreG45);
+            _selectedTypes.Add(FilterSelectionType.Cleanliness, FilterPropertyType.CleanE45);
+            _selectedTypes.Add(FilterSelectionType.HotelType, FilterPropertyType.FlashSale);
+
             _reviewScoreField.Clear();
-            _reviewScoreField.Add(new FilterPropertyButtonUI("? 4.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE45));
-            _reviewScoreField.Add(new FilterPropertyButtonUI("? 4.0", FilterSelectionType.ReviewScore, FilterPropertyType.GE40));
-            _reviewScoreField.Add(new FilterPropertyButtonUI("? 3.5", FilterSelectionType.ReviewScore, FilterPropertyType.GE35));
+            _reviewScoreField.Add(new FilterPropertyButtonUI("> 4.5", FilterSelectionType.ReviewScore, FilterPropertyType.ScoreG45, OnFilterTypeSelected));
+            _reviewScoreField.Add(new FilterPropertyButtonUI("> 4.0", FilterSelectionType.ReviewScore, FilterPropertyType.ScoreG40, OnFilterTypeSelected));
+            _reviewScoreField.Add(new FilterPropertyButtonUI("> 3.5", FilterSelectionType.ReviewScore, FilterPropertyType.ScoreG35, OnFilterTypeSelected));
 
             _cleanlinessField.Clear();
-            _cleanlinessField.Add(new FilterPropertyButtonUI("5.0", FilterSelectionType.Cleanliness, FilterPropertyType.E50));
-            _cleanlinessField.Add(new FilterPropertyButtonUI("? 4.9", FilterSelectionType.Cleanliness, FilterPropertyType.GE49));
-            _cleanlinessField.Add(new FilterPropertyButtonUI("? 4.8", FilterSelectionType.Cleanliness, FilterPropertyType.GE48));
+            _cleanlinessField.Add(new FilterPropertyButtonUI("> 4.5", FilterSelectionType.Cleanliness, FilterPropertyType.CleanE45, OnFilterTypeSelected));
+            _cleanlinessField.Add(new FilterPropertyButtonUI("> 4.0", FilterSelectionType.Cleanliness, FilterPropertyType.CleanG40, OnFilterTypeSelected));
+            _cleanlinessField.Add(new FilterPropertyButtonUI("> 3.5", FilterSelectionType.Cleanliness, FilterPropertyType.CleanG35, OnFilterTypeSelected));
 
             _hotelTypeField.Clear();
-            _hotelTypeField.Add(new FilterPropertyButtonUI("Flash sale", FilterSelectionType.HotelType, FilterPropertyType.FlashSale));
-            _hotelTypeField.Add(new FilterPropertyButtonUI("Hot", FilterSelectionType.HotelType, FilterPropertyType.Hot));
-            _hotelTypeField.Add(new FilterPropertyButtonUI("New", FilterSelectionType.HotelType, FilterPropertyType.New));
-            _hotelTypeField.Add(new FilterPropertyButtonUI("Stamp", FilterSelectionType.HotelType, FilterPropertyType.Stamp));
-            _hotelTypeField.Add(new FilterPropertyButtonUI("Discount", FilterSelectionType.HotelType, FilterPropertyType.Discount));
-            _hotelTypeField.Add(new FilterPropertyButtonUI("Coupon", FilterSelectionType.HotelType, FilterPropertyType.Coupon));
+            _hotelTypeField.Add(new FilterPropertyButtonUI("Flash sale", FilterSelectionType.HotelType, FilterPropertyType.FlashSale, OnFilterTypeSelected));
+            _hotelTypeField.Add(new FilterPropertyButtonUI("Hot", FilterSelectionType.HotelType, FilterPropertyType.Hot, OnFilterTypeSelected));
+            _hotelTypeField.Add(new FilterPropertyButtonUI("New", FilterSelectionType.HotelType, FilterPropertyType.New, OnFilterTypeSelected));
+            _hotelTypeField.Add(new FilterPropertyButtonUI("Stamp", FilterSelectionType.HotelType, FilterPropertyType.Stamp, OnFilterTypeSelected));
+            _hotelTypeField.Add(new FilterPropertyButtonUI("Discount", FilterSelectionType.HotelType, FilterPropertyType.Discount, OnFilterTypeSelected));
+            _hotelTypeField.Add(new FilterPropertyButtonUI("Coupon", FilterSelectionType.HotelType, FilterPropertyType.Coupon, OnFilterTypeSelected));
 
             _hotelFacilitiesList.Clear();
             foreach (HotelFacility type in Enum.GetValues(typeof(HotelFacility)))
             {
-                _hotelFacilitiesList.Add(new FilteringSelectionItemUI(this, type));
+                var item = new FilteringSelectionItemUI(this, type);
+
+                if (type == HotelFacility.None) item.OnClicked__Toggle();
+
+                _hotelFacilitiesList.Add(item);
             }
         }
 
         protected override void Refresh()
         {
+            return;
+
             _slider.value = new(0, 1);
 
             (_reviewScoreField.Children().ToArray()[0] as FilterPropertyButtonUI).OnClicked__Button();
@@ -123,6 +137,9 @@ namespace YNL.Checkotel
 
             _minLabel.text = $"<b>{minPrice.ToString("N0")}$</b>";
             _maxLabel.text = maxPrice == PriceRange.Max ? $"<size=100>∞</size>" : $"<b>{maxPrice.ToString("N0")}$</b>";
+
+            _currentPriceRange.Min = minPrice;
+            _currentPriceRange.Max = maxPrice;
         }
 
         private void OnClicked_CloseButton(PointerUpEvent evt)
@@ -136,6 +153,13 @@ namespace YNL.Checkotel
 
         private void OnClicked_ApplyButton(PointerUpEvent evt)
         {
+            Marker.OnSearchResultFiltered?.Invoke(HotelFacility, _currentPriceRange, _selectedTypes);
+            OnPageOpened(false);
+        }
+
+        private void OnFilterTypeSelected(FilterSelectionType selection, FilterPropertyType property)
+        {
+            _selectedTypes[selection] = property;
         }
     }
 }

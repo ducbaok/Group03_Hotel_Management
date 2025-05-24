@@ -60,6 +60,8 @@ namespace YNL.Checkotel
 
             await UniTask.Delay(100);
 
+            InitializeBaseData();
+
             Marker.OnDatabaseSerializationDone?.Invoke();
             Main.IsSystemStarted = true;
         }
@@ -138,6 +140,15 @@ namespace YNL.Checkotel
                 if (string.IsNullOrEmpty(fields[1])) break;
 
                 _database.SerializeFeedbackDatabase(fields);
+            }
+        }
+
+        private void InitializeBaseData()
+        {
+            foreach (var id in _database.Hotels.Keys)
+            {
+                id.GetHighestPriceAllType();
+                id.GetLowestPriceAllType();
             }
         }
 
